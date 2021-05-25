@@ -8,11 +8,21 @@ const archive = archiver('zip', {
     level: 9,
   },
 });
+const list = {
+  directories: ['dist'],
+  files: ['consts.js', 'index.html'],
+};
 
 archive.pipe(output);
 
-archive.directory('dist');
-archive.file('consts.js');
-archive.file('index.html');
+list.directories.forEach((directory) => {
+  archive.directory(directory, directory, null);
+});
+
+list.files.forEach((fileName) => {
+  archive.file(fileName, {
+    name: fileName,
+  });
+});
 
 archive.finalize();
