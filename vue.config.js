@@ -1,5 +1,10 @@
 const path = require('path');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const HtmlWebpackHardDiskPlugin = require('html-webpack-harddisk-plugin');
+const { dirNameApp, archiveName } = require('./getNames');
+
+const pagesList = {
+  index: 'src/main.js',
+};
 
 module.exports = {
   devServer: {
@@ -8,35 +13,29 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? 'dist/'
     : 'http://localhost:8080/',
-  pages: {
-    index: 'src/index.js',
-    install: 'src/install.js',
-  },
-  chainWebpack: (config) => {
-    ['index', 'install'].forEach((file) => {
+  pages: pagesList,
+  chainWebpack(config) {
+    Object.keys(pagesList).forEach((file) => {
       config
         .plugin(`html-${file}`)
-        .tap((args) => {
-          args[0].filename = path.resolve(__dirname, `${file}.html`);
-          args[0].alwaysWriteToDisk = true;
-          return args;
-        });
+        .tap((args) => ([{
+          ...args[0],
+          filename: path.resolve(__dirname, `${file}.html`),
+          alwaysWriteToDisk: true,
+        }]));
     });
 
     config
       .plugin('define')
-      .tap(args => {
-        args[0] = {
-          ...args[0],
-          DIRNAME_APP: `"${path.resolve(__dirname).split(path.sep).pop()}"`,
-        };
-
-        return args;
-      });
+      .tap((args) => ([{
+        ...args[0],
+        'window.DIRNAME_APP': `"${dirNameApp}"`,
+        'window.ARCHIVE_NAME': `"${archiveName}"`,
+      }]));
   },
   configureWebpack: {
     plugins: [
-      new HtmlWebpackHarddiskPlugin(),
+      new HtmlWebpackHardDiskPlugin(),
     ],
   },
   transpileDependencies: [

@@ -1,15 +1,20 @@
 <template>
-  <v-app>
+  <v-app v-if="show" style="width: 100%;">
     <v-container fluid>
       <h1>
-        <a :href="portal" target="_blank">{{ site }}</a>
+        <a :href="portal" target="_blank">{{ domain }}</a>
       </h1>
-      <v-row align="start" justify="start">
-        <v-col v-for="(user, id) in usersList" :key="id" >
-          <a :href="`${portal}/company/personal/user/${id}/`"
-             :title="parseName(user.name, user.lastName)"
-             target="_blank">
-            <img :src="user.photo" :alt="parseDate(user.birthday)">
+      <v-row align="center" justify="space-between">
+        <v-col v-for="(user, id) in users" :key="id">
+          <a
+             class="user"
+             :class="classList(id)"
+             :href="`${portal}/company/personal/user/${id}/`"
+             :title="getTitle(user)"
+             :data-birthday="user.birthday"
+             target="_blank"
+          >
+            <img v-if="user.photo" :src="user.photo" :alt="user.fullName">
           </a>
         </v-col>
       </v-row>
@@ -18,63 +23,68 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
-import DataBase from '@/utils/database';
-import tools from '@/utils/tools';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
-  created() {
-    this.setVisible(true);
-    const db = new DataBase();
-    db.init((response) => {
-      this.setList(response.users.data);
-      this.setVisible(false);
-    });
+  mounted() {
+    this.$emit('update');
   },
 
-  mounted() {
-    this.$nextTick(DataBase.fitWindow);
+  updated() {
+    this.$emit('update');
   },
 
   computed: {
-    ...mapState(['portal']),
-    ...mapGetters('users', ['usersList']),
+    ...mapState(['users', 'department', 'currentId']),
+    ...mapGetters(['portal', 'domain']),
 
-    site() {
-      return DataBase.address;
+    show() {
+      return Object.keys(this.users).length;
     },
   },
 
   methods: {
-    ...mapMutations('loader', ['setVisible']),
-    ...mapMutations('users', ['setList']),
-
-    parseName(...args) {
-      return args.filter((name) => Boolean(name)).join(' ');
+    classList(id) {
+      return {
+        department: this.department.includes(id),
+        current: this.currentId === id,
+      };
     },
 
-    parseDate(date) {
-      return tools.formatDate(date);
+    getTitle(user) {
+      return [user.fullName, user.position].filter((s) => s).join('\n');
     },
   },
 };
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus">
+size = 170px
+
 h1
   text-align center
-a
+  margin-bottom 20px
+a.user
   display block
   margin 0 auto
-  width 200px
-img
-  object-fit cover
-  width 200px
-  height 200px
+  width size
+  height size
+  border 5px solid black
   border-radius 50%
   background-image url("~@/assets/nouserpic.svg")
   background-color rgba(82,92,105,.23)
   background-size 111px 124px
   background-repeat no-repeat
   background-position center
+  &.department
+    border-color coral
+  &.current
+    border-color currentColor
+  img
+    display block
+    object-fit cover
+    width 100%
+    height 100%
+    border-radius 50%
+    font-size 0
 </style>

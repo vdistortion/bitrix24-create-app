@@ -1,34 +1,54 @@
 <template>
-  <div id="app">
-    <UserList/>
-    <Loader/>
-    <DownloadApp/>
+  <div>
+    <dev-panel></dev-panel>
+    <the-loader></the-loader>
+    <user-list @update="fitWindow"></user-list>
   </div>
 </template>
 
 <script>
-import UserList from '@/components/UserList.vue';
-import Loader from '@/components/Loader.vue';
-import DownloadApp from '@/components/DownloadApp.vue';
+import { mapActions } from 'vuex';
+import TheLoader from './components/TheLoader.vue';
+import UserList from './components/UserList.vue';
+import DevPanel from './components/dev/Panel.vue';
 
 export default {
   components: {
+    TheLoader,
     UserList,
-    Loader,
-    DownloadApp,
+    DevPanel,
+  },
+
+  mounted() {
+    this.init().finally(() => {
+      this.setTitle();
+      this.fitWindow();
+    });
+  },
+
+  updated() {
+    this.fitWindow();
+  },
+
+  methods: {
+    ...mapActions(['init']),
+
+    fitWindow() {
+      this.$nextTick(this.$BX24.fitWindow);
+    },
+
+    setTitle() {
+      this.$BX24.setTitle(window.appName);
+    },
   },
 };
 </script>
 
 <style lang="stylus">
 html
+  font-family Roboto, sans-serif
   overflow initial
 #app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
   color #2c3e50
-  display flex
-  flex-direction column
-  align-items flex-start
+  margin-bottom 40px
 </style>

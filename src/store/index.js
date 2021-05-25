@@ -1,18 +1,45 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import DataBase from '@/utils/database';
-import loader from './loader';
-import users from './users';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    portal: `https://${DataBase.address}`,
+    loader: false,
+    BX24: {},
+    BitrixApi: {},
+    currentId: '',
+    department: [],
+    users: {},
   },
 
-  modules: {
-    loader,
-    users,
+  getters: {
+    domain: (state) => state.BX24.getDomain(),
+    portal: (state, getters) => `https://${getters.domain}`,
+  },
+
+  mutations: {
+    bx24init(state, { BX24, BitrixApi }) {
+      state.BX24 = BX24;
+      state.BitrixApi = BitrixApi;
+    },
+
+    toggleLoader(state, loaderVisible) {
+      state.loader = loaderVisible;
+    },
+  },
+
+  actions: {
+    init({ state, commit }) {
+      commit('toggleLoader', true);
+
+      return state.BitrixApi.load().then((response) => {
+        state.users = response.users;
+        state.currentId = response.user;
+        state.department = response.department;
+
+        commit('toggleLoader', false);
+      }).catch(console.warn);
+    },
   },
 });

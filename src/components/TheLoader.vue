@@ -1,5 +1,5 @@
 <template>
-  <v-overlay :value="visible" :z-index="4">
+  <v-overlay :value="loader" :z-index="4">
     <v-progress-circular indeterminate size="17"/>
   </v-overlay>
 </template>
@@ -8,6 +8,6 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState('loader', ['visible']),
+  computed: mapState(['loader']),
 };
 </script>

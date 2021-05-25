@@ -1,7 +1,8 @@
 const fs = require('fs');
 const archiver = require('archiver');
+const { archiveName } = require('./getNames');
 
-const output = fs.createWriteStream('app-b24.zip');
+const output = fs.createWriteStream(archiveName);
 const archive = archiver('zip', {
   zlib: {
     level: 9,
@@ -11,7 +12,7 @@ const archive = archiver('zip', {
 archive.pipe(output);
 
 archive.directory('dist');
+archive.file('consts.js');
 archive.file('index.html');
-archive.file('install.html');
 
 archive.finalize();
