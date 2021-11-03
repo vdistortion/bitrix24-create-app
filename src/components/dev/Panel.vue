@@ -10,7 +10,7 @@ export default {
     },
 
     isDevelopmentPortal() {
-      return this.$BX24.getDomain() === 'team.bitrix24.ru';
+      return this.$BX24.getDomain === 'team.bitrix24.ru';
     },
 
     isVisible() {

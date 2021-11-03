@@ -7,21 +7,23 @@ export default new Vuex.Store({
   state: {
     loader: false,
     BX24: {},
-    BitrixApi: {},
     currentId: '',
     department: [],
     users: {},
   },
 
   getters: {
-    domain: (state) => state.BX24.getDomain(),
+    domain: (state) => state.BX24.getDomain,
     portal: (state, getters) => `https://${getters.domain}`,
   },
 
   mutations: {
-    bx24init(state, { BX24, BitrixApi }) {
+    bx24init(state, BX24) {
       state.BX24 = BX24;
-      state.BitrixApi = BitrixApi;
+    },
+
+    setTitle(state, title) {
+      state.BX24.setTitle(title);
     },
 
     toggleLoader(state, loaderVisible) {
@@ -33,7 +35,7 @@ export default new Vuex.Store({
     init({ state, commit }) {
       commit('toggleLoader', true);
 
-      return state.BitrixApi.load().then((response) => {
+      return state.BX24.callBatch().load().then((response) => {
         state.users = response.users;
         state.currentId = response.user;
         state.department = response.department;

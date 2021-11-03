@@ -7,15 +7,17 @@ import bx24api from './api/bitrix';
 
 Vue.config.productionTip = false;
 
-bx24init(bx24api).then(({ Bitrix, BX24, BitrixApi }) => {
-  store.commit('bx24init', { BX24, BitrixApi });
+bx24init(bx24api).then(({ Bitrix, $BX24 }) => {
+  $BX24.addInformer(() => {
+    store.commit('bx24init', $BX24);
 
-  const app = new Vue({
-    store,
-    vuetify,
-    Bitrix,
-    render: (h) => h(App),
+    const app = new Vue({
+      store,
+      vuetify,
+      Bitrix,
+      render: (h) => h(App),
+    });
+
+    app.$mount('#app');
   });
-
-  app.$mount('#app');
 });

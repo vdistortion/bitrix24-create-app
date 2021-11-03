@@ -5,9 +5,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
-  computed: mapState(['loader']),
+  props: {
+    loader: {
+      type: Boolean,
+      required: true,
+    },
+  },
 };
 </script>

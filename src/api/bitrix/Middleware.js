@@ -1,6 +1,6 @@
-export default class BitrixMiddleware {
-  constructor(batch, requestList) {
-    this.batch = batch;
+export default class Middleware {
+  constructor(restCall, requestList = {}) {
+    this.batch = restCall.batch.bind(restCall);
     this.request = requestList;
   }
 

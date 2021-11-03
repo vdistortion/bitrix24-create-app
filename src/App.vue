@@ -1,44 +1,50 @@
 <template>
   <div>
     <dev-panel></dev-panel>
-    <the-loader></the-loader>
+    <the-loader :loader="loader"></the-loader>
     <user-list @update="fitWindow"></user-list>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
+import DevPanel from './components/dev/Panel.vue';
 import TheLoader from './components/TheLoader.vue';
 import UserList from './components/UserList.vue';
-import DevPanel from './components/dev/Panel.vue';
 
 export default {
   components: {
+    DevPanel,
     TheLoader,
     UserList,
-    DevPanel,
+  },
+
+  created() {
+    this.setTitle(window.appName);
   },
 
   mounted() {
-    this.init().finally(() => {
-      this.setTitle();
-      this.fitWindow();
-    });
+    this.init()
+      .then(this.load)
+      .catch(console.warn);
   },
 
   updated() {
     this.fitWindow();
   },
 
+  computed: mapState(['loader']),
+
   methods: {
+    ...mapMutations(['setTitle']),
     ...mapActions(['init']),
 
-    fitWindow() {
-      this.$nextTick(this.$BX24.fitWindow);
+    load() {
+      this.fitWindow();
     },
 
-    setTitle() {
-      this.$BX24.setTitle(window.appName);
+    fitWindow() {
+      this.$BX24.fitWindow();
     },
   },
 };

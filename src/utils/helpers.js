@@ -1,9 +1,7 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export default {
-  uuid() {
-    return uuidv4();
-  },
+  uuid,
 
   parseDate(date) {
     const [year, month, day] = date.split('-');

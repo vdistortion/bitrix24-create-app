@@ -1,5 +1,5 @@
 <template>
-  <v-app v-if="show" style="width: 100%;">
+  <v-app v-if="show" class="user-list">
     <v-container fluid>
       <h1>
         <a :href="portal" target="_blank">{{ domain }}</a>
@@ -36,7 +36,7 @@ export default {
 
   computed: {
     ...mapState(['users', 'department', 'currentId']),
-    ...mapGetters(['portal', 'domain']),
+    ...mapGetters(['domain', 'portal']),
 
     show() {
       return Object.keys(this.users).length;
@@ -61,30 +61,32 @@ export default {
 <style lang="stylus">
 size = 170px
 
-h1
-  text-align center
-  margin-bottom 20px
-a.user
-  display block
-  margin 0 auto
-  width size
-  height size
-  border 5px solid black
-  border-radius 50%
-  background-image url("~@/assets/nouserpic.svg")
-  background-color rgba(82,92,105,.23)
-  background-size 111px 124px
-  background-repeat no-repeat
-  background-position center
-  &.department
-    border-color coral
-  &.current
-    border-color currentColor
-  img
+.user-list
+  width 100%
+  h1
+    text-align center
+    margin-bottom 20px
+  a.user
     display block
-    object-fit cover
-    width 100%
-    height 100%
+    margin 0 auto
+    width size
+    height size
+    border 5px solid black
     border-radius 50%
-    font-size 0
+    background-image url("~@/assets/nouserpic.svg")
+    background-color rgba(82,92,105,.23)
+    background-size 111px 124px
+    background-repeat no-repeat
+    background-position center
+    &.department
+      border-color coral
+    &.current
+      border-color currentColor
+    img
+      display block
+      object-fit cover
+      width 100%
+      height 100%
+      border-radius 50%
+      font-size 0
 </style>
