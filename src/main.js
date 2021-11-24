@@ -1,23 +1,22 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
+import router from './router';
 import vuetify from './plugins/vuetify';
-import bx24init from './plugins/bitrix';
-import bx24api from './api/bitrix';
+import Bitrix24 from './plugins/bitrix';
 
 Vue.config.productionTip = false;
 
-bx24init(bx24api).then(({ Bitrix, $BX24 }) => {
-  $BX24.addInformer(() => {
-    store.commit('bx24init', $BX24);
+Bitrix24.init(true, ['https://www.szdl.ru/app/branding/init.js']).then(($BX24) => {
+  store.commit('bx24init', $BX24);
 
-    const app = new Vue({
-      store,
-      vuetify,
-      Bitrix,
-      render: (h) => h(App),
-    });
-
-    app.$mount('#app');
+  const app = new Vue({
+    store,
+    router,
+    vuetify,
+    provide: { $BX24 },
+    render: (h) => h(App),
   });
+
+  app.$mount('#app');
 });

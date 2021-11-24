@@ -2,24 +2,26 @@
   <div class="dev-panel-team">
     <reload-frame></reload-frame>
     <download-app></download-app>
+    <settings-placement></settings-placement>
   </div>
 </template>
 
 <script>
 import ReloadFrame from './ReloadFrame.vue';
 import DownloadApp from './DownloadApp.vue';
+import SettingsPlacement from './SettingsPlacement.vue';
 
 export default {
-  components: {
-    ReloadFrame,
-    DownloadApp,
-  },
-
   beforeCreate() {
     ['log', 'info', 'warn', 'error'].forEach((method) => {
       console[method] = console[method]
-        .bind(console, '%cApp', 'background-color: white;color: black;');
+        .bind(console, '%c App ', 'background-color: #ffffff;color: #000000;');
     });
+  },
+  components: {
+    ReloadFrame,
+    DownloadApp,
+    SettingsPlacement,
   },
 };
 </script>
@@ -29,18 +31,15 @@ export default {
   display flex
   align-items center
   justify-content space-between
-  position fixed
-  z-index 1
-  right 0
-  left 0
-  top 0
-
   .button-icon-team
     text-decoration none
     transition opacity .4s
     opacity .4
+    &:first-child
+      margin-right auto
     &:hover
       opacity 1
-    i
+    span
       font-size 20px
+      color rgba(0, 0, 0, .5)
 </style>

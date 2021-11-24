@@ -5,7 +5,7 @@
     title="Скачать последнюю версию"
     download
   >
-    <v-icon>mdi-download</v-icon>
+    <span class="mdi mdi-download"></span>
   </a>
 </template>
 

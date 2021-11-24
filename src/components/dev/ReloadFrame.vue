@@ -5,12 +5,17 @@
     title="Обновить (Ctrl+R)"
     @click.prevent="reload"
   >
-    <v-icon>mdi-reload</v-icon>
+    <span class="mdi mdi-reload"></span>
   </a>
 </template>
 
 <script>
 export default {
+  methods: {
+    reload() {
+      window.location.reload();
+    },
+  },
   created() {
     window.addEventListener('keydown', (e) => {
       if (e.ctrlKey && e.code === 'KeyR') {
@@ -18,12 +23,6 @@ export default {
         this.reload();
       }
     });
-  },
-
-  methods: {
-    reload() {
-      window.location.reload();
-    },
   },
 };
 </script>

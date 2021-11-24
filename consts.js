@@ -1,3 +1,4 @@
-window.appName = 'bitrix24-create-app';
-window.appNameEng = 'bitrix24-create-app';
-window.appCodeName = 'bitrix24-create-app';
+const name = 'bitrix24-create-app';
+window.appName = name;
+window.appNameEng = name;
+window.appCodeName = name;

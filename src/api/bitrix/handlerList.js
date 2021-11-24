@@ -24,6 +24,7 @@ function parseUsers(users) {
 
 function parseUser(user) {
   const {
+    ID,
     NAME,
     LAST_NAME,
     PERSONAL_BIRTHDAY,
@@ -38,5 +39,7 @@ function parseUser(user) {
     position: WORK_POSITION,
     birthday: PERSONAL_BIRTHDAY ? tools.formatDate(PERSONAL_BIRTHDAY) : false,
     photo: PERSONAL_PHOTO,
+    href: `/company/personal/user/${ID}/`,
+    target: '_blank',
   };
 }

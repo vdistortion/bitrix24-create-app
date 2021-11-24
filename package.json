@@ -9,10 +9,11 @@
   "dependencies": {
     "archiver": "^4.0.2",
     "axios": "^0.24.0",
-    "bitrix24-vue": "^0.1.38",
     "object-to-formdata": "^4.1.0",
     "uuid": "^3.4.0",
     "vue": "^2.6.11",
+    "vue-bitrix24": "0.0.4",
+    "vue-router": "^3.5.3",
     "vuetify": "^2.3.5",
     "vuex": "^3.5.1"
   },

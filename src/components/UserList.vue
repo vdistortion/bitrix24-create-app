@@ -7,15 +7,31 @@
       <v-row align="center" justify="space-between">
         <v-col v-for="(user, id) in users" :key="id">
           <a
-             class="user"
-             :class="classList(id)"
-             :href="`${portal}/company/personal/user/${id}/`"
-             :title="getTitle(user)"
-             :data-birthday="user.birthday"
-             target="_blank"
+            class="user"
+            :class="classList(id)"
+            :href="`${portal}${user.href}`"
+            :target="user.target"
+            :title="getTitle(user)"
+            :data-birthday="user.birthday"
+            @click.prevent="openPath(user.href, user.target, `${portal}${user.href}`)"
           >
             <img v-if="user.photo" :src="user.photo" :alt="user.fullName">
           </a>
+          <bx-button-wrapper center>
+            <bx-button
+              color="light-border"
+              size="xs"
+              :round="true"
+              @click="openHistory(id)"
+            >История</bx-button>
+            <bx-button
+              color="light-border"
+              size="xs"
+              icon="chat"
+              :round="true"
+              @click="openMessenger(id)"
+            >Чат</bx-button>
+          </bx-button-wrapper>
         </v-col>
       </v-row>
     </v-container>
@@ -26,23 +42,6 @@
 import { mapState, mapGetters } from 'vuex';
 
 export default {
-  mounted() {
-    this.$emit('update');
-  },
-
-  updated() {
-    this.$emit('update');
-  },
-
-  computed: {
-    ...mapState(['users', 'department', 'currentId']),
-    ...mapGetters(['domain', 'portal']),
-
-    show() {
-      return Object.keys(this.users).length;
-    },
-  },
-
   methods: {
     classList(id) {
       return {
@@ -50,11 +49,29 @@ export default {
         current: this.currentId === id,
       };
     },
-
     getTitle(user) {
       return [user.fullName, user.position].filter((s) => s).join('\n');
     },
+    openPath(href, target, address) {
+      this.$BX24.openPath(href).catch(() => {
+        window.open(address, target);
+      });
+    },
+    openMessenger(id) {
+      this.$BX24.im.openMessenger(id);
+    },
+    openHistory(id) {
+      this.$BX24.im.openHistory(id);
+    },
   },
+  computed: {
+    ...mapState(['users', 'department', 'currentId']),
+    ...mapGetters(['domain', 'portal']),
+    show() {
+      return Object.keys(this.users).length;
+    },
+  },
+  inject: ['$BX24'],
 };
 </script>
 

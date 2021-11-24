@@ -2,7 +2,7 @@
 echo json_encode([
   'success' => true,
   'data' => [
-    'status' => '200',
+    'status' => 200,
   ],
 ]);
 ?>
