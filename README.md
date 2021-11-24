@@ -1,29 +1,5 @@
 # bitrix24-create-app
 
-## Project setup
-```
-npm ci
-```
+Command line for create a project with your own templates
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### Битрикс24
-[Документация по REST](https://dev.1c-bitrix.ru/rest_help/)
-
-Плагин [bitrix24-vue](https://www.npmjs.com/package/bitrix24-vue)
+Based on [@pongsatt/mycli](https://github.com/pongsatt/mycli)

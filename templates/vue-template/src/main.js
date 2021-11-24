@@ -7,7 +7,7 @@ import Bitrix24 from './plugins/bitrix';
 
 Vue.config.productionTip = false;
 
-Bitrix24.init(true, ['https://www.szdl.ru/app/branding/init.js']).then(($BX24) => {
+Bitrix24.init(true).then(($BX24) => {
   store.commit('bx24init', $BX24);
 
   const app = new Vue({

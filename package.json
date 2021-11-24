@@ -1,40 +1,29 @@
 {
-  "private": true,
+  "name": "bitrix24-create-app",
+  "version": "0.0.10",
+  "main": "./dist/index.js",
   "scripts": {
-    "serve": "vue-cli-service serve --host localhost",
-    "build": "vue-cli-service build && node archiving.js",
-    "lint": "vue-cli-service lint",
-    "browserslistUpdate": "npx browserslist@latest --update-db"
+    "start": "ts-node src/index.ts",
+    "build": "tsc && shx rm -rf dist/templates && shx cp -r templates dist"
+  },
+  "bin": {
+    "bitrix24-create-app": "./dist/index.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/ejs": "^2.6.0",
+    "@types/inquirer": "^0.0.43",
+    "@types/node": "^10.9.4",
+    "@types/shelljs": "^0.8.0",
+    "@types/yargs": "^11.1.1",
+    "shx": "^0.3.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
   },
   "dependencies": {
-    "archiver": "^4.0.2",
-    "axios": "^0.24.0",
-    "object-to-formdata": "^4.1.0",
-    "uuid": "^3.4.0",
-    "vue": "^2.6.11",
-    "vue-bitrix24": "0.0.4",
-    "vue-router": "^3.5.3",
-    "vuetify": "^2.3.5",
-    "vuex": "^3.5.1"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.6",
-    "@vue/cli-plugin-eslint": "^4.4.6",
-    "@vue/cli-plugin-vuex": "^4.4.6",
-    "@vue/cli-service": "^4.4.6",
-    "@vue/eslint-config-airbnb": "^5.1.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.5.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "html-webpack-harddisk-plugin": "^1.0.2",
-    "html-webpack-plugin": "^4.3.0",
-    "sass": "^1.26.10",
-    "sass-loader": "^9.0.2",
-    "stylus": "^0.54.8",
-    "stylus-loader": "^3.0.2",
-    "vue-cli-plugin-vuetify": "^2.0.7",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.6.0"
+    "ejs": "^2.6.1",
+    "inquirer": "^6.2.0",
+    "shelljs": "^0.8.2",
+    "yargs": "^12.0.1"
   }
 }
