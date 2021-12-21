@@ -130,6 +130,8 @@ function isNode(options: CliOptions) {
 function postProcessNode(options: CliOptions) {
   shell.cd(options.tartgetPath);
 
+  if (shell.which('git')) shell.exec('git init');
+
   let cmd = '';
 
   if (shell.which('yarn')) {

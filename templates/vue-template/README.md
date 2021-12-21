@@ -26,4 +26,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Битрикс24
 [Документация по REST](https://dev.1c-bitrix.ru/rest_help/)
 
-Плагин [bitrix24-vue](https://www.npmjs.com/package/bitrix24-vue)
+Плагин [vue-bitrix24](https://www.npmjs.com/package/vue-bitrix24)

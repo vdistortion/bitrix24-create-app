@@ -5,7 +5,7 @@
     "serve": "vue-cli-service serve --host localhost",
     "build": "vue-cli-service build && node archiving.js",
     "lint": "vue-cli-service lint",
-    "browserslistUpdate": "npx browserslist@latest --update-db"
+    "update-db": "npx browserslist@latest --update-db"
   },
   "dependencies": {
     "archiver": "^4.0.2",
@@ -13,7 +13,7 @@
     "object-to-formdata": "^4.1.0",
     "uuid": "^3.4.0",
     "vue": "^2.6.11",
-    "vue-bitrix24": "^0.0.4",
+    "vue-bitrix24": "^0.0.7",
     "vue-router": "^3.5.3",
     "vuetify": "^2.3.5",
     "vuex": "^3.5.1"

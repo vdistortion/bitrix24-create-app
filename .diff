@@ -1,0 +1,119 @@
+diff --git a/README.md b/README.md
+index b039684..714ec5e 100644
+--- a/README.md
++++ b/README.md
+@@ -2,4 +2,20 @@
+ 
+ Command line for create a project with your own templates
+ 
++### Use
++
++```nodejs
++npx bitrix24-create-app
++```
++or
++```nodejs
++npx bitrix24-create-app --name=testproject --template=vue-template
++```
++
++### Templates
++
++* vue-template ([Documentation](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue-template#readme))
++
++___
++
+ Based on [@pongsatt/mycli](https://github.com/pongsatt/mycli)
+diff --git a/package.json b/package.json
+index d08d53a..c678785 100644
+--- a/package.json
++++ b/package.json
+@@ -1,15 +1,37 @@
+ {
+   "name": "bitrix24-create-app",
+-  "version": "0.0.10",
++  "description": "Command line for create a project with your own templates",
++  "version": "0.0.11",
++  "license": "MIT",
++  "private": false,
+   "main": "./dist/index.js",
++  "homepage": "https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue-template#readme",
++  "repository": {
++    "type": "git",
++    "url": "git@github.com:astrotrain55/bitrix24-create-app.git"
++  },
++  "bin": {
++    "bitrix24-create-app": "./dist/index.js"
++  },
++  "keywords": [
++    "vue",
++    "api",
++    "rest",
++    "promises",
++    "components",
++    "bitrix24",
++    "bx24"
++  ],
+   "scripts": {
+     "start": "ts-node src/index.ts",
+     "build": "tsc && shx rm -rf dist/templates && shx cp -r templates dist"
+   },
+-  "bin": {
+-    "bitrix24-create-app": "./dist/index.js"
++  "dependencies": {
++    "ejs": "^2.6.1",
++    "inquirer": "^6.2.0",
++    "shelljs": "^0.8.2",
++    "yargs": "^12.0.1"
+   },
+-  "license": "MIT",
+   "devDependencies": {
+     "@types/ejs": "^2.6.0",
+     "@types/inquirer": "^0.0.43",
+@@ -19,11 +41,5 @@
+     "shx": "^0.3.2",
+     "ts-node": "^7.0.1",
+     "typescript": "^3.0.3"
+-  },
+-  "dependencies": {
+-    "ejs": "^2.6.1",
+-    "inquirer": "^6.2.0",
+-    "shelljs": "^0.8.2",
+-    "yargs": "^12.0.1"
+   }
+ }
+diff --git a/src/index.ts b/src/index.ts
+index bfef2ca..da3320b 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -130,6 +130,8 @@ function isNode(options: CliOptions) {
+ function postProcessNode(options: CliOptions) {
+   shell.cd(options.tartgetPath);
+ 
++  if (shell.which('git')) shell.exec('git init');
++
+   let cmd = '';
+ 
+   if (shell.which('yarn')) {
+diff --git a/templates/vue-template/README.md b/templates/vue-template/README.md
+index d1e614f..ef28ec4 100644
+--- a/templates/vue-template/README.md
++++ b/templates/vue-template/README.md
+@@ -26,4 +26,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
+ ### Битрикс24
+ [Документация по REST](https://dev.1c-bitrix.ru/rest_help/)
+ 
+-Плагин [bitrix24-vue](https://www.npmjs.com/package/bitrix24-vue)
++Плагин [vue-bitrix24](https://www.npmjs.com/package/vue-bitrix24)
+diff --git a/templates/vue-template/package.json b/templates/vue-template/package.json
+index 7c37d3e..36d27c1 100644
+--- a/templates/vue-template/package.json
++++ b/templates/vue-template/package.json
+@@ -13,7 +13,7 @@
+     "object-to-formdata": "^4.1.0",
+     "uuid": "^3.4.0",
+     "vue": "^2.6.11",
+-    "vue-bitrix24": "^0.0.4",
++    "vue-bitrix24": "^0.0.5",
+     "vue-router": "^3.5.3",
+     "vuetify": "^2.3.5",
+     "vuex": "^3.5.1"
