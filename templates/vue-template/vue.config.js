@@ -24,7 +24,6 @@ module.exports = {
           alwaysWriteToDisk: true,
         }]));
     });
-
     config
       .plugin('define')
       .tap((args) => ([{
@@ -38,7 +37,4 @@ module.exports = {
       new HtmlWebpackHardDiskPlugin(),
     ],
   },
-  transpileDependencies: [
-    'vuetify',
-  ],
 };

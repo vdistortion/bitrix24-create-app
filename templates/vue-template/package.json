@@ -5,15 +5,18 @@
     "serve": "vue-cli-service serve --host localhost",
     "build": "vue-cli-service build && node archiving.js",
     "lint": "vue-cli-service lint",
-    "update-db": "npx browserslist@latest --update-db"
+    "grid": "node smartgrid.js",
+    "caniuse": "npx browserslist@latest --update-db"
   },
   "dependencies": {
     "archiver": "^4.0.2",
     "axios": "^0.24.0",
+    "is-mobile": "^3.0.0",
     "object-to-formdata": "^4.1.0",
-    "uuid": "^3.4.0",
+    "smart-grid": "^2.1.2",
+    "uuid": "^8.3.2",
     "vue": "^2.6.11",
-    "vue-bitrix24": "^0.0.7",
+    "vue-bitrix24": "0.0.9",
     "vue-router": "^3.5.3",
     "vuetify": "^2.3.5",
     "vuex": "^3.5.1"

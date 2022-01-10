@@ -1,8 +1,8 @@
 <template>
-  <div v-if="loader" class="preloader">
-    <div class="preloader__element">
-      <span class="preloader__item preloader__item--top"></span>
-      <span class="preloader__item preloader__item--bottom"></span>
+  <div v-if="loader" class="the-loader">
+    <div class="the-loader__element">
+      <span class="the-loader__item the-loader__item--top"></span>
+      <span class="the-loader__item the-loader__item--bottom"></span>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.preloader
+.the-loader
   position fixed
   margin 0 auto
   background-color white
@@ -48,21 +48,21 @@ export default {
       margin-left 1px
     &--top
       background-color rgba(black, 1)
-      animation preloader 2s infinite
+      animation the-loader 2s infinite
       &::after
         background-color rgba(black, .66)
-        animation preloader 2s infinite
+        animation the-loader 2s infinite
         animation-delay 0.5s
     &--bottom
       background-color rgba(black, 0)
-      animation preloader 2s infinite
+      animation the-loader 2s infinite
       animation-delay 1.5s
       &::after
         background-color rgba(black, .33)
-        animation preloader 2s infinite
+        animation the-loader 2s infinite
         animation-delay 1s
 
-@keyframes preloader
+@keyframes the-loader
   0%
     background-color black
   100%

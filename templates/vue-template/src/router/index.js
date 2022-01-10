@@ -12,7 +12,11 @@ export default new VueRouter({
     },
     {
       path: '/placement',
-      component: () => import(/* webpackChunkName: 'placement' */ '../views/Placement.vue'),
+      component: () => import(/* webpackChunkName: 'placement-page' */ '../views/Placement.vue'),
+    },
+    {
+      path: '/example',
+      component: () => import(/* webpackChunkName: 'example-page' */ '../views/Example.vue'),
     },
   ],
 });

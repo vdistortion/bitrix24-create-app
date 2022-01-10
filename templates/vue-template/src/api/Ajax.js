@@ -1,7 +1,8 @@
 import axios from 'axios';
+import config from '../config';
 
 const instance = axios.create({
-  baseURL: `/app/${window.DIRNAME_APP}/ajax/`,
+  baseURL: config.ajaxUrl,
 });
 
 instance.interceptors.response.use(({ data }) => data);

@@ -1,27 +1,21 @@
 <template>
   <div class="dev-panel-team">
     <reload-frame></reload-frame>
+    <pages-buttons></pages-buttons>
     <download-app></download-app>
-    <settings-placement></settings-placement>
   </div>
 </template>
 
 <script>
 import ReloadFrame from './ReloadFrame.vue';
+import PagesButtons from './PagesButtons.vue';
 import DownloadApp from './DownloadApp.vue';
-import SettingsPlacement from './SettingsPlacement.vue';
 
 export default {
-  beforeCreate() {
-    ['log', 'info', 'warn', 'error'].forEach((method) => {
-      console[method] = console[method]
-        .bind(console, '%c App ', 'background-color: #ffffff;color: #000000;');
-    });
-  },
   components: {
     ReloadFrame,
+    PagesButtons,
     DownloadApp,
-    SettingsPlacement,
   },
 };
 </script>

@@ -6,7 +6,12 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-    <script src="./consts.js"></script>
+    <script src="./constants.js"></script>
+    <script>
+      ['log', 'info', 'warn', 'error'].forEach((method) => {
+        console[method] = console[method].bind(console, '%cVueApp', 'background-color: #ffffff;color: #000000;');
+      });
+    </script>
   </head>
   <body>
     <div id="app"></div>

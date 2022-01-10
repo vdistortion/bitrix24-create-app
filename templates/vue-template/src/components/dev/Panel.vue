@@ -3,19 +3,15 @@
 </template>
 
 <script>
+import utils from '../../utils/helpers';
+
 export default {
   computed: {
-    isDevelopmentMode() {
-      return process.env.NODE_ENV === 'development';
-    },
-    isDevelopmentPortal() {
-      return this.$BX24.getDomain() === 'team.bitrix24.ru';
-    },
     isVisible() {
-      return this.isDevelopmentMode || this.isDevelopmentPortal;
+      return utils.isDevelopmentMode() || utils.isDevelopmentPortal(this.$BX24.getDomain());
     },
     TopPanel() {
-      return () => import(/* webpackChunkName: 'DevPanel' */ './TopPanel.vue');
+      return () => import(/* webpackChunkName: 'dev-panel' */ './TopPanel.vue');
     },
   },
   inject: ['$BX24'],

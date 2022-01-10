@@ -10,7 +10,7 @@ const archive = archiver('zip', {
 });
 const list = {
   directories: ['dist'],
-  files: ['consts.js', 'index.html'],
+  files: ['constants.js', 'index.html'],
 };
 
 archive.pipe(output);

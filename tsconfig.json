@@ -18,6 +18,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "templates"
+    "templates",
+    "bitrix24-create-app"
   ]
 }

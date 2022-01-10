@@ -24,7 +24,4 @@ export default {
 html
   font-family Roboto, sans-serif
   overflow initial
-#app
-  color #2c3e50
-  margin-bottom 40px
 </style>
