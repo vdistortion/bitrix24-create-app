@@ -1,7 +1,7 @@
 {
   "name": "bitrix24-create-app",
   "description": "Command line for create a project with your own templates",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "license": "MIT",
   "private": false,
   "main": "./dist/index.js",
@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc && shx rm -rf dist/templates && shx cp -r templates dist"
+    "build": "tsc && shx rm -rf dist/templates && shx cp -r templates dist",
+    "lib": "npm run build && npm publish"
   },
   "dependencies": {
     "ejs": "^2.6.1",
