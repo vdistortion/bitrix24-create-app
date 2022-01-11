@@ -130,14 +130,10 @@ function isNode(options: CliOptions) {
 function postProcessNode(options: CliOptions) {
   shell.cd(options.tartgetPath);
 
-  if (shell.which('git')) shell.exec('git init');
-
   let cmd = '';
 
-  if (shell.which('yarn')) {
-    cmd = 'yarn';
-  } else if (shell.which('npm')) {
-    cmd = 'npm install';
+  if (shell.which('npm')) {
+    cmd = 'npm ci';
   }
 
   if (cmd) {
@@ -147,7 +143,7 @@ function postProcessNode(options: CliOptions) {
       return false;
     }
   } else {
-    console.log(chalk.red('No yarn or npm found. Cannot run installation.'));
+    console.log(chalk.red('No npm found. Cannot run installation.'));
   }
 
   return true;
@@ -167,12 +163,18 @@ function createDirectoryContents(templatePath: string, projectName: string, conf
     if (SKIP_FILES.indexOf(file) > -1) return;
 
     if (stats.isFile()) {
-      let contents = fs.readFileSync(origFilePath, 'utf8');
-
-      if (!origFilePath.includes('public')) contents = template.render(contents, { projectName });
-
       const writePath = path.join(CURR_DIR, projectName, file);
-      fs.writeFileSync(writePath, contents, 'utf8');
+      if (origFilePath.includes('public/favicon.ico')) {
+        fs.copyFileSync(origFilePath, writePath);
+      } else {
+        let contents = fs.readFileSync(origFilePath, 'utf8');
+
+        if (!origFilePath.includes('public/index.html')) {
+          contents = template.render(contents, { projectName });
+        }
+
+        fs.writeFileSync(writePath, contents, 'utf8');
+      }
     } else if (stats.isDirectory()) {
       fs.mkdirSync(path.join(CURR_DIR, projectName, file));
 
