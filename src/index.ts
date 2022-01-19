@@ -163,6 +163,8 @@ function createDirectoryContents(templatePath: string, projectName: string, conf
       const writePath = path.join(CURR_DIR, projectName, file);
       if (origFilePath.includes('public/favicon.ico')) {
         fs.copyFileSync(origFilePath, writePath);
+      } else if (origFilePath.includes('config.template')) {
+        fs.copyFileSync(origFilePath, writePath.replace('config.template', '.gitignore'));
       } else {
         let contents = fs.readFileSync(origFilePath, 'utf8');
 
