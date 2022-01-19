@@ -8,8 +8,9 @@ export default {
   },
 
   getters: {
-    appLink(s, g, rootState, rootGetters) {
-      return `${rootGetters.portal}/marketplace/view/${rootState.appInfo.CODE}/?params[id]=${rootState.appInfo.ID}`;
+    appLink(state, getters, rootState) {
+      const link = `/marketplace/view/${rootState.appInfo.CODE}/?params[id]=${rootState.appInfo.ID}`;
+      return encodeURI(link);
     },
   },
 

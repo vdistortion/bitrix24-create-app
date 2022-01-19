@@ -1,7 +1,7 @@
 import config from '../../config';
 
-export default {
-  initParams(isAdmin) {
+export default (isAdmin) => ({
+  initParams() {
     const params = {
       ACTIVE: true,
       USER_TYPE: 'employee',
@@ -65,4 +65,4 @@ export default {
       ...this.placementList(),
     };
   },
-};
+});

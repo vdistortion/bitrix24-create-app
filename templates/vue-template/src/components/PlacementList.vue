@@ -6,11 +6,10 @@
           <small>{{ item.placement }}</small>
         </td>
         <td>
-          <a
+          <bx-link
             v-if="item.placement === 'REST_APP_URI'"
             :href="appLink"
-            target="_blank"
-          >{{ item.name }}</a>
+          >{{ item.name }}</bx-link>
           <span v-else>{{ item.name }}</span>
         </td>
         <td>

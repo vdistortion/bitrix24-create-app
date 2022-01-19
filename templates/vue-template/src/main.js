@@ -7,7 +7,8 @@ import config from './config';
 
 Vue.config.productionTip = false;
 
-Bitrix24.init(true, config.scripts).then(($BX24) => {
+Bitrix24.init(config.scripts).then(($BX24) => {
+  setInterval(() => $BX24.fitWindow(), 1000);
   store.commit('bx24init', $BX24);
 
   const app = new Vue({

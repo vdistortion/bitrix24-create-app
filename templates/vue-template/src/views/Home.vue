@@ -1,24 +1,21 @@
 <template>
-  <user-list></user-list>
+  <the-loader v-if="loader" :loader="loader"></the-loader>
+  <user-list v-else></user-list>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import TheLoader from '../components/TheLoader.vue';
 import UserList from '../components/UserList.vue';
 import config from '../config';
+import utils from '../utils/helpers';
 
 export default {
-  methods: {
-    ...mapActions(['init']),
-  },
+  methods: mapActions(['init']),
+  computed: mapState(['loader']),
   created() {
     this.$BX24.appInfo().then((info) => {
-      config.scope.forEach((scope) => {
-        if (!info.scope.includes(scope)) {
-          const message = `scope "${scope}" not found`;
-          console.warn(message.toUpperCase());
-        }
-      });
+      utils.verifyScopeLog(config.scope, info.scope);
     });
   },
   mounted() {
@@ -27,6 +24,7 @@ export default {
   },
   inject: ['$BX24'],
   components: {
+    TheLoader,
     UserList,
   },
 };

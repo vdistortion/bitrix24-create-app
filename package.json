@@ -1,8 +1,8 @@
 {
-  "name": "bitrix24-create-app",
+  "name": "npx-bitrix24-create-app",
   "description": "Command line for create a project with your own templates",
-  "version": "0.0.16",
-  "license": "MIT",
+  "version": "0.0.17",
+  "license": "GPL",
   "private": false,
   "main": "./dist/index.js",
   "repository": {

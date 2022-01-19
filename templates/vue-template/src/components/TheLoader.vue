@@ -1,22 +1,11 @@
 <template>
-  <div v-if="loader" class="the-loader">
+  <div class="the-loader">
     <div class="the-loader__element">
       <span class="the-loader__item the-loader__item--top"></span>
       <span class="the-loader__item the-loader__item--bottom"></span>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    loader: {
-      type: Boolean,
-      required: true,
-    },
-  },
-};
-</script>
 
 <style lang="stylus">
 .the-loader

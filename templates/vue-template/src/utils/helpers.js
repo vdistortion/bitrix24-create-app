@@ -9,6 +9,15 @@ export default {
   isDevelopmentPortal(domain) {
     return config.testDomains.includes(domain);
   },
+  verifyScopeLog(scopeList, requiredList) {
+    [...scopeList, ...requiredList].reduce((messages, scope) => {
+      if (!scopeList.includes(scope)) messages.push(`scope "${scope}" excess`);
+      if (!requiredList.includes(scope)) messages.push(`scope "${scope}" not found`);
+      return messages;
+    }, []).forEach((message) => {
+      console.log('🔥', message);
+    });
+  },
   parseDate(date = Date.now()) {
     const newDate = new Date(date);
     const year = newDate.getFullYear();

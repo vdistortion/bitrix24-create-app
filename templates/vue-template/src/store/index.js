@@ -9,7 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state() {
     return {
-      loader: false,
+      loader: true,
       appInfo: {
         ID: '',
         CODE: '',
@@ -19,6 +19,7 @@ export default new Vuex.Store({
       currentId: '',
       department: [],
       users: {},
+      placementInfo: {},
     };
   },
 
@@ -30,30 +31,29 @@ export default new Vuex.Store({
   mutations: {
     bx24init(state, BX24) {
       state.BX24 = BX24;
-      state.batch = new BitrixBatch(BX24);
+      state.batch = new BitrixBatch(BX24, BX24.isAdmin());
     },
 
-    toggleLoader(state, loaderVisible) {
-      state.loader = loaderVisible;
+    toggleLoader(state, visible) {
+      state.loader = visible;
     },
   },
 
   actions: {
     init({ state, commit }) {
-      commit('toggleLoader', true);
       api.test().then(console.info).catch(console.warn);
+      state.placementInfo = state.BX24.placement.info();
 
-      return state.batch.load(state.BX24.isAdmin())
-        .then((response) => {
-          state.appInfo.CODE = response.info.CODE;
-          state.appInfo.ID = response.info.ID;
-          state.users = response.users;
-          state.currentId = response.user;
-          state.department = response.department;
-          commit('placement/setList', response.placementList);
-
-          commit('toggleLoader', false);
-        }).catch(console.warn);
+      return state.batch.load().then((response) => {
+        state.appInfo.CODE = response.info.CODE;
+        state.appInfo.ID = response.info.ID;
+        state.users = response.users;
+        state.currentId = response.user;
+        state.department = response.department;
+        commit('placement/setList', response.placementList);
+      }).catch(console.warn).finally(() => {
+        commit('toggleLoader', false);
+      });
     },
   },
 

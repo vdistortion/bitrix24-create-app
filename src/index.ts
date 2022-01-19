@@ -45,37 +45,34 @@ export interface CliOptions {
   config: TemplateConfig
 }
 
-inquirer.prompt(QUESTIONS)
-  .then(answers => {
+inquirer.prompt(QUESTIONS).then((response: Object) => {
+  const answers = Object.assign({}, response, yargs.argv);
+  const projectChoice = answers['template'];
+  const projectName = answers['name'];
+  const templatePath = path.join(__dirname, '..', 'templates', projectChoice);
+  const tartgetPath = path.join(CURR_DIR, projectName);
+  const templateConfig = getTemplateConfig(templatePath);
 
-    answers = Object.assign({}, answers, yargs.argv);
+  const options: CliOptions = {
+    projectName,
+    templateName: projectChoice,
+    templatePath,
+    tartgetPath,
+    config: templateConfig
+  }
 
-    const projectChoice = answers['template'];
-    const projectName = answers['name'];
-    const templatePath = path.join(__dirname, '..', 'templates', projectChoice);
-    const tartgetPath = path.join(CURR_DIR, projectName);
-    const templateConfig = getTemplateConfig(templatePath);
+  if (!createProject(tartgetPath)) {
+    return;
+  }
 
-    const options: CliOptions = {
-      projectName,
-      templateName: projectChoice,
-      templatePath,
-      tartgetPath,
-      config: templateConfig
-    }
+  createDirectoryContents(templatePath, projectName, templateConfig);
 
-    if (!createProject(tartgetPath)) {
-      return;
-    }
+  if (!postProcess(options)) {
+    return;
+  }
 
-    createDirectoryContents(templatePath, projectName, templateConfig);
-
-    if (!postProcess(options)) {
-      return;
-    }
-
-    showMessage(options);
-  });
+  showMessage(options);
+});
 
 function showMessage(options: CliOptions) {
   console.log('');
@@ -154,7 +151,7 @@ const SKIP_FILES = ['node_modules', '.template.json'];
 function createDirectoryContents(templatePath: string, projectName: string, config: TemplateConfig) {
   const filesToCreate = fs.readdirSync(templatePath);
 
-  filesToCreate.forEach(file => {
+  filesToCreate.forEach((file) => {
     const origFilePath = path.join(templatePath, file);
 
     // get stats about the current file

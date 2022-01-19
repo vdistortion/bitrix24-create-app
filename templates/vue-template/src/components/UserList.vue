@@ -12,7 +12,7 @@
           :target="user.target"
           :title="getTitle(user)"
           :data-birthday="user.birthday"
-          @click.prevent="openPath(user.href, user.target, `${portal}${user.href}`)"
+          @click.prevent="openLink(user.href)"
         >
           <img v-if="user.photo" :src="user.photo" :alt="user.fullName">
         </a>
@@ -38,7 +38,6 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import isMobile from 'is-mobile';
 
 export default {
   methods: {
@@ -51,13 +50,8 @@ export default {
     getTitle(user) {
       return [user.fullName, user.position].filter((s) => s).join('\n');
     },
-    openPath(href, target, address) {
-      if (isMobile()) window.open(address, target);
-      else {
-        this.$BX24.openPath(href).catch(() => {
-          window.open(address, target);
-        });
-      }
+    openLink(href) {
+      this.$BX24.openLink(href);
     },
     openMessenger(id) {
       this.$BX24.im.openMessenger(id);

@@ -10,9 +10,8 @@ module.exports = {
   devServer: {
     hot: true,
   },
-  publicPath: process.env.NODE_ENV === 'production'
-    ? 'dist/'
-    : 'http://localhost:8080/',
+  lintOnSave: false,
+  publicPath: process.env.NODE_ENV === 'production' ? 'dist/' : 'http://localhost:8080/',
   pages: pagesList,
   chainWebpack(config) {
     Object.keys(pagesList).forEach((file) => {
