@@ -130,7 +130,7 @@ function postProcessNode(options: CliOptions) {
   let cmd = '';
 
   if (shell.which('npm')) {
-    cmd = 'npm ci';
+    cmd = 'npm i';
   }
 
   if (cmd) {
