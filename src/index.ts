@@ -165,7 +165,7 @@ function createDirectoryContents(templatePath: string, projectName: string, conf
       if (origFilePath.includes(favicon)) {
         fs.copyFileSync(origFilePath, writePath);
       } else if (origFilePath.includes('config.template')) {
-        fs.copyFileSync(origFilePath, writePath.replace('config.template', 'config.template'));
+        fs.copyFileSync(origFilePath, writePath.replace('config.template', '.gitignore'));
       } else {
         let contents = fs.readFileSync(origFilePath, 'utf8');
 
