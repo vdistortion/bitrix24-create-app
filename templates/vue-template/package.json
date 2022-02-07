@@ -16,7 +16,7 @@
     "smart-grid": "^2.1.2",
     "uuid": "^8.3.2",
     "vue": "^2.6.11",
-    "vue-bitrix24": "^0.0.10",
+    "vue-bitrix24": "^0.0.11",
     "vue-router": "^3.2.0",
     "vuetify": "^2.4.0",
     "vuex": "^3.4.0"

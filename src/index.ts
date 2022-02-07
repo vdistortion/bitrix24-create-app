@@ -153,22 +153,23 @@ function createDirectoryContents(templatePath: string, projectName: string, conf
 
   filesToCreate.forEach((file) => {
     const origFilePath = path.join(templatePath, file);
-
-    // get stats about the current file
     const stats = fs.statSync(origFilePath);
 
     if (SKIP_FILES.indexOf(file) > -1) return;
 
     if (stats.isFile()) {
       const writePath = path.join(CURR_DIR, projectName, file);
-      if (origFilePath.includes('public/favicon.ico')) {
+      const favicon = ['public', 'favicon.ico'].join(path.sep);
+      const indexHtml = ['public', 'index.html'].join(path.sep);
+
+      if (origFilePath.includes(favicon)) {
         fs.copyFileSync(origFilePath, writePath);
       } else if (origFilePath.includes('config.template')) {
-        fs.copyFileSync(origFilePath, writePath.replace('config.template', '.gitignore'));
+        fs.copyFileSync(origFilePath, writePath.replace('config.template', 'config.template'));
       } else {
         let contents = fs.readFileSync(origFilePath, 'utf8');
 
-        if (!origFilePath.includes('public/index.html')) {
+        if (!origFilePath.includes(indexHtml)) {
           contents = template.render(contents, { projectName });
         }
 
@@ -176,8 +177,6 @@ function createDirectoryContents(templatePath: string, projectName: string, conf
       }
     } else if (stats.isDirectory()) {
       fs.mkdirSync(path.join(CURR_DIR, projectName, file));
-
-      // recursive call
       createDirectoryContents(path.join(templatePath, file), path.join(projectName, file), config);
     }
   });
