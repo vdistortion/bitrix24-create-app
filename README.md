@@ -5,17 +5,17 @@ Command line for create a project with your own templates
 ### Use
 
 ```nodejs
-npx bitrix24-create-app
+npx bitrix24-create-app@latest
 ```
 or
 ```nodejs
-npx bitrix24-create-app --name=testproject --template=vue-template
+npx bitrix24-create-app@latest --template=vue3-template --name=testproject
 ```
 
 ### Templates
 
-* [vue3-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue3-template#readme) [Vue 3, Pinia, Vite]
-* [vue2-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue2-template#readme) [Vue 2, Vuex, @vue/cli]
+* [vue3-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue3-template#readme) (Vue 3, Pinia, Vite)
+* [vue2-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue2-template#readme) (Vue 2, Vuex, @vue/cli)
 
 ___
 
