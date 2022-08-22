@@ -1,0 +1,59 @@
+<template>
+  <table class="placement-list">
+    <tbody v-for="(item, key) in placementList" :key="key">
+      <tr v-if="item.bind">
+        <td>
+          <small>{{ item.placement }}</small>
+        </td>
+        <td>
+          <bx-link
+            v-if="item.placement === 'REST_APP_URI'"
+            :href="appLink"
+          >{{ item.name }}</bx-link>
+          <span v-else>{{ item.name }}</span>
+        </td>
+        <td>
+          <bx-button
+            color="danger"
+            @click="unbind(item.placement)"
+          >Удалить</bx-button>
+        </td>
+      </tr>
+      <tr v-else>
+        <td>
+          <small>{{ item.placement }}</small>
+        </td>
+        <td>
+          <bx-input
+            v-model="item.name"
+            :placeholder="item.placement"
+            inline
+          ></bx-input>
+        </td>
+        <td>
+          <bx-button
+            :disabled="!item.name"
+            color="primary"
+            @click="bind(item)"
+          >Добавить</bx-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
+<script>
+import { mapState, mapActions } from 'pinia';
+import { usePlacementStore } from '@/stores/PlacementStore';
+
+export default {
+  methods: mapActions(usePlacementStore, ['bind', 'unbind']),
+  computed: mapState(usePlacementStore, ['placementList', 'appLink']),
+  name: 'placement-list',
+};
+</script>
+
+<style lang="stylus">
+.placement-list small
+  color gray
+</style>

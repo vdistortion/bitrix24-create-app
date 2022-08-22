@@ -1,0 +1,45 @@
+import { v4 as uuid } from 'uuid';
+import config from '../config';
+
+export default {
+  uuid,
+  isDevelopmentMode() {
+    return process.env.NODE_ENV === 'development';
+  },
+  isDevelopmentPortal(domain) {
+    return config.testDomains.includes(domain);
+  },
+  verifyScopeLog(scopeList, requiredList) {
+    [...scopeList, ...requiredList].reduce((messages, scope) => {
+      if (!scopeList.includes(scope)) messages.push(`scope "${scope}" excess`);
+      if (!requiredList.includes(scope)) messages.push(`scope "${scope}" not found`);
+      return messages;
+    }, []).forEach((message) => {
+      console.log('🔥', message);
+    });
+  },
+  parseDate(date = Date.now()) {
+    const newDate = new Date(date);
+    const year = newDate.getFullYear();
+    const month = (`0${newDate.getMonth() + 1}`).slice(-2);
+    const day = (`0${newDate.getDate()}`).slice(-2);
+    return [year, month, day].join('-');
+  },
+  formatPrice(price, currency = 'RUB') {
+    return new Intl.NumberFormat('ru', {
+      currency,
+      style: 'currency',
+      minimumFractionDigits: 0,
+    }).format(price);
+  },
+  formatDate(date = Date.now()) {
+    return new Intl.DateTimeFormat('ru').format(new Date(date));
+  },
+  formatDeclension(number, titles) {
+    const cases = [2, 0, 1, 1, 1, 2];
+    const word = titles[(number % 100 > 4 && number % 100 < 20)
+      ? 2
+      : cases[(number % 10 < 5) ? number % 10 : 5]];
+    return [number, word].join(' ');
+  },
+};
