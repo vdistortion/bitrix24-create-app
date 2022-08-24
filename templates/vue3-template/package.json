@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
+    "watch": "vite build --watch",
     "build": "vite build && node archiving.js",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",

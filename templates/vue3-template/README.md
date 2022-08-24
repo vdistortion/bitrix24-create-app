@@ -3,7 +3,8 @@
 ### Команды
 
 ```bash
-npm run dev   # development
+npm run dev   # development на локалке
+npm run watch # development на сервере (записывает файлы на диск и следит за изменениями)
 npm run build # production и сборка архива с приложением первого типа
 npm run lint  # проверка кода
 npm run grid  # пересборка сетки
