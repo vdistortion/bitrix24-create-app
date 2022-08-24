@@ -13,7 +13,7 @@ npm run grep  # поиск файлов
 #### Поиск файлов
 ```bash
 npm run grep list # список файлов
-npm run grep once # только полные слова
+npm run grep word # только полные слова
 npm run grep full # подробно
 ```
 

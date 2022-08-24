@@ -12,12 +12,12 @@ export default createRouter({
     {
       path: '/placement',
       name: 'placement-page',
-      component: () => import(/* webpackChunkName: 'placement-page' */ '../views/PlacementPage.vue'),
+      component: () => import('../views/PlacementPage.vue'),
     },
     {
       path: '/example',
       name: 'example-page',
-      component: () => import(/* webpackChunkName: 'example-page' */ '../views/ExamplePage.vue'),
+      component: () => import('../views/ExamplePage.vue'),
     },
   ],
 });
