@@ -9,13 +9,12 @@ npx bitrix24-create-app@latest
 ```
 or
 ```nodejs
-npx bitrix24-create-app@latest --template=vue3-template --name=testproject
+npx bitrix24-create-app@latest --template=vue-template --name=testproject
 ```
 
 ### Templates
 
-* [vue3-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue3-template#readme) (Vue 3, Pinia, Vite)
-* [vue2-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue2-template#readme) (Vue 2, Vuex, @vue/cli)
+* [vue-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue-template#readme) (vue 3, pinia, vite, vue-bitrix24)
 
 ___
 
