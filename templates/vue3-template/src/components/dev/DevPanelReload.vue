@@ -12,13 +12,14 @@ export default {
     },
   },
   created() {
-    window.addEventListener('keydown', (e) => {
+    this.$BX24.bind(window, 'keydown', (e) => {
       if (e.ctrlKey && e.code === 'KeyR') {
         e.preventDefault();
         this.reload();
       }
     });
   },
+  inject: ['$BX24'],
   name: 'dev-panel-reload',
 };
 </script>

@@ -2,19 +2,21 @@ import config from '../../config';
 
 export default (isAdmin) => ({
   initParams() {
-    const params = {
-      ACTIVE: true,
-      USER_TYPE: 'employee',
-    };
     const options = {
       info: ['app.info'],
       user: ['user.current'],
-      users: ['user.get', params],
+      users: ['user.get', {
+        FILTER: {
+          USER_TYPE: 'employee',
+        },
+      }],
       department: {
         method: 'user.get',
         params: {
-          ...params,
-          UF_DEPARTMENT: '$result[user][UF_DEPARTMENT]',
+          FILTER: {
+            USER_TYPE: 'employee',
+            UF_DEPARTMENT: '$result[user][UF_DEPARTMENT]',
+          },
         },
       },
     };

@@ -28,19 +28,23 @@ function parseUser(user) {
   const {
     ID,
     NAME,
+    ACTIVE,
     LAST_NAME,
     PERSONAL_BIRTHDAY,
     PERSONAL_PHOTO,
     WORK_POSITION,
+    UF_DEPARTMENT,
   } = user;
 
   const fullName = [NAME, LAST_NAME].join(' ');
 
   return {
     fullName,
+    active: ACTIVE,
     position: WORK_POSITION,
     birthday: PERSONAL_BIRTHDAY ? tools.formatDate(PERSONAL_BIRTHDAY) : false,
     photo: PERSONAL_PHOTO,
+    department: UF_DEPARTMENT,
     href: `/company/personal/user/${ID}/`,
     target: '_blank',
   };

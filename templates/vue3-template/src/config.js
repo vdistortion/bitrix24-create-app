@@ -9,6 +9,7 @@ export default {
     appCodeName: window.appCodeName,
     appDirName: window.DIRNAME_APP,
     archiveName: [window.ARCHIVE_NAME, Math.random()].join('?'),
+    mode: window.MODE,
   },
   ajaxUrl: `/app/${window.DIRNAME_APP}/ajax/`,
   handler: [window.location.origin, window.location.pathname].join(''),

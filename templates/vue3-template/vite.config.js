@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import { appName, archiveName } from './getNames';
 
-export default defineConfig({
+export default ({ mode }) => defineConfig({
   base: '',
   plugins: [vue()],
   resolve: {
@@ -14,5 +14,11 @@ export default defineConfig({
   define: {
     'window.DIRNAME_APP': `"${appName}"`,
     'window.ARCHIVE_NAME': `"${archiveName}"`,
+    'window.MODE': `"${mode}"`,
+  },
+  server: {
+    fs: {
+      allow: ['..'],
+    },
   },
 });

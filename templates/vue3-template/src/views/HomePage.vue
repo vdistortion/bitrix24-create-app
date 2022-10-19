@@ -1,13 +1,13 @@
 <template>
   <the-loader v-if="loader" :loader="loader"></the-loader>
-  <user-list v-else></user-list>
+  <user-lists v-else></user-lists>
 </template>
 
 <script>
 import { mapState, mapActions } from 'pinia';
 import { useRootStore } from '@/stores';
 import TheLoader from '../components/TheLoader.vue';
-import UserList from '../components/UserList.vue';
+import UserLists from '../components/UserLists.vue';
 import config from '../config';
 import utils from '../utils/helpers';
 
@@ -20,13 +20,12 @@ export default {
     });
   },
   mounted() {
-    this.$BX24.setTitle(config.global.appName);
     this.init().catch(console.warn);
   },
   inject: ['$BX24'],
   components: {
     TheLoader,
-    UserList,
+    UserLists,
   },
   name: 'home-page',
 };

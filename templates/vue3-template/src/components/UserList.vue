@@ -1,37 +1,32 @@
 <template>
-  <div v-if="show" class="user-list">
-    <div class="user-list__wrapper">
-      <h1>
-        <a :href="portal" target="_blank">{{ domain }}</a>
-      </h1>
-      <div class="user-list__card" v-for="(user, id) in users" :key="id">
-        <a
-          class="user"
-          :class="classList(id)"
-          :href="`${portal}${user.href}`"
-          :target="user.target"
-          :title="getTitle(user)"
-          :data-birthday="user.birthday"
-          @click.prevent="openLink(user.href)"
-        >
-          <img v-if="user.photo" :src="user.photo" :alt="user.fullName">
-        </a>
-        <bx-button-wrapper center>
-          <bx-button
-            color="light-border"
-            size="xs"
-            :round="true"
-            @click="openHistory(id)"
-          >История</bx-button>
-          <bx-button
-            color="light-border"
-            size="xs"
-            icon="chat"
-            :round="true"
-            @click="openMessenger(id)"
-          >Чат</bx-button>
-        </bx-button-wrapper>
-      </div>
+  <div class="user-list">
+    <div v-for="(user, id) in users" :key="id" class="user-list__card">
+      <a
+        class="user"
+        :class="classList(id)"
+        :href="`${portal}${user.href}`"
+        :target="user.target"
+        :title="getTitle(user)"
+        :data-birthday="user.birthday"
+        @click.prevent="openLink(user.href)"
+      >
+        <img v-if="user.photo" :src="user.photo" :alt="user.fullName">
+      </a>
+      <bx-button-wrapper center>
+        <bx-button
+          color="light-border"
+          size="xs"
+          :round="true"
+          @click="openHistory(id)"
+        >История</bx-button>
+        <bx-button
+          color="light-border"
+          size="xs"
+          icon="chat"
+          :round="true"
+          @click="openMessenger(id)"
+        >Чат</bx-button>
+      </bx-button-wrapper>
     </div>
   </div>
 </template>
@@ -61,14 +56,14 @@ export default {
       this.$BX24.im.openHistory(id);
     },
   },
-  computed: {
-    ...mapState(useRootStore, ['users', 'department', 'currentId', 'domain', 'portal']),
-
-    show() {
-      return Object.keys(this.users).length;
+  computed: mapState(useRootStore, ['department', 'currentId', 'portal']),
+  inject: ['$BX24'],
+  props: {
+    users: {
+      type: Object,
+      required: true,
     },
   },
-  inject: ['$BX24'],
   name: 'user-list',
 };
 </script>
@@ -78,9 +73,7 @@ export default {
 size = 170px
 
 .user-list
-  wrapper()
-  &__wrapper
-    row-flex()
+  row-flex()
   &__card
     col()
     col-size(3)
