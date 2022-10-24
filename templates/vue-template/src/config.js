@@ -11,6 +11,7 @@ export default {
     archiveName: [window.ARCHIVE_NAME, Math.random()].join('?'),
     mode: window.MODE,
   },
-  ajaxUrl: `/app/${window.DIRNAME_APP}/ajax/`,
+  path: `${window.location.origin}/dev/${window.DIRNAME_APP}/`,
+  ajaxUrl: `/dev/${window.DIRNAME_APP}/ajax/`,
   handler: [window.location.origin, window.location.pathname].join(''),
 };
