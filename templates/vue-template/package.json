@@ -16,7 +16,6 @@
     "axios": "^0.27.2",
     "object-to-formdata": "^4.4.2",
     "pinia": "^2.0.17",
-    "smart-grid": "^2.1.2",
     "uuid": "^8.3.2",
     "vue": "^3.2.37",
     "vue-bitrix24": "^0.2.0",
@@ -26,6 +25,7 @@
     "@vitejs/plugin-vue": "^3.0.1",
     "eslint": "^8.21.0",
     "eslint-plugin-vue": "^9.3.0",
+    "smart-grid": "^2.1.2",
     "stylus": "^0.59.0",
     "vite": "^3.0.4"
   }
