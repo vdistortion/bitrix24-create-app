@@ -14,10 +14,9 @@ export default defineConfig(({ command, mode }) => ({
   define: {
     'window.appDirName': `"${appDirName}"`,
     'window.archiveName': `"${archiveName}"`,
-    'window.mode': `"${mode}"`,
-    'window.isDev': command !== 'vite build' && mode === 'development',
-    'window.isProd': command === 'vite build' && mode === 'production',
-    'window.isWatch': command !== 'vite build' && mode === 'production',
+    'window.isDev': command === 'serve' && mode === 'development',
+    'window.isProd': command === 'build' && mode === 'production',
+    'window.isWatch': process.env.npm_lifecycle_script === 'vite build --watch',
   },
   server: {
     fs: {

@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HomePage from '../views/HomePage.vue';
+import HomePage from './views/HomePage.vue';
 
 export default createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -12,12 +12,12 @@ export default createRouter({
     {
       path: '/placement',
       name: 'placement-page',
-      component: () => import('../views/PlacementPage.vue'),
+      component: () => import('./views/PlacementPage.vue'),
     },
     {
       path: '/example',
       name: 'example-page',
-      component: () => import('../views/ExamplePage.vue'),
+      component: () => import('./views/ExamplePage.vue'),
     },
   ],
 });

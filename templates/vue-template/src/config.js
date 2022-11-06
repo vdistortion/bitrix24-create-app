@@ -1,5 +1,5 @@
 export default {
-  scope: ['crm', 'user', 'placement'],
+  scope: ['crm', 'placement', 'user_brief'],
   placement: ['CRM_DEAL_DETAIL_TAB', 'CRM_ANALYTICS_MENU', 'REST_APP_URI'],
   testDomains: [],
   scripts: [],
@@ -9,7 +9,6 @@ export default {
     appCodeName: window.appCodeName,
     appDirName: window.appDirName,
     archiveName: window.archiveName,
-    mode: window.mode,
     isDev: window.isDev,
     isProd: window.isProd,
     isWatch: window.isWatch,

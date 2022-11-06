@@ -1,11 +1,11 @@
 import { Ajax } from './Ajax';
 
 export default {
-  test(data = {}) {
+  test(FormData = {}) {
     return Ajax({
       url: 'index.php',
       method: 'post',
-      params: data,
+      data: FormData,
     }).then(this.handler);
   },
 

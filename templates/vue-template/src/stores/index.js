@@ -5,7 +5,7 @@ import BitrixBatch from '../api/bitrix';
 export const useRootStore = defineStore('rootStore', {
   state() {
     return {
-      loader: true,
+      loader: false,
       appInfo: {
         ID: '',
         CODE: '',

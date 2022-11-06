@@ -8,7 +8,7 @@ export default {
       if (!requiredList.includes(scope)) messages.push(`scope "${scope}" not found`);
       return messages;
     }, []).forEach((message) => {
-      console.log('🔥', message);
+      console.info('🔥', message);
     });
   },
   parseDate(date = Date.now()) {

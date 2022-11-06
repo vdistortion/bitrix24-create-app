@@ -5,16 +5,16 @@ import config from '../config';
 
 const instance = axios.create({
   baseURL: config.ajaxUrl,
-  transformRequest: (data) => qs.stringify(data, { arrayFormat: 'brackets' }),
-  // transformRequest: (data, headers) => {
-  //   headers['Content-Type'] = 'multipart/form-data';
-  //   return serialize(data, {
-  //     indices: true,
-  //     nullsAsUndefineds: true,
-  //     booleansAsIntegers: true,
-  //     allowEmptyArrays: true,
-  //   });
-  // },
+  transformRequest: (data, headers) => {
+    headers['Content-Type'] = 'multipart/form-data';
+    return qs.stringify(data, { arrayFormat: 'brackets' });
+    // return serialize(data, {
+    //   indices: true,
+    //   nullsAsUndefineds: true,
+    //   booleansAsIntegers: true,
+    //   allowEmptyArrays: true,
+    // });
+  },
 });
 
 instance.interceptors.response.use(({ data }) => data);

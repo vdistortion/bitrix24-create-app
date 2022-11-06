@@ -1,4 +1,4 @@
-# <%= projectName %>
+# test.app
 
 ### Команды
 
@@ -8,7 +8,6 @@ npm run watch # development на сервере (записывает файлы
 npm run build # production и сборка архива с приложением первого типа
 npm run lint  # проверка кода
 npm run grid  # пересборка сетки
-npm run grep  # поиск файлов
 ```
 
 #### Поиск файлов
@@ -31,7 +30,7 @@ npm run grep full # подробно
 ```js
 window.appName = 'Приложение';
 window.appNameEng = 'Application';
-window.appCodeName = '<%= projectName %>';
+window.appCodeName = 'test.app';
 ```
 
 #### /src/config.js
@@ -43,6 +42,7 @@ export default {
   testDomains: [], // список доменов, которые считаются тестовыми
   scripts: [], // список сторонних скриптов, которые нужно подключить до загрузки приложения
   global: {}, // глобальные переменные
+  path: '', // полный путь к приложению
   ajaxUrl: '', // адрес для обращения к API
   handler: '', // полный путь к приложению
 };
@@ -51,6 +51,7 @@ export default {
 Также в __global__ доступны следующие переменные:
 * __global.appDirName__ - директория_приложения
 * __global.archiveName__ - директория_приложения.zip
+* __global.isDev__, __global.isProd__ и __global.isWatch__ - boolean
 
 #### /src/api/
 
