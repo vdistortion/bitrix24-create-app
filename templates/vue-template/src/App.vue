@@ -1,14 +1,14 @@
 <template>
-  <is-dev-panel></is-dev-panel>
+  <dev-panel></dev-panel>
   <router-view></router-view>
 </template>
 
 <script>
-import IsDevPanel from './components/dev/IsDevPanel.vue';
+import DevPanel from './components/dev/DevPanel.vue';
 
 export default {
   components: {
-    IsDevPanel,
+    DevPanel,
   },
   name: 'app-layout',
 };

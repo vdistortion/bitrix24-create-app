@@ -1,9 +1,9 @@
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
-import { appName, archiveName } from './getNames';
+import { appDirName, archiveName } from './getNames';
 
-export default ({ mode }) => defineConfig({
+export default defineConfig(({ command, mode }) => ({
   base: '',
   plugins: [vue()],
   resolve: {
@@ -12,13 +12,16 @@ export default ({ mode }) => defineConfig({
     },
   },
   define: {
-    'window.DIRNAME_APP': `"${appName}"`,
-    'window.ARCHIVE_NAME': `"${archiveName}"`,
-    'window.MODE': `"${mode}"`,
+    'window.appDirName': `"${appDirName}"`,
+    'window.archiveName': `"${archiveName}"`,
+    'window.mode': `"${mode}"`,
+    'window.isDev': command !== 'vite build' && mode === 'development',
+    'window.isProd': command === 'vite build' && mode === 'production',
+    'window.isWatch': command !== 'vite build' && mode === 'production',
   },
   server: {
     fs: {
       allow: ['..'],
     },
   },
-});
+}));

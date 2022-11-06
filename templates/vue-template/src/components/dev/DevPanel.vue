@@ -1,5 +1,5 @@
 <template>
-  <div class="dev-panel">
+  <div v-if="isVisible" class="dev-panel">
     <dev-panel-reload class="dev-panel__button-icon"></dev-panel-reload>
     <dev-panel-pages class="dev-panel__button-icon"></dev-panel-pages>
     <dev-panel-download class="dev-panel__button-icon"></dev-panel-download>
@@ -10,8 +10,15 @@
 import DevPanelReload from './DevPanelReload.vue';
 import DevPanelPages from './DevPanelPages.vue';
 import DevPanelDownload from './DevPanelDownload.vue';
+import config from '../../config';
 
 export default {
+  computed: {
+    isVisible() {
+      return config.testDomains.includes(this.$BX24.getDomain());
+    },
+  },
+  inject: ['$BX24'],
   components: {
     DevPanelReload,
     DevPanelPages,
