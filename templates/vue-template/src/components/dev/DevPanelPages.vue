@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <router-link
-      v-for="page in pages"
-      :key="page.path"
-      :to="page.path"
-      :title="page.title"
-      v-bind="$attrs"
-    >
-      <span class="mdi" :class="page.className"></span>
-    </router-link>
-  </div>
+  <router-link
+    v-for="page in pages"
+    :key="page.path"
+    :to="page.path"
+    :title="page.title"
+    v-bind="$attrs"
+  >
+    <span class="mdi" :class="page.className"></span>
+  </router-link>
 </template>
 
 <script>
