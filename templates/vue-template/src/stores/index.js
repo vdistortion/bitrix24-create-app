@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { usePlacementStore } from './PlacementStore';
 import BitrixBatch from '../api/bitrix';
-import api from '../api';
 
 export const useRootStore = defineStore('rootStore', {
   state() {
@@ -30,11 +29,9 @@ export const useRootStore = defineStore('rootStore', {
       this.BX24 = BX24;
       this.batch = new BitrixBatch(BX24, BX24.isAdmin());
     },
-
     toggleLoader(visible) {
       this.loader = visible;
     },
-
     init() {
       const placementStore = usePlacementStore();
       this.placementInfo = this.BX24.placement.info();
@@ -46,10 +43,7 @@ export const useRootStore = defineStore('rootStore', {
         this.currentId = response.user;
         this.department = response.department;
         placementStore.setList(response.placementList);
-      }).catch(console.warn).finally(() => {
-        this.toggleLoader(false);
-        api.test().then(console.info).catch(console.warn);
-      });
+      }).catch(console.warn);
     },
   },
 });

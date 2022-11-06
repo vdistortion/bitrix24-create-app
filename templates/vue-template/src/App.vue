@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style lang="stylus">
-html
+body
   font-family Roboto, sans-serif
-  overflow initial
+  margin 0
 </style>

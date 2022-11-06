@@ -26,4 +26,4 @@ list.forEach(({ file, name }) => {
 });
 
 archive.pipe(output);
-archive.finalize().then(console.log).catch(console.warn);
+archive.finalize().then(console.info).catch(console.warn);

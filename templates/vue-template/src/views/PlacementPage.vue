@@ -1,7 +1,5 @@
 <template>
-  <div class="placement-page">
-    <placement-list></placement-list>
-  </div>
+  <placement-list></placement-list>
 </template>
 
 <script>
@@ -14,9 +12,3 @@ export default {
   name: 'placement-page',
 };
 </script>
-
-<style lang="stylus">
-.placement-page
-  display flex
-  justify-content center
-</style>

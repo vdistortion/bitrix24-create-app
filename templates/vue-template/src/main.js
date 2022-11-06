@@ -9,8 +9,7 @@ import config from './config';
 const app = createApp(App).use(createPinia()).use(router).use(useBitrix24);
 
 Bitrix24.init(config.scripts).then((BX24) => {
-  const rootStore = useRootStore();
-  rootStore.bx24init(BX24);
+  const store = useRootStore();
+  store.bx24init(BX24);
   app.provide('$BX24', BX24).mount('#app');
-  setInterval(() => BX24.fitWindow(), 1000);
 });
