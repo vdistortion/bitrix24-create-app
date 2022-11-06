@@ -32,6 +32,10 @@ const QUESTIONS = [
 
 const CURR_DIR = process.cwd();
 
+const TEMPLATE_DATA: template.TemplateData = {
+  projectName: '',
+};
+
 export interface TemplateConfig {
   files?: string[]
   postMessage?: string
@@ -59,7 +63,9 @@ inquirer.prompt(QUESTIONS).then((response: Object) => {
     templatePath,
     tartgetPath,
     config: templateConfig
-  }
+  };
+
+  TEMPLATE_DATA.projectName = projectName;
 
   if (!createProject(tartgetPath)) {
     return;
@@ -86,7 +92,6 @@ function showMessage(options: CliOptions) {
     console.log(chalk.yellow(message));
     console.log('');
   }
-
 }
 
 function getTemplateConfig(templatePath: string): TemplateConfig {
@@ -160,19 +165,13 @@ function createDirectoryContents(templatePath: string, projectName: string, conf
     if (stats.isFile()) {
       const writePath = path.join(CURR_DIR, projectName, file);
       const favicon = ['public', 'favicon.ico'].join(path.sep);
-      const indexHtml = ['public', 'index.html'].join(path.sep);
 
       if (origFilePath.includes(favicon)) {
         fs.copyFileSync(origFilePath, writePath);
       } else if (origFilePath.includes('config.template')) {
         fs.copyFileSync(origFilePath, writePath.replace('config.template', '.gitignore'));
       } else {
-        let contents = fs.readFileSync(origFilePath, 'utf8');
-
-        if (!origFilePath.includes(indexHtml)) {
-          contents = template.render(contents, { projectName });
-        }
-
+        const contents = template.render(fs.readFileSync(origFilePath, 'utf8'), TEMPLATE_DATA);
         fs.writeFileSync(writePath, contents, 'utf8');
       }
     } else if (stats.isDirectory()) {

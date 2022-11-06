@@ -1,4 +1,4 @@
-# test.app
+# <%= projectName %>
 
 ### Команды
 
@@ -30,7 +30,7 @@ npm run grep full # подробно
 ```js
 window.appName = 'Приложение';
 window.appNameEng = 'Application';
-window.appCodeName = 'test.app';
+window.appCodeName = '<%= projectName %>';
 ```
 
 #### /src/config.js

@@ -1,4 +1,3 @@
-const name = '<%= projectName %>';
-window.appName = name;
-window.appNameEng = name;
-window.appCodeName = name;
+window.appName = '<%= projectName %>';
+window.appNameEng = '<%= projectName %>';
+window.appCodeName = '<%= projectName %>';
