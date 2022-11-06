@@ -1,4 +1,4 @@
-const name = 'bitrix24-create-app';
+const name = '<%= projectName %>';
 window.appName = name;
 window.appNameEng = name;
 window.appCodeName = name;

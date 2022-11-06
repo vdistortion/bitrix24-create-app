@@ -1,4 +1,4 @@
-# bitrix24-create-app
+# <%= projectName %>
 
 ### Команды
 
@@ -31,7 +31,7 @@ npm run grep full # подробно
 ```js
 window.appName = 'Приложение';
 window.appNameEng = 'Application';
-window.appCodeName = 'bitrix24-create-app';
+window.appCodeName = '<%= projectName %>';
 ```
 
 #### /src/config.js
