@@ -14,7 +14,7 @@ import config from '../../config';
 export default {
   computed: {
     dirname() {
-      return [config.path, config.global.archiveName].join('');
+      return [config.path.root, config.global.archiveName].join('');
     },
     filename() {
       return `${config.global.appDirName}, ${new Date().toLocaleString()}.zip`;

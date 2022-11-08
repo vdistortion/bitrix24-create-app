@@ -1,3 +1,8 @@
+const fullPath = [window.location.origin, window.location.pathname].join('');
+const rootPath = fullPath
+  .replace('dist/index.html', '')
+  .replace('dist/index.php', '')
+
 export default {
   scope: ['crm', 'placement', 'user_brief'],
   placement: ['CRM_DEAL_DETAIL_TAB', 'CRM_ANALYTICS_MENU', 'REST_APP_URI'],
@@ -13,7 +18,9 @@ export default {
     isProd: window.isProd,
     isWatch: window.isWatch,
   },
-  path: `${window.location.origin}/dev/${window.appDirName}/`,
-  ajaxUrl: `/dev/${window.appDirName}/ajax/`,
-  handler: [window.location.origin, window.location.pathname].join(''),
+  path: {
+    root: rootPath,
+    handler: fullPath,
+    ajaxUrl: `${rootPath}ajax/`,
+  },
 };

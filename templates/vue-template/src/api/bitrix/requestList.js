@@ -43,7 +43,7 @@ export default (isAdmin) => ({
         method: 'placement.bind',
         params: {
           PLACEMENT: placement,
-          HANDLER: config.handler,
+          HANDLER: config.path.handler,
           LANG_ALL: {
             ru: {
               TITLE: name,
@@ -61,7 +61,7 @@ export default (isAdmin) => ({
         method: 'placement.unbind',
         params: {
           PLACEMENT: placement,
-          HANDLER: config.handler,
+          HANDLER: config.path.handler,
         },
       },
       ...this.placementList(),

@@ -4,7 +4,7 @@ import axios from 'axios';
 import config from '../config';
 
 const instance = axios.create({
-  baseURL: config.ajaxUrl,
+  baseURL: config.path.ajaxUrl,
   transformRequest: (data, headers) => {
     headers['Content-Type'] = 'multipart/form-data';
     return qs.stringify(data, { arrayFormat: 'brackets' });
