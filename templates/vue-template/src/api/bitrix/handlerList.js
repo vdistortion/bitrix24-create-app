@@ -1,5 +1,6 @@
 import tools from '../../utils/helpers';
 import config from '../../config';
+import env from '../../env';
 
 export default {
   user: parseId,
@@ -54,7 +55,7 @@ function parsePlacementList(placementList) {
   function getItem(placement, name, bind = false) {
     return { placement, name: name || config.global.appName, bind };
   }
-  const defaultPlacement = config.placement.reduce((acc, placement) => {
+  const defaultPlacement = env.get('PLACEMENT').reduce((acc, placement) => {
     acc[placement] = getItem(placement);
     return acc;
   }, {});

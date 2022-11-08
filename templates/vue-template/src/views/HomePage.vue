@@ -8,7 +8,7 @@ import { mapState, mapActions } from 'pinia';
 import { useRootStore } from '@/stores';
 import TheLoader from '../components/TheLoader.vue';
 import UserLists from '../components/UserLists.vue';
-import config from '../config';
+import env from '../env';
 import utils from '../utils/helpers';
 
 export default {
@@ -16,7 +16,7 @@ export default {
   computed: mapState(useRootStore, ['loader']),
   created() {
     this.$BX24.appInfo().then((info) => {
-      utils.verifyScopeLog(config.scope, info.scope);
+      utils.verifyScopeLog(env.get('SCOPE'), info.scope);
     });
   },
   mounted() {

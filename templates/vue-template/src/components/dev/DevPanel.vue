@@ -10,12 +10,12 @@
 import DevPanelReload from './DevPanelReload.vue';
 import DevPanelPages from './DevPanelPages.vue';
 import DevPanelDownload from './DevPanelDownload.vue';
-import config from '../../config';
+import env from '../../env';
 
 export default {
   computed: {
     isVisible() {
-      return config.testDomains.includes(this.$BX24.getDomain());
+      return env.get('TEST_DOMAINS').includes(this.$BX24.getDomain());
     },
   },
   inject: ['$BX24'],
