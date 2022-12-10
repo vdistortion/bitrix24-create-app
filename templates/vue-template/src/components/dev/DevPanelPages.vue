@@ -6,11 +6,13 @@
     :title="page.title"
     v-bind="$attrs"
   >
-    <span class="mdi" :class="page.className"></span>
+    <app-icon :icon="page.icon"></app-icon>
   </router-link>
 </template>
 
 <script>
+import AppIcon from '../AppIcon.vue';
+
 export default {
   computed: {
     isAdmin() {
@@ -29,25 +31,28 @@ export default {
           admin: true,
           path: '/',
           title: 'На главную',
-          className: 'mdi-home',
+          icon: 'mdiHome',
         },
         {
           admin: true,
           path: '/placement',
           title: 'Настройки встраивания',
-          className: 'mdi-tools',
+          icon: 'mdiTools',
         },
         {
           admin: false,
           path: '/example',
           title: 'Компоненты vue-bitrix24',
-          className: 'mdi-format-list-bulleted-type',
+          icon: 'mdiFormatListBulletedType',
         },
       ],
     };
   },
   inheritAttrs: false,
   inject: ['$BX24'],
+  components: {
+    AppIcon,
+  },
   name: 'dev-panel-pages',
 };
 </script>

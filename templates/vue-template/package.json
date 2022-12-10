@@ -13,6 +13,8 @@
     "grep": "sh grep.sh"
   },
   "dependencies": {
+    "@jamescoyle/vue-icon": "^0.1.2",
+    "@mdi/js": "^7.0.96",
     "archiver": "^5.3.1",
     "axios": "^1.2.1",
     "object-to-formdata": "^4.4.2",

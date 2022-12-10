@@ -37,11 +37,9 @@ export default {
     text-decoration none
     transition opacity .4s
     opacity .4
+    color rgba(0, 0, 0, .5)
     &:first-child
       margin-right auto
     &:hover
       opacity 1
-    span
-      font-size 20px
-      color rgba(0, 0, 0, .5)
 </style>

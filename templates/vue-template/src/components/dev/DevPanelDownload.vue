@@ -4,11 +4,12 @@
     :download="filename"
     title="Скачать последнюю версию"
   >
-    <span class="mdi mdi-download"></span>
+    <app-icon icon="mdiDownload"></app-icon>
   </a>
 </template>
 
 <script>
+import AppIcon from '../AppIcon.vue';
 import config from '../../config';
 
 export default {
@@ -19,6 +20,9 @@ export default {
     filename() {
       return `${config.global.appDirName}, ${new Date().toLocaleString()}.zip`;
     },
+  },
+  components: {
+    AppIcon,
   },
   name: 'dev-panel-download',
 };

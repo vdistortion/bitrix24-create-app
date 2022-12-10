@@ -1,10 +1,12 @@
 <template>
   <a href="#" title="Обновить (Ctrl+R)" @click.prevent="reload">
-    <span class="mdi mdi-reload"></span>
+    <app-icon icon="mdiReload"></app-icon>
   </a>
 </template>
 
 <script>
+import AppIcon from '../AppIcon.vue';
+
 export default {
   methods: {
     reload() {
@@ -20,6 +22,9 @@ export default {
     });
   },
   inject: ['$BX24'],
+  components: {
+    AppIcon,
+  },
   name: 'dev-panel-reload',
 };
 </script>
