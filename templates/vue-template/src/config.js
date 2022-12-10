@@ -1,7 +1,7 @@
 const fullPath = [window.location.origin, window.location.pathname].join('');
 const rootPath = fullPath
   .replace('dist/index.html', '')
-  .replace('dist/index.php', '')
+  .replace('dist/index.php', '');
 
 export default {
   global: {

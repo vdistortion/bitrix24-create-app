@@ -26,7 +26,7 @@ export default {
     return {
       buttons: [
         {
-          admin: false,
+          admin: true,
           path: '/',
           title: 'На главную',
           className: 'mdi-home',
