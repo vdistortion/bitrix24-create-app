@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "watch": "vite build --watch",
     "build": "vite build && node archiving.js",
-    "preview": "vite preview",
+    "preview": "vite preview --host",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "grid": "node smartgrid.js",
     "grep": "sh grep.sh"
@@ -22,7 +22,7 @@
     "qs": "^6.11.0",
     "uuid": "^9.0.0",
     "vue": "^3.2.45",
-    "vue-bitrix24": "^0.2.1",
+    "vue-bitrix24": "^0.2.2",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

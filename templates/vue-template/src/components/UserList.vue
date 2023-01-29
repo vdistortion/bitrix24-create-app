@@ -12,7 +12,7 @@
       >
         <img v-if="user.photo" :src="user.photo" :alt="user.fullName">
       </a>
-      <bx-button-wrapper center>
+      <div class="user-list__buttons">
         <bx-button
           color="light-border"
           size="xs"
@@ -26,7 +26,7 @@
           :round="true"
           @click="openMessenger(id)"
         >Чат</bx-button>
-      </bx-button-wrapper>
+      </div>
     </div>
   </div>
 </template>
@@ -107,4 +107,7 @@ size = 170px
       height 100%
       border-radius 50%
       font-size 0
+  &__buttons
+    text-align center
+    margin 15px 0
 </style>
