@@ -108,10 +108,12 @@ Bitrix24.init().then((BX24) => {
 ```
 
 ### Ссылки
-* Pinia (https://pinia.vuejs.org/core-concepts/)
-* Vite (https://vitejs.dev/config/)
-* archiver (https://www.archiverjs.com/docs/quickstart)
-* REST API (https://dev.1c-bitrix.ru/rest_help/whatsnew.php)
+* Style Guide (https://github.com/leonidlebedev/javascript-airbnb)
+* Pinia (https://pinia.vuejs.org/)
+* Vite (https://vitejs.dev/)
+* axios (https://axios-http.com/ru/)
+* vue-bitrix24 (https://www.npmjs.com/package/vue-bitrix24)
+* REST API (https://dev.1c-bitrix.ru/rest_help/)
 
 #### Сетка smartgrid
 * [Документация](https://www.npmjs.com/package/smart-grid)

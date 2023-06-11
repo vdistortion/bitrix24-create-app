@@ -8,6 +8,7 @@
     "watch": "vite build --watch",
     "build": "vite build && node archiving.js",
     "preview": "vite preview --host",
+    "reset": "git fetch --all && git reset --hard origin/master",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "grid": "node smartgrid.js",
     "grep": "sh grep.sh"

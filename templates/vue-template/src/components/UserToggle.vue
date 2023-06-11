@@ -51,7 +51,7 @@ export default defineComponent({
     cursor pointer
     transition all .53s
     font-style normal
-    font-weight 600
+    font-weight bold
     font-size 14px
     line-height 19px
     background-color #f5f7f8

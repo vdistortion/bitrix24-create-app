@@ -1,7 +1,4 @@
-import { v4 as uuid } from 'uuid';
-
 export default {
-  uuid,
   parseDate(date = Date.now()) {
     const newDate = new Date(date);
     const year = newDate.getFullYear();
