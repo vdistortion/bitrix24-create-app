@@ -1,3 +1,4 @@
 ['log', 'info', 'warn', 'error'].forEach((method) => {
-  console[method] = console[method].bind(console, '%cVueApp', 'background-color: #ffffff;color: #000000;');
+  window.console[method] = window.console[method]
+    .bind(window.console, '%cVueApp', 'background-color: #ffffff;color: #000000;');
 });

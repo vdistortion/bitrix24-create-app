@@ -16,8 +16,15 @@
     "vue"
   ],
   "rules": {
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": ["*.js"]
+    }],
+    "no-use-before-define": ["error", {
+      "functions": false
+    }],
+    "no-unused-vars": ["error", {
+      "argsIgnorePattern": "^_"
     }],
     "no-param-reassign": ["error", {
       "props": true,
@@ -26,6 +33,16 @@
     "max-len": ["error", {
       "code": 100,
       "ignorePattern": "d=\"([\\s\\S]*?)\""
+    }],
+    "no-console": ["error", {
+      "allow": ["info", "warn", "error"]
     }]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": [
+        ["@", "./src"]
+      ]
+    }
   }
 }

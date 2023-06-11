@@ -33,7 +33,7 @@
 
 <script>
 import { mapState } from 'pinia';
-import { useRootStore } from '@/stores';
+import { useRootStore } from '@/stores/RootStore';
 
 export default {
   methods: {

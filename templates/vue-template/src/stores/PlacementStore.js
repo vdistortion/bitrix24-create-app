@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useRootStore } from './';
+import { useRootStore } from './RootStore';
 
 export const usePlacementStore = defineStore('placementStore', {
   state() {
@@ -11,7 +11,8 @@ export const usePlacementStore = defineStore('placementStore', {
   getters: {
     appLink() {
       const rootStore = useRootStore();
-      const link = `/marketplace/view/${rootStore.appInfo.CODE}/?params[id]=${rootStore.appInfo.ID}`;
+      const { ID, CODE } = rootStore.appInfo;
+      const link = `/marketplace/view/${CODE}/?params[id]=${ID}`;
       return encodeURI(link);
     },
   },

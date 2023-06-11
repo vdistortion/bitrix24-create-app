@@ -5,14 +5,18 @@
 
 <script>
 import { mapState, mapActions } from 'pinia';
-import { useRootStore } from '@/stores';
+import { useRootStore } from '@/stores/RootStore';
+import { usePlacementStore } from '@/stores/PlacementStore';
 import TheLoader from '../components/TheLoader.vue';
 import UserLists from '../components/UserLists.vue';
 import env from '../env';
 import utils from '../utils/helpers';
 
 export default {
-  methods: mapActions(useRootStore, ['init']),
+  methods: {
+    ...mapActions(useRootStore, ['init']),
+    ...mapActions(usePlacementStore, ['setList']),
+  },
   computed: mapState(useRootStore, ['loader']),
   created() {
     this.$BX24.appInfo().then((info) => {
@@ -20,7 +24,9 @@ export default {
     });
   },
   mounted() {
-    this.init().catch(console.warn);
+    this.init()
+      .then(this.setList)
+      .catch(console.warn);
   },
   inject: ['$BX24'],
   components: {

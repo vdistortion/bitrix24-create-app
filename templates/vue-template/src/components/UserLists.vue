@@ -18,7 +18,7 @@
 
 <script>
 import { mapState } from 'pinia';
-import { useRootStore } from '@/stores';
+import { useRootStore } from '@/stores/RootStore';
 import UserToggle from './UserToggle.vue';
 import UsersList from './UserList.vue';
 
@@ -27,12 +27,12 @@ export default {
     ...mapState(useRootStore, ['users']),
 
     usersEnabled() {
-      const users = Object.entries(this.users).filter(([key, user]) => user.active);
+      const users = Object.entries(this.users).filter(([_key, user]) => user.active);
       return Object.fromEntries(users);
     },
 
     usersDisabled() {
-      const users = Object.entries(this.users).filter(([key, user]) => !user.active);
+      const users = Object.entries(this.users).filter(([_key, user]) => !user.active);
       return Object.fromEntries(users);
     },
   },

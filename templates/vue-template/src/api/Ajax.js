@@ -6,6 +6,7 @@ import config from '../config';
 const instance = axios.create({
   baseURL: config.path.ajaxUrl,
   transformRequest: (data, headers) => {
+    // eslint-disable-next-line no-param-reassign
     headers['Content-Type'] = 'multipart/form-data';
     return qs.stringify(data, { arrayFormat: 'brackets' });
     // return serialize(data, {

@@ -1,4 +1,6 @@
-import { Bitrix24, BxButton, BxInput, BxLink } from 'vue-bitrix24';
+import {
+  Bitrix24, BxButton, BxInput, BxLink,
+} from 'vue-bitrix24';
 import 'vue-bitrix24/css';
 
 const useBitrix24 = {

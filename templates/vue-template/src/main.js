@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { useRootStore } from './stores';
+import { useRootStore } from './stores/RootStore';
 import { Bitrix24, useBitrix24 } from './plugins/vue-bitrix24';
 import App from './App.vue';
 import router from './router';

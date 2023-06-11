@@ -1,10 +1,10 @@
 import fs from 'fs';
 import archiver from 'archiver';
-import { archiveName } from './getNames.js';
+import { archiveName } from './getNames';
 
 const archive = archiver('zip', { zlib: { level: 9 } });
 const output = fs.createWriteStream(archiveName);
-const path = (path) => ['dist', path].join('/');
+const path = (file) => ['dist', file].join('/');
 const list = [
   {
     file: false,

@@ -4,7 +4,9 @@
 
 <script>
 import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType } from '@mdi/js';
+import {
+  mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType,
+} from '@mdi/js';
 
 export default {
   computed: {
@@ -14,7 +16,9 @@ export default {
   },
   data() {
     return {
-      icons: { mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType },
+      icons: {
+        mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType,
+      },
     };
   },
   props: {
@@ -27,5 +31,5 @@ export default {
     SvgIcon,
   },
   name: 'app-icon',
-}
+};
 </script>

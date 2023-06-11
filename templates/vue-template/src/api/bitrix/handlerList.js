@@ -18,10 +18,10 @@ function parseId(user) {
 }
 
 function parseUsers(users) {
-  return users.reduce((list, user) => {
+  return users.reduce((acc, user) => {
     const { ID, NAME } = user;
-    if (NAME) list[ID] = parseUser(user);
-    return list;
+    if (NAME) acc[ID] = parseUser(user);
+    return acc;
   }, {});
 }
 
