@@ -6,13 +6,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import DevPanelReload from './DevPanelReload.vue';
 import DevPanelPages from './DevPanelPages.vue';
 import DevPanelDownload from './DevPanelDownload.vue';
 import env from '../../env';
 
-export default {
+export default defineComponent({
   computed: {
     isVisible() {
       return env.get('TEST_DOMAINS').includes(this.$BX24.getDomain());
@@ -25,7 +26,7 @@ export default {
     DevPanelDownload,
   },
   name: 'dev-panel',
-};
+});
 </script>
 
 <style lang="stylus">

@@ -42,15 +42,16 @@
   </table>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'pinia';
 import { usePlacementStore } from '@/stores/PlacementStore';
 
-export default {
+export default defineComponent({
   methods: mapActions(usePlacementStore, ['bind', 'unbind']),
   computed: mapState(usePlacementStore, ['placementList', 'appLink']),
   name: 'placement-list',
-};
+});
 </script>
 
 <style lang="stylus">

@@ -10,10 +10,11 @@
   </router-link>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import AppIcon from '../AppIcon.vue';
 
-export default {
+export default defineComponent({
   computed: {
     isAdmin() {
       return this.$BX24.isAdmin();
@@ -54,5 +55,5 @@ export default {
     AppIcon,
   },
   name: 'dev-panel-pages',
-};
+});
 </script>

@@ -4,10 +4,11 @@
   </a>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import AppIcon from '../AppIcon.vue';
 
-export default {
+export default defineComponent({
   methods: {
     reload() {
       window.location.reload();
@@ -26,5 +27,5 @@ export default {
     AppIcon,
   },
   name: 'dev-panel-reload',
-};
+});
 </script>

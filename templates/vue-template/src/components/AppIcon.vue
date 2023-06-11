@@ -2,13 +2,14 @@
   <svg-icon type="mdi" :path="path"></svg-icon>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import SvgIcon from '@jamescoyle/vue-icon';
 import {
   mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType,
 } from '@mdi/js';
 
-export default {
+export default defineComponent({
   computed: {
     path() {
       return this.icons[this.icon];
@@ -31,5 +32,5 @@ export default {
     SvgIcon,
   },
   name: 'app-icon',
-};
+});
 </script>

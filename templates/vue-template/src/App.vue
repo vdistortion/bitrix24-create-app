@@ -3,15 +3,16 @@
   <router-view></router-view>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import DevPanel from './components/dev/DevPanel.vue';
 
-export default {
+export default defineComponent({
   components: {
     DevPanel,
   },
   name: 'app-layout',
-};
+});
 </script>
 
 <style lang="stylus">

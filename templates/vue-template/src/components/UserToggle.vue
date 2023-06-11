@@ -13,8 +13,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   methods: {
     onClick(type) {
       this.type = type;
@@ -34,7 +36,7 @@ export default {
     },
   },
   name: 'user-toggle',
-};
+});
 </script>
 
 <style lang="stylus">

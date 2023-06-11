@@ -16,13 +16,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { mapState } from 'pinia';
 import { useRootStore } from '@/stores/RootStore';
 import UserToggle from './UserToggle.vue';
 import UsersList from './UserList.vue';
 
-export default {
+export default defineComponent({
   computed: {
     ...mapState(useRootStore, ['users']),
 
@@ -46,7 +47,7 @@ export default {
     UsersList,
   },
   name: 'user-lists',
-};
+});
 </script>
 
 <style lang="stylus">

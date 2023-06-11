@@ -3,7 +3,8 @@
   <user-lists v-else></user-lists>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'pinia';
 import { useRootStore } from '@/stores/RootStore';
 import { usePlacementStore } from '@/stores/PlacementStore';
@@ -11,7 +12,7 @@ import TheLoader from '../components/TheLoader.vue';
 import UserLists from '../components/UserLists.vue';
 import env from '../env';
 
-export default {
+export default defineComponent({
   methods: {
     ...mapActions(useRootStore, ['init', 'appInfo']),
     ...mapActions(usePlacementStore, ['setList']),
@@ -42,5 +43,5 @@ export default {
     UserLists,
   },
   name: 'home-page',
-};
+});
 </script>

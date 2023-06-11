@@ -8,11 +8,12 @@
   </a>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import AppIcon from '../AppIcon.vue';
 import config from '../../config';
 
-export default {
+export default defineComponent({
   computed: {
     dirname() {
       return [config.path.root, config.global.archiveName].join('');
@@ -25,5 +26,5 @@ export default {
     AppIcon,
   },
   name: 'dev-panel-download',
-};
+});
 </script>

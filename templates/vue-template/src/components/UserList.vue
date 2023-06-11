@@ -31,11 +31,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { mapState } from 'pinia';
 import { useRootStore } from '@/stores/RootStore';
 
-export default {
+export default defineComponent({
   methods: {
     classList(id) {
       return {
@@ -65,7 +66,7 @@ export default {
     },
   },
   name: 'user-list',
-};
+});
 </script>
 
 <style lang="stylus">
