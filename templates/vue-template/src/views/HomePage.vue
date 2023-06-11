@@ -37,7 +37,6 @@ export default {
       .then(this.setList)
       .catch(console.warn);
   },
-  inject: ['$BX24'],
   components: {
     TheLoader,
     UserLists,
