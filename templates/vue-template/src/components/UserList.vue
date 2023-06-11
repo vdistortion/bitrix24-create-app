@@ -33,8 +33,20 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
 import { mapState } from 'pinia';
 import { useRootStore } from '@/stores/RootStore';
+
+interface User {
+  fullName: string
+  active: boolean
+  position: string
+  birthday: string | boolean
+  photo: string
+  department: number[]
+  href: string
+  target: string
+}
 
 export default defineComponent({
   methods: {
@@ -61,7 +73,7 @@ export default defineComponent({
   inject: ['$BX24'],
   props: {
     users: {
-      type: Object,
+      type: Object as PropType<User>,
       required: true,
     },
   },
