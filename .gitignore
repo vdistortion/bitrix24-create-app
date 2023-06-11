@@ -2,3 +2,4 @@ node_modules
 dist
 .idea
 bitrix24-create-app
+templates/**/package-lock.json

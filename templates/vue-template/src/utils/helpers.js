@@ -2,15 +2,6 @@ import { v4 as uuid } from 'uuid';
 
 export default {
   uuid,
-  verifyScopeLog(scopeList, requiredList) {
-    [...scopeList, ...requiredList].reduce((messages, scope) => {
-      if (!scopeList.includes(scope)) messages.push(`scope "${scope}" excess`);
-      if (!requiredList.includes(scope)) messages.push(`scope "${scope}" not found`);
-      return messages;
-    }, []).forEach((message) => {
-      console.info('🔥', message);
-    });
-  },
   parseDate(date = Date.now()) {
     const newDate = new Date(date);
     const year = newDate.getFullYear();

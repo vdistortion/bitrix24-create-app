@@ -10,17 +10,26 @@ import { usePlacementStore } from '@/stores/PlacementStore';
 import TheLoader from '../components/TheLoader.vue';
 import UserLists from '../components/UserLists.vue';
 import env from '../env';
-import utils from '../utils/helpers';
 
 export default {
   methods: {
-    ...mapActions(useRootStore, ['init']),
+    ...mapActions(useRootStore, ['init', 'appInfo']),
     ...mapActions(usePlacementStore, ['setList']),
+
+    verifyScopeLog(scopeList, requiredList) {
+      [...scopeList, ...requiredList].reduce((messages, scope) => {
+        if (!scopeList.includes(scope)) messages.push(`scope "${scope}" excess`);
+        if (!requiredList.includes(scope)) messages.push(`scope "${scope}" not found`);
+        return messages;
+      }, []).forEach((message) => {
+        console.info('🔥', message);
+      });
+    },
   },
   computed: mapState(useRootStore, ['loader']),
   created() {
-    this.$BX24.appInfo().then((info) => {
-      utils.verifyScopeLog(env.get('SCOPE'), info.scope);
+    this.appInfo().then((info) => {
+      this.verifyScopeLog(env.get('SCOPE'), info.scope);
     });
   },
   mounted() {

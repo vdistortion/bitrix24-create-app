@@ -14,19 +14,19 @@
   },
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
-    "@mdi/js": "^7.0.96",
+    "@mdi/js": "^7.2.96",
     "archiver": "^5.3.1",
-    "axios": "^1.2.1",
-    "object-to-formdata": "^4.4.2",
-    "pinia": "^2.0.28",
-    "qs": "^6.11.0",
+    "axios": "^1.4.0",
+    "object-to-formdata": "^4.5.1",
+    "pinia": "^2.1.3",
+    "qs": "^6.11.2",
     "uuid": "^9.0.0",
-    "vue": "^3.2.45",
+    "vue": "^3.3.4",
     "vue-bitrix24": "^0.2.2",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.2.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
+    "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.42.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -35,6 +35,6 @@
     "eslint-plugin-vue": "^9.14.1",
     "smart-grid": "^2.1.2",
     "stylus": "^0.59.0",
-    "vite": "^4.0.0"
+    "vite": "^4.3.9"
   }
 }

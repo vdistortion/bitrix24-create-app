@@ -1,6 +1,7 @@
 import fs from 'fs';
 import archiver from 'archiver';
-import { archiveName } from './getNames';
+// eslint-disable-next-line import/extensions
+import { archiveName } from './getNames.js';
 
 const archive = archiver('zip', { zlib: { level: 9 } });
 const output = fs.createWriteStream(archiveName);
