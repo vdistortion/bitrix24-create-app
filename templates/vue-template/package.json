@@ -23,7 +23,7 @@
     "qs": "^6.11.2",
     "uuid": "^9.0.0",
     "vue": "^3.3.4",
-    "vue-bitrix24": "^0.2.2",
+    "vue-bitrix24": "^0.2.3",
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
