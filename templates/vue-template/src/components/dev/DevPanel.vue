@@ -16,7 +16,7 @@ import env from '../../env';
 export default defineComponent({
   computed: {
     isVisible() {
-      return env.get('TEST_DOMAINS').includes(this.$BX24.getDomain());
+      return this.$BX24 && env.get('TEST_DOMAINS').includes(this.$BX24.getDomain());
     },
   },
   inject: ['$BX24'],

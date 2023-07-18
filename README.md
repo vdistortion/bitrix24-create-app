@@ -14,17 +14,9 @@ npx bitrix24-create-app@latest
 npx bitrix24-create-app@latest --template=vue-template --name=testproject
 ```
 ```sh
+cd testproject
 git init
 ```
-
-### Подключение к Битрикс24
-![alt text Установка для локальной разработки](example.jpg)
-* Создайте локальное приложение на существующем портале по ссылке https://DOMAIN.bitrix24.ru/devops/section/standard/
-  * Или создайте новый портал https://www.bitrix24.ru/create.php (для регистрации лучше использовать временную почту, например https://temp-mail.org/ru/)
-* "Путь вашего обработчика":
-  * `http://127.0.0.1:5173/index.html` для локальной разработки (`npm run dev`)
-  * `ПУТЬ_ДО_ПРИЛОЖЕНИЯ_НА_СЕРВЕРЕ/dist/index.html` для стандартной разработки (`npm run watch`)
-* Список установленных приложений можно посмотреть тут https://DOMAIN.bitrix24.ru/devops/list/
 
 ___
 

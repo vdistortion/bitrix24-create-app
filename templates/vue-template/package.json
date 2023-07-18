@@ -23,7 +23,7 @@
     "qs": "^6.11.2",
     "uuid": "^9.0.0",
     "vue": "^3.3.4",
-    "vue-bitrix24": "^0.2.3",
+    "vue-bitrix24": "^0.2.5",
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-vue": "^9.14.1",
+    "rollup-plugin-visualizer": "^5.9.2",
     "smart-grid": "^2.1.2",
     "stylus": "^0.59.0",
     "typescript": "^5.1.3",

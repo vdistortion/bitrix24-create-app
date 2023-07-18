@@ -25,6 +25,7 @@ export const useRootStore = defineStore('rootStore', {
 
   actions: {
     bx24init(BX24) {
+      if (!BX24) return;
       this.BX24 = BX24;
       this.batch = new BitrixBatch(BX24, BX24.isAdmin());
     },
@@ -32,6 +33,9 @@ export const useRootStore = defineStore('rootStore', {
       this.loader = visible;
     },
     init() {
+      if (!this.BX24.placement) {
+        return Promise.reject(new Error('Unable to initialize Bitrix24 JS library!'));
+      }
       this.placementInfo = this.BX24.placement.info();
 
       return this.batch.load().then((response) => {
@@ -44,6 +48,9 @@ export const useRootStore = defineStore('rootStore', {
       });
     },
     appInfo() {
+      if (!this.BX24.createBatch) {
+        return Promise.reject(new Error('Unable to initialize Bitrix24 JS library!'));
+      }
       const RestCall = this.BX24.createBatch();
 
       return RestCall.batch({

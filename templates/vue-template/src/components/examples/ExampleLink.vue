@@ -11,7 +11,8 @@
         slots.default
         <select v-model="slots.default">
           <option
-            v-for="item in settings.slots"
+            v-for="(item, key) in settings.slots"
+            :key="key"
             :value="item"
           >{{ item }}</option>
         </select>

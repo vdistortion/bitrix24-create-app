@@ -22,7 +22,8 @@
         props.displayField
         <select v-model="props.displayField">
           <option
-            v-for="item in settings.fields"
+            v-for="(item, key) in settings.fields"
+            :key="key"
             :value="item"
           >{{ item }}</option>
         </select>
@@ -68,20 +69,20 @@ export default defineComponent({
   methods: {
     onClick(index, item) {
       if (!this.$BX24) return;
-      console.log('click', index, item);
+      console.info('click', index, item);
       this.$BX24.openLink(`/company/personal/user/${item.id}/`);
     },
     onAuxClick(index, item) {
       if (!this.$BX24) return;
-      console.log('auxclick', index, item);
+      console.info('auxclick', index, item);
       this.$BX24.openLink(`/company/personal/user/${item.id}/`, true);
     },
     onDelete(index, item) {
-      console.log('delete', index, item);
+      console.info('delete', index, item);
       this.props.list.splice(index, 1);
     },
     onAdd() {
-      console.log('add');
+      console.info('add');
       if (!this.$BX24) return;
 
       if (this.props.multiple) {
@@ -121,7 +122,7 @@ export default defineComponent({
       props: {
         list: [],
         displayField: 'name',
-        displayFieldLink: 'url',
+        displayFieldLink: '',
         multiple: false,
         clickable: false,
         inline: false,

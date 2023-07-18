@@ -72,6 +72,7 @@ export default defineComponent({
   padding: 10px;
   background-color: #eee;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 .example-table__params {
   display: flex;

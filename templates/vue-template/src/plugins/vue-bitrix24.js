@@ -5,9 +5,5 @@ import BxLink from 'vue-bitrix24/BxLink';
 
 export { Bitrix24 };
 export const useBitrix24 = {
-  install(app) {
-    [BxButton, BxInput, BxLink].forEach((Component) => {
-      app.component(Component.name, Component);
-    });
-  },
+  install: (app) => Bitrix24.install(app, [BxButton, BxInput, BxLink]),
 };

@@ -10,7 +10,7 @@
         :data-birthday="user.birthday"
         @click.prevent="openLink(user.href)"
       >
-        <img v-if="user.photo" :src="user.photo" :alt="user.fullName">
+        <img v-if="user.photo" :src="user.photo" :alt="user.fullName" loading="lazy">
       </a>
       <div class="user-list__buttons">
         <bx-button

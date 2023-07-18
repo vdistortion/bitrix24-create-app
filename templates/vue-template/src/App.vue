@@ -17,6 +17,6 @@ export default defineComponent({
 
 <style lang="stylus">
 body
-  font-family 'Roboto', sans-serif
+  font-family 'Roboto Flex', sans-serif
   margin 0
 </style>

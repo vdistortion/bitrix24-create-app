@@ -63,6 +63,9 @@ export default defineComponent({
     &:last-child
       border-radius 0 25px 25px 0
 
+    &:only-child
+      border-radius 25px
+
     &.active
       background-color transparent
       color #185ccf

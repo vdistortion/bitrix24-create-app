@@ -1,7 +1,9 @@
 const fullPath = [window.location.origin, window.location.pathname].join('');
 const rootPath = fullPath
   .replace('dist/index.html', '')
-  .replace('dist/index.php', '');
+  .replace('dist/index.php', '')
+  .replace('index.html', '')
+  .replace('index.php', '');
 
 export default {
   global: {
@@ -10,8 +12,8 @@ export default {
     appCodeName: window.appCodeName,
     appDirName: window.appDirName,
     archiveName: window.archiveName,
-    isDev: window.isDev,
-    isProd: window.isProd,
+    isDev: import.meta.env.DEV,
+    isProd: import.meta.env.PROD,
     isWatch: window.isWatch,
   },
   path: {

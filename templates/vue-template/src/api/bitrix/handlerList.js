@@ -19,8 +19,8 @@ function parseId(user) {
 
 function parseUsers(users) {
   return users.reduce((acc, user) => {
-    const { ID, NAME } = user;
-    if (NAME) acc[ID] = parseUser(user);
+    const { ID } = user;
+    acc[ID] = parseUser(user);
     return acc;
   }, {});
 }
@@ -29,6 +29,7 @@ function parseUser(user) {
   const {
     ID,
     NAME,
+    EMAIL,
     ACTIVE,
     LAST_NAME,
     PERSONAL_BIRTHDAY,
@@ -40,7 +41,7 @@ function parseUser(user) {
   const fullName = [NAME, LAST_NAME].join(' ');
 
   return {
-    fullName,
+    fullName: fullName.trim() ? fullName : EMAIL,
     active: ACTIVE,
     position: WORK_POSITION,
     birthday: PERSONAL_BIRTHDAY ? tools.formatDate(PERSONAL_BIRTHDAY) : false,
