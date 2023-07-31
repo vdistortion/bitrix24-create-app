@@ -121,6 +121,7 @@ Bitrix24.init().then((BX24) => {
 * Pinia (https://pinia.vuejs.org/)
 * Vite (https://vitejs.dev/)
 * axios (https://axios-http.com/ru/)
+* bitrix24-library (https://www.npmjs.com/package/bitrix24-library)
 * vue-bitrix24 (https://www.npmjs.com/package/vue-bitrix24)
 * REST API (https://dev.1c-bitrix.ru/rest_help/)
 
