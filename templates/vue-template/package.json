@@ -16,6 +16,8 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.2.96",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.3",
     "archiver": "^5.3.1",
     "axios": "^1.4.0",
     "bitrix24-library": "^0.0.1",

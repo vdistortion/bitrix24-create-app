@@ -1,25 +1,34 @@
 <template>
   <main class="example-main">
     <div class="example-main__menu">
-      <ul v-if="components.length" style="padding-left: 0;list-style-type: none;">
-        <li v-for="component in components" :key="component">
-          <label>
-            <input type="radio" :value="component" v-model="componentVisible">
-            <span>{{ component }}</span>
-          </label>
-        </li>
-        <li>
-          <a
-            href="https://astrotrain55.github.io/vue-bitrix24/"
-            target="_blank"
-            style="margin-left: 5px;"
-          >
-            More components...
-          </a>
-        </li>
-      </ul>
+      <div
+        v-for="(components, group) in componentsGroups"
+        :key="group"
+      >
+        <h4 style="margin-bottom: 5px;">{{ group }}</h4>
+        <ul v-if="components.length" style="margin-top: 0;padding-left: 0;list-style-type: none;">
+          <li v-for="component in components" :key="component">
+            <label>
+              <input type="radio" :value="component" v-model="componentVisible">
+              <span>{{ component }}</span>
+            </label>
+          </li>
+          <li v-if="group === 'vue-bitrix24'">
+            <a
+              href="https://astrotrain55.github.io/vue-bitrix24/"
+              target="_blank"
+              style="margin-left: 5px;"
+            >
+              More components...
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="example-main__content">
+      <example-form
+        v-if="componentVisible === 'form-validation'"
+      ></example-form>
       <example-link
         v-if="componentVisible === 'bx-link'"
       ></example-link>
@@ -32,6 +41,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ExampleForm from './ExampleForm.vue';
 import ExampleLink from './ExampleLink.vue';
 import ExampleEntitySelector from './ExampleEntitySelector.vue';
 
@@ -53,15 +63,21 @@ export default defineComponent({
   },
   data() {
     return {
-      componentVisible: 'bx-link',
-      components: [
-        'bx-link',
-        'bx-entity-selector',
-      ],
+      componentVisible: 'form-validation',
+      componentsGroups: {
+        'bitrix24-create-app': [
+          'form-validation',
+        ],
+        'vue-bitrix24': [
+          'bx-link',
+          'bx-entity-selector',
+        ],
+      },
     };
   },
   inject: ['$BX24'],
   components: {
+    ExampleForm,
     ExampleLink,
     ExampleEntitySelector,
   },

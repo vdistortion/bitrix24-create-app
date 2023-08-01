@@ -43,7 +43,7 @@ export default defineComponent({
         {
           admin: false,
           path: '/example',
-          title: 'Компоненты vue-bitrix24',
+          title: 'Компоненты',
           icon: 'mdiFormatListBulletedType',
         },
       ],
