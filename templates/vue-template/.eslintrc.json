@@ -6,9 +6,11 @@
   },
   "extends": [
     "airbnb-base",
-    "plugin:vue/vue3-essential"
+    "plugin:vue/vue3-essential",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parserOptions": {
+    "parser": "@typescript-eslint/parser",
     "ecmaVersion": "latest",
     "sourceType": "module"
   },

@@ -32,8 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import type { PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { mapState } from 'pinia';
 import { useRootStore } from '@/stores/RootStore';
 

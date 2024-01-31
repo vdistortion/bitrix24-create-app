@@ -4,7 +4,7 @@
 
 ### Шаблоны
 
-* [vue-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue-template#readme) (Vue 3, Pinia, Vite, [vue-bitrix24](https://www.npmjs.com/package/vue-bitrix24))
+* [vue-template](https://github.com/astrotrain55/bitrix24-create-app/tree/master/templates/vue-template#readme) (Vue 3, Pinia, Vite, Stylus, [vue-bitrix24](https://www.npmjs.com/package/vue-bitrix24), [bitrix24-library](https://www.npmjs.com/package/bitrix24-library))
 
 ### Использование
 

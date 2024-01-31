@@ -30,7 +30,7 @@
         v-if="componentVisible === 'form-validation'"
       ></example-form>
       <example-link
-        v-if="componentVisible === 'bx-link'"
+        v-if="componentVisible === 'app-link'"
       ></example-link>
       <example-entity-selector
         v-if="componentVisible === 'bx-entity-selector'"
@@ -67,9 +67,9 @@ export default defineComponent({
       componentsGroups: {
         'bitrix24-create-app': [
           'form-validation',
+          'app-link',
         ],
         'vue-bitrix24': [
-          'bx-link',
           'bx-entity-selector',
         ],
       },

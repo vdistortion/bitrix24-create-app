@@ -35,7 +35,9 @@
 <script>
 import { defineComponent } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
-import { email, required, minLength, sameAs, helpers } from '@vuelidate/validators';
+import {
+  email, required, minLength, sameAs, helpers,
+} from '@vuelidate/validators';
 import FormErrorWrapper from './FormErrorWrapper.vue';
 
 export default defineComponent({
@@ -53,7 +55,7 @@ export default defineComponent({
         },
         password: {
           required: helpers.withMessage('Заполните это поле', required),
-          minLength: helpers.withMessage('Пароль должен содержать не менее 8 символов', minLength(8)),
+          minLength: helpers.withMessage('Пароль должен быть не менее 8 символов', minLength(8)),
         },
         passwordConfirm: {
           required: helpers.withMessage('Заполните это поле', required),

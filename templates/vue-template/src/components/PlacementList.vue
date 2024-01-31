@@ -6,10 +6,10 @@
           <small>{{ item.placement }}</small>
         </td>
         <td>
-          <bx-link
+          <app-link
             v-if="item.placement === 'REST_APP_URI'"
             :href="appLink"
-          >{{ item.name }}</bx-link>
+          >{{ item.name }}</app-link>
           <span v-else>{{ item.name }}</span>
         </td>
         <td>
@@ -46,10 +46,14 @@
 import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'pinia';
 import { usePlacementStore } from '@/stores/PlacementStore';
+import AppLink from './AppLink.vue';
 
 export default defineComponent({
   methods: mapActions(usePlacementStore, ['bind', 'unbind']),
   computed: mapState(usePlacementStore, ['placementList', 'appLink']),
+  components: {
+    AppLink,
+  },
   name: 'placement-list',
 });
 </script>

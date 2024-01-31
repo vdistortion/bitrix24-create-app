@@ -1,11 +1,11 @@
 <template>
-  <example-table name="bx-link" :code="markup">
-    <bx-link
+  <example-table name="app-link" :code="markup">
+    <app-link
       :href="props.href"
     >
       <img v-if="slots.default === 'image'" src="/favicon.svg" alt="logo">
       <span v-else-if="slots.default === 'text'">Текст</span>
-    </bx-link>
+    </app-link>
     <template #params>
       <label>
         slots.default
@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import BxLink from 'vue-bitrix24/BxLink';
+import AppLink from '../AppLink.vue';
 import ExampleTable from './Table.vue';
 
 export default defineComponent({
@@ -41,11 +41,11 @@ export default defineComponent({
     },
     markup() {
       return `
-<bx-link
+<app-link
   href="${this.props.href}"
 >
   ${this.slot}
-</bx-link>
+</app-link>
       `;
     },
   },
@@ -67,7 +67,7 @@ export default defineComponent({
   },
   components: {
     ExampleTable,
-    BxLink,
+    AppLink,
   },
   name: 'example-link',
 });
