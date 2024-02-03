@@ -6,54 +6,46 @@
     :title="page.title"
     v-bind="$attrs"
   >
-    <app-icon :icon="page.icon"></app-icon>
+    <slot :icon="page.icon"></slot>
   </router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import AppIcon from '../AppIcon.vue';
+<script setup lang="ts">
+import { defineOptions, reactive, computed, inject } from 'vue';
 
-export default defineComponent({
-  computed: {
-    isAdmin() {
-      return this.$BX24.isAdmin();
-    },
-
-    pages() {
-      if (this.isAdmin) return this.buttons;
-      return this.buttons.filter((btn) => !btn.admin);
-    },
-  },
-  data() {
-    return {
-      buttons: [
-        {
-          admin: true,
-          path: '/',
-          title: 'На главную',
-          icon: 'mdiHome',
-        },
-        {
-          admin: true,
-          path: '/placement',
-          title: 'Настройки встраивания',
-          icon: 'mdiTools',
-        },
-        {
-          admin: false,
-          path: '/example',
-          title: 'Компоненты',
-          icon: 'mdiFormatListBulletedType',
-        },
-      ],
-    };
-  },
+defineOptions({
   inheritAttrs: false,
-  inject: ['$BX24'],
-  components: {
-    AppIcon,
-  },
-  name: 'dev-panel-pages',
+});
+
+const $BX24 = inject('$BX24');
+
+const data = reactive({
+  buttons: [
+    {
+      admin: true,
+      path: '/',
+      title: 'На главную',
+      icon: 'mdiHome',
+    },
+    {
+      admin: true,
+      path: '/placement',
+      title: 'Настройки встраивания',
+      icon: 'mdiTools',
+    },
+    {
+      admin: false,
+      path: '/example',
+      title: 'Компоненты',
+      icon: 'mdiFormatListBulletedType',
+    },
+  ],
+});
+
+const isAdmin = computed(() => $BX24.isAdmin());
+
+const pages = computed(() => {
+  if (isAdmin.value) return data.buttons;
+  return data.buttons.filter((btn) => !btn.admin);
 });
 </script>

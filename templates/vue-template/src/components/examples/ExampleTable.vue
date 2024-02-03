@@ -1,6 +1,10 @@
 <template>
   <table class="example-table">
-    <caption>{{ name }}</caption>
+    <caption>
+      {{
+        props.name
+      }}
+    </caption>
     <tbody>
       <tr>
         <td colspan="2">
@@ -16,35 +20,31 @@
           </div>
         </td>
         <td>
-          <pre class="example-table__code" v-text="code.trim()"></pre>
+          <pre class="example-table__code" v-text="props.code.trim()"></pre>
         </td>
       </tr>
     </tbody>
-    <tfoot v-if="based.length">
-      Component based on <a :href="based[0]" target="_blank">{{ based[1] ?? based[0] }}</a>
+    <tfoot v-if="props.based.length">
+      Component based on
+      <a :href="props.based[0]" target="_blank">{{ props.based[1] ?? props.based[0] }}</a>
     </tfoot>
   </table>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  props: {
-    name: {
-      type: String,
-      default: '',
-    },
-    code: {
-      type: String,
-      default: '',
-    },
-    based: {
-      type: Array,
-      default: () => [],
-    },
+<script setup lang="ts">
+const props = defineProps({
+  name: {
+    type: String,
+    default: '',
   },
-  name: 'example-table',
+  code: {
+    type: String,
+    default: '',
+  },
+  based: {
+    type: Array,
+    default: () => [],
+  },
 });
 </script>
 

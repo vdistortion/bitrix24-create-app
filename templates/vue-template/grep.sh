@@ -9,7 +9,7 @@ for var in node_modules dist .git .idea; do
 done
 
 # Список файлов, в которых искать не нужно
-for var in package-lock.json; do
+for var in package-lock.json stats.html; do
   exclude=$exclude"--exclude="$var" "
 done
 

@@ -1,10 +1,9 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import archiver from 'archiver';
-// eslint-disable-next-line import/extensions
-import { archiveName } from './getNames.js';
 
+const packageJson = JSON.parse(fs.readFileSync('./package.json'));
 const archive = archiver('zip', { zlib: { level: 9 } });
-const output = fs.createWriteStream(archiveName);
+const output = fs.createWriteStream(`${packageJson.name}.zip`);
 const path = (name) => ['dist', name].join('/');
 const list = [
   {
@@ -13,7 +12,7 @@ const list = [
   },
   {
     file: true,
-    name: 'constants.js',
+    name: 'nouserpic.svg',
   },
   {
     file: true,

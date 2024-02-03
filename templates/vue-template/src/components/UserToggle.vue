@@ -2,41 +2,41 @@
   <div class="user-toggle">
     <button
       class="user-toggle__button"
-      :class="{ active: type === 'users' }"
+      :class="{ active: data.type === 'users' }"
       @click="onClick('users')"
-    >Сотрудники</button>
+    >
+      Сотрудники
+    </button>
     <button
       class="user-toggle__button"
-      :class="{ active: type === 'disabled' }"
+      :class="{ active: data.type === 'disabled' }"
       @click="onClick('disabled')"
-    >Уволенные</button>
+    >
+      Уволенные
+    </button>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { reactive } from 'vue';
 
-export default defineComponent({
-  methods: {
-    onClick(type) {
-      this.type = type;
-      this.$emit('click', type);
-    },
+const props = defineProps({
+  defaultType: {
+    type: String,
+    required: true,
   },
-  data() {
-    return {
-      type: this.defaultType, // users, disabled
-    };
-  },
-  emits: ['click'],
-  props: {
-    defaultType: {
-      type: String,
-      required: true,
-    },
-  },
-  name: 'user-toggle',
 });
+
+const emit = defineEmits(['click']);
+
+const data = reactive({
+  type: props.defaultType, // users, disabled
+});
+
+function onClick(type) {
+  data.type = type;
+  emit('click', type);
+}
 </script>
 
 <style lang="stylus">

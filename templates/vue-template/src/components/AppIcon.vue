@@ -2,35 +2,27 @@
   <svg-icon type="mdi" :path="path"></svg-icon>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { reactive, computed } from 'vue';
 import SvgIcon from '@jamescoyle/vue-icon';
-import {
-  mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType,
-} from '@mdi/js';
+import { mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType } from '@mdi/js';
 
-export default defineComponent({
-  computed: {
-    path() {
-      return this.icons[this.icon];
-    },
+const props = defineProps({
+  icon: {
+    type: String,
+    required: true,
   },
-  data() {
-    return {
-      icons: {
-        mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType,
-      },
-    };
-  },
-  props: {
-    icon: {
-      type: String,
-      required: true,
-    },
-  },
-  components: {
-    SvgIcon,
-  },
-  name: 'app-icon',
 });
+
+const data = reactive({
+  icons: {
+    mdiHome,
+    mdiTools,
+    mdiReload,
+    mdiDownload,
+    mdiFormatListBulletedType,
+  },
+});
+
+const path = computed(() => data.icons[props.icon]);
 </script>

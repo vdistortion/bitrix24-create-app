@@ -1,14 +1,10 @@
 <template>
   <div class="user-lists">
-    <user-toggle @click="type = $event" :default-type="type"></user-toggle>
+    <user-toggle @click="data.type = $event" :default-type="data.type"></user-toggle>
     <div class="user-lists__wrapper">
+      <users-list v-if="data.type === 'users'" key="users" :users="usersEnabled"></users-list>
       <users-list
-        v-if="type === 'users'"
-        key="users"
-        :users="usersEnabled"
-      ></users-list>
-      <users-list
-        v-else-if="type === 'disabled'"
+        v-else-if="data.type === 'disabled'"
         key="disabled"
         :users="usersDisabled"
       ></users-list>
@@ -16,43 +12,30 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { mapState } from 'pinia';
+<script setup lang="ts">
+import { reactive, computed } from 'vue';
 import { useRootStore } from '@/stores/RootStore';
 import UserToggle from './UserToggle.vue';
 import UsersList from './UserList.vue';
 
-export default defineComponent({
-  computed: {
-    ...mapState(useRootStore, ['users']),
+const store = useRootStore();
 
-    usersEnabled() {
-      const users = Object.entries(this.users).filter(([_key, user]) => user.active);
-      return Object.fromEntries(users);
-    },
+const data = reactive({
+  type: 'users',
+});
 
-    usersDisabled() {
-      const users = Object.entries(this.users).filter(([_key, user]) => !user.active);
-      return Object.fromEntries(users);
-    },
-  },
-  data() {
-    return {
-      type: 'users',
-    };
-  },
-  components: {
-    UserToggle,
-    UsersList,
-  },
-  name: 'user-lists',
+const usersEnabled = computed(() => {
+  const list = Object.entries(store.users).filter(([_key, user]) => user.active);
+  return Object.fromEntries(list);
+});
+
+const usersDisabled = computed(() => {
+  const list = Object.entries(store.users).filter(([_key, user]) => !user.active);
+  return Object.fromEntries(list);
 });
 </script>
 
 <style lang="stylus">
-@import '../src/assets/smartgrid';
-
 .user-lists
   wrapper()
   &__wrapper

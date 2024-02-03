@@ -6,17 +6,13 @@
           <small>{{ item.placement }}</small>
         </td>
         <td>
-          <app-link
-            v-if="item.placement === 'REST_APP_URI'"
-            :href="appLink"
-          >{{ item.name }}</app-link>
+          <app-link v-if="item.placement === 'REST_APP_URI'" :href="placementLink">
+            {{ item.name }}
+          </app-link>
           <span v-else>{{ item.name }}</span>
         </td>
         <td>
-          <bx-button
-            color="danger"
-            @click="unbind(item.placement)"
-          >Удалить</bx-button>
+          <bx-button color="danger" @click="unbind(item.placement)">Удалить</bx-button>
         </td>
       </tr>
       <tr v-else>
@@ -24,38 +20,33 @@
           <small>{{ item.placement }}</small>
         </td>
         <td>
-          <bx-input
-            v-model="item.name"
-            :placeholder="item.placement"
-            inline
-          ></bx-input>
+          <bx-input v-model="item.name" :placeholder="item.placement" inline></bx-input>
         </td>
         <td>
-          <bx-button
-            :disabled="!item.name"
-            color="primary"
-            @click="bind(item)"
-          >Добавить</bx-button>
+          <bx-button :disabled="!item.name" color="primary" @click="bind(item)">Добавить</bx-button>
         </td>
       </tr>
     </tbody>
   </table>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { mapState, mapActions } from 'pinia';
+<script setup lang="ts">
+import { computed } from 'vue';
 import { usePlacementStore } from '@/stores/PlacementStore';
 import AppLink from './AppLink.vue';
 
-export default defineComponent({
-  methods: mapActions(usePlacementStore, ['bind', 'unbind']),
-  computed: mapState(usePlacementStore, ['placementList', 'appLink']),
-  components: {
-    AppLink,
-  },
-  name: 'placement-list',
-});
+const placementStore = usePlacementStore();
+
+const placementList = computed(() => placementStore.placementList);
+const placementLink = computed(() => placementStore.appLink);
+
+function bind(item) {
+  placementStore.bind(item);
+}
+
+function unbind(placement) {
+  placementStore.unbind(placement);
+}
 </script>
 
 <style lang="stylus">

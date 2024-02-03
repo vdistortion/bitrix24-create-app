@@ -2,14 +2,6 @@
   <form-validation></form-validation>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import FormValidation from '../FormValidation.vue';
-
-export default defineComponent({
-  components: {
-    FormValidation,
-  },
-  name: 'example-form',
-});
 </script>

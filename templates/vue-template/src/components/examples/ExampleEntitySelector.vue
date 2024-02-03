@@ -2,15 +2,15 @@
   <example-table name="bx-entity-selector" :code="markup">
     <div style="flex-grow: 1">
       <bx-entity-selector
-        :list="props.list"
-        :display-field="props.displayField"
-        :display-field-link="props.displayFieldLink"
-        :multiple="props.multiple"
-        :clickable="props.clickable"
-        :inline="props.inline"
-        :text-add="props.textAdd"
-        :text-more="props.textMore"
-        :text-change="props.textChange"
+        :list="data.props.list"
+        :display-field="data.props.displayField"
+        :display-field-link="data.props.displayFieldLink"
+        :multiple="data.props.multiple"
+        :clickable="data.props.clickable"
+        :inline="data.props.inline"
+        :text-add="data.props.textAdd"
+        :text-more="data.props.textMore"
+        :text-change="data.props.textChange"
         @click="onClick"
         @auxclick="onAuxClick"
         @delete="onDelete"
@@ -20,126 +20,117 @@
     <template #params>
       <label>
         props.displayField
-        <select v-model="props.displayField">
-          <option
-            v-for="(item, key) in settings.fields"
-            :key="key"
-            :value="item"
-          >{{ item }}</option>
+        <select v-model="data.props.displayField">
+          <option v-for="(item, key) in data.settings.fields" :key="key" :value="item">
+            {{ item }}
+          </option>
         </select>
       </label>
       <label>
         props.displayFieldLink
-        <input type="text" v-model="props.displayFieldLink">
+        <input type="text" v-model="data.props.displayFieldLink" />
       </label>
       <label>
-        <input type="checkbox" v-model="props.clickable">
+        <input type="checkbox" v-model="data.props.clickable" />
         props.clickable
       </label>
       <label>
-        <input type="checkbox" v-model="props.multiple">
+        <input type="checkbox" v-model="data.props.multiple" />
         props.multiple
       </label>
       <label>
-        <input type="checkbox" v-model="props.inline">
+        <input type="checkbox" v-model="data.props.inline" />
         props.inline
       </label>
       <label>
         props.textAdd
-        <input type="text" v-model="props.textAdd">
+        <input type="text" v-model="data.props.textAdd" />
       </label>
       <label>
         props.textMore
-        <input type="text" v-model="props.textMore">
+        <input type="text" v-model="data.props.textMore" />
       </label>
       <label>
         props.textChange
-        <input type="text" v-model="props.textChange">
+        <input type="text" v-model="data.props.textChange" />
       </label>
     </template>
   </example-table>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { reactive, computed, inject } from 'vue';
 import BxEntitySelector from 'vue-bitrix24/BxEntitySelector';
-import ExampleTable from './Table.vue';
+import ExampleTable from './ExampleTable.vue';
 
-export default defineComponent({
-  methods: {
-    onClick(index, item) {
-      if (!this.$BX24) return;
-      console.info('click', index, item);
-      this.$BX24.openLink(`/company/personal/user/${item.id}/`);
-    },
-    onAuxClick(index, item) {
-      if (!this.$BX24) return;
-      console.info('auxclick', index, item);
-      this.$BX24.openLink(`/company/personal/user/${item.id}/`, true);
-    },
-    onDelete(index, item) {
-      console.info('delete', index, item);
-      this.props.list.splice(index, 1);
-    },
-    onAdd() {
-      console.info('add');
-      if (!this.$BX24) return;
+const $BX24 = inject('$BX24');
 
-      if (this.props.multiple) {
-        this.$BX24.selectUsers().then((users) => {
-          this.props.list.push(...users);
-        });
-      } else {
-        this.$BX24.selectUser().then((user) => {
-          this.props.list = [user];
-        });
-      }
-    },
+const data = reactive({
+  props: {
+    list: [],
+    displayField: 'name',
+    displayFieldLink: '',
+    multiple: false,
+    clickable: false,
+    inline: false,
+    textAdd: 'Добавить',
+    textMore: 'Добавить ещё',
+    textChange: 'Сменить',
   },
-  computed: {
-    markup() {
-      return `
+  settings: {
+    fields: ['id', 'name', 'position'],
+  },
+});
+
+const markup = computed(
+  () => `
 <bx-entity-selector
   :list="[]"
-  display-field="${this.props.displayField}"
-  display-field-link="${this.props.displayFieldLink}"
-  :multiple="${this.props.multiple}"
-  :clickable="${this.props.clickable}"
-  :inline="${this.props.inline}"
-  text-add="${this.props.textAdd}"
-  text-more="${this.props.textMore}"
-  text-change="${this.props.textChange}"
+  display-field="${data.props.displayField}"
+  display-field-link="${data.props.displayFieldLink}"
+  :multiple="${data.props.multiple}"
+  :clickable="${data.props.clickable}"
+  :inline="${data.props.inline}"
+  text-add="${data.props.textAdd}"
+  text-more="${data.props.textMore}"
+  text-change="${data.props.textChange}"
   @click="onClick(index, item)"
   @auxclick="onAuxClick(index, item)"
   @delete="onDelete(index, item)"
   @add="onAdd"
 ></bx-entity-selector>
-      `;
-    },
-  },
-  data() {
-    return {
-      props: {
-        list: [],
-        displayField: 'name',
-        displayFieldLink: '',
-        multiple: false,
-        clickable: false,
-        inline: false,
-        textAdd: 'Добавить',
-        textMore: 'Добавить ещё',
-        textChange: 'Сменить',
-      },
-      settings: {
-        fields: ['id', 'name', 'position'],
-      },
-    };
-  },
-  inject: ['$BX24'],
-  components: {
-    ExampleTable,
-    BxEntitySelector,
-  },
-  name: 'example-entity-selector',
-});
+`,
+);
+
+function onClick(index, item) {
+  if (!$BX24) return;
+  console.info('click', index, item);
+  $BX24.openLink(`/company/personal/user/${item.id}/`);
+}
+
+function onAuxClick(index, item) {
+  if (!$BX24) return;
+  console.info('auxclick', index, item);
+  $BX24.openLink(`/company/personal/user/${item.id}/`, true);
+}
+
+function onDelete(index, item) {
+  console.info('delete', index, item);
+  data.props.list.splice(index, 1);
+}
+
+function onAdd() {
+  console.info('add');
+  if (!$BX24) return;
+
+  if (data.props.multiple) {
+    $BX24.selectUsers().then((users) => {
+      data.props.list.push(...users);
+    });
+  } else {
+    $BX24.selectUser().then((user) => {
+      data.props.list = [user];
+    });
+  }
+}
 </script>

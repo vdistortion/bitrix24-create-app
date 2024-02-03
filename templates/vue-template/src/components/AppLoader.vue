@@ -1,22 +1,14 @@
 <template>
-  <div class="the-loader">
-    <div class="the-loader__element">
-      <span class="the-loader__item the-loader__item--top"></span>
-      <span class="the-loader__item the-loader__item--bottom"></span>
+  <div class="app-loader">
+    <div class="app-loader__element">
+      <span class="app-loader__item app-loader__item--top"></span>
+      <span class="app-loader__item app-loader__item--bottom"></span>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'the-loader',
-});
-</script>
-
 <style lang="stylus">
-.the-loader
+.app-loader
   position fixed
   margin 0 auto
   background-color white
@@ -45,21 +37,21 @@ export default defineComponent({
       margin-left 1px
     &--top
       background-color rgba(black, 1)
-      animation the-loader 2s infinite
+      animation app-loader 2s infinite
       &::after
         background-color rgba(black, .66)
-        animation the-loader 2s infinite
+        animation app-loader 2s infinite
         animation-delay 0.5s
     &--bottom
       background-color rgba(black, 0)
-      animation the-loader 2s infinite
+      animation app-loader 2s infinite
       animation-delay 1.5s
       &::after
         background-color rgba(black, .33)
-        animation the-loader 2s infinite
+        animation app-loader 2s infinite
         animation-delay 1s
 
-@keyframes the-loader
+@keyframes app-loader
   0%
     background-color black
   100%

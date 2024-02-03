@@ -27,5 +27,8 @@ coverage
 *.sln
 *.sw?
 
+*.tsbuildinfo
+
 *.zip
+.env.development
 stats.html

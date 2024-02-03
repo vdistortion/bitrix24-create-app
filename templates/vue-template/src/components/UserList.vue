@@ -1,6 +1,6 @@
 <template>
   <div class="user-list">
-    <div v-for="(user, id) in users" :key="id" class="user-list__card">
+    <div v-for="(user, id) in props.users" :key="id" class="user-list__card">
       <a
         class="user"
         :class="classList(id)"
@@ -10,78 +10,70 @@
         :data-birthday="user.birthday"
         @click.prevent="openLink(user.href)"
       >
-        <img v-if="user.photo" :src="user.photo" :alt="user.fullName" loading="lazy">
+        <img v-if="user.photo" :src="user.photo" :alt="user.fullName" loading="lazy" />
       </a>
       <div class="user-list__buttons">
-        <bx-button
-          color="light-border"
-          size="xs"
-          :round="true"
-          @click="openHistory(id)"
-        >История</bx-button>
+        <bx-button color="light-border" size="xs" :round="true" @click="openHistory(id)">
+          История
+        </bx-button>
         <bx-button
           color="light-border"
           size="xs"
           icon="chat"
           :round="true"
           @click="openMessenger(id)"
-        >Чат</bx-button>
+        >
+          Чат
+        </bx-button>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { mapState } from 'pinia';
+<script setup lang="ts">
+import { computed, inject } from 'vue';
 import { useRootStore } from '@/stores/RootStore';
 
-interface User {
-  fullName: string
-  active: boolean
-  position: string
-  birthday: string | boolean
-  photo: string
-  department: number[]
-  href: string
-  target: string
+const store = useRootStore();
+
+const $BX24 = inject('$BX24');
+
+const props = defineProps({
+  users: {
+    type: Object,
+    required: true,
+  },
+});
+
+const department = computed(() => store.department);
+const currentId = computed(() => store.currentId);
+const portal = computed(() => store.portal);
+
+function classList(id) {
+  return {
+    department: department.value.includes(id),
+    current: currentId.value === id,
+  };
 }
 
-export default defineComponent({
-  methods: {
-    classList(id) {
-      return {
-        department: this.department.includes(id),
-        current: this.currentId === id,
-      };
-    },
-    getTitle(user) {
-      return [user.fullName, user.position].filter((s) => s).join('\n');
-    },
-    openLink(href) {
-      this.$BX24.openLink(href);
-    },
-    openMessenger(id) {
-      this.$BX24.im.openMessenger(id);
-    },
-    openHistory(id) {
-      this.$BX24.im.openHistory(id);
-    },
-  },
-  computed: mapState(useRootStore, ['department', 'currentId', 'portal']),
-  inject: ['$BX24'],
-  props: {
-    users: {
-      type: Object as PropType<User>,
-      required: true,
-    },
-  },
-  name: 'user-list',
-});
+function getTitle(user) {
+  return [user.fullName, user.position].filter((s) => s).join('\n');
+}
+
+function openLink(href) {
+  $BX24.openLink(href);
+}
+
+function openMessenger(id) {
+  $BX24.im.openMessenger(id);
+}
+
+function openHistory(id) {
+  $BX24.im.openHistory(id);
+}
 </script>
 
 <style lang="stylus">
-@import '../src/assets/smartgrid';
 size = 170px
 
 .user-list
@@ -103,7 +95,7 @@ size = 170px
     height size
     border 5px solid black
     border-radius 50%
-    background-image url("../assets/nouserpic.svg")
+    background-image url("/nouserpic.svg")
     background-color rgba(82,92,105,.23)
     background-size 111px 124px
     background-repeat no-repeat

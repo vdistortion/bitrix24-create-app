@@ -3,19 +3,14 @@
   <router-view></router-view>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import DevPanel from './components/dev/DevPanel.vue';
-
-export default defineComponent({
-  components: {
-    DevPanel,
-  },
-  name: 'app-layout',
-});
 </script>
 
 <style lang="stylus">
+@css
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;700&display=swap')
+
 body
   font-family 'Roboto Flex', sans-serif
   margin 0

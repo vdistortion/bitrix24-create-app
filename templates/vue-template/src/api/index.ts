@@ -1,8 +1,8 @@
-import { Ajax } from './Ajax';
+import { HttpClient } from './HttpClient';
 
 export default {
   test(FormData = {}) {
-    return Ajax({
+    return HttpClient({
       url: 'index.php',
       method: 'post',
       data: FormData,

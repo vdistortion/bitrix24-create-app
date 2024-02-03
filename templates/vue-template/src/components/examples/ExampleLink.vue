@@ -1,74 +1,58 @@
 <template>
   <example-table name="app-link" :code="markup">
-    <app-link
-      :href="props.href"
-    >
-      <img v-if="slots.default === 'image'" src="/favicon.svg" alt="logo">
-      <span v-else-if="slots.default === 'text'">Текст</span>
+    <app-link :href="data.props.href">
+      <img v-if="data.slots.default === 'image'" src="../../assets/vite.svg" alt="logo" />
+      <span v-else-if="data.slots.default === 'text'">Текст</span>
     </app-link>
     <template #params>
       <label>
         slots.default
-        <select v-model="slots.default">
-          <option
-            v-for="(item, key) in settings.slots"
-            :key="key"
-            :value="item"
-          >{{ item }}</option>
+        <select v-model="data.slots.default">
+          <option v-for="(item, key) in data.settings.slots" :key="key" :value="item">
+            {{ item }}
+          </option>
         </select>
       </label>
       <label>
         props.href
-        <input type="text" v-model="props.href">
+        <input type="text" v-model="data.props.href" />
       </label>
     </template>
   </example-table>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { reactive, computed } from 'vue';
+import ExampleTable from './ExampleTable.vue';
 import AppLink from '../AppLink.vue';
-import ExampleTable from './Table.vue';
 
-export default defineComponent({
-  computed: {
-    slot() {
-      const tags = {
-        image: '<img src="logo.png" alt="logo">',
-        text: '<span>Текст</span>',
-      };
-      return tags[this.slots.default];
-    },
-    markup() {
-      return `
-<app-link
-  href="${this.props.href}"
->
-  ${this.slot}
-</app-link>
-      `;
-    },
+const data = reactive({
+  slots: {
+    default: 'image',
   },
-  data() {
-    return {
-      slots: {
-        default: 'image',
-      },
-      props: {
-        href: '/marketplace/',
-      },
-      settings: {
-        slots: [
-          'image',
-          'text',
-        ],
-      },
-    };
+  props: {
+    href: '/marketplace/',
   },
-  components: {
-    ExampleTable,
-    AppLink,
+  settings: {
+    slots: ['image', 'text'],
   },
-  name: 'example-link',
 });
+
+const slot = computed(() => {
+  const tags = {
+    image: '<img src="logo.png" alt="logo">',
+    text: '<span>Текст</span>',
+  };
+  return tags[data.slots.default];
+});
+
+const markup = computed(
+  () => `
+<app-link
+  href="${data.props.href}"
+>
+  ${slot.value}
+</app-link>
+`,
+);
 </script>

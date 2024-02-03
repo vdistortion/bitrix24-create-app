@@ -1,37 +1,32 @@
 <template>
-  <a :href="href" target="_blank" @click="onClick" @auxclick="onMiddleClick">
+  <a :href="props.href" target="_blank" @click="onClick" @auxclick="onMiddleClick">
     <slot></slot>
   </a>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { inject } from 'vue';
 
-export default defineComponent({
-  methods: {
-    onClick(e) {
-      if (this.$BX24) {
-        e.preventDefault();
-        this.$BX24.openLink(this.href);
-      }
-    },
-    onMiddleClick(e) {
-      if (this.$BX24) {
-        e.preventDefault();
-        this.$BX24.openLink(this.href, true);
-      }
-    },
+const $BX24 = inject('$BX24');
+
+const props = defineProps({
+  href: {
+    type: String,
+    required: true,
   },
-  inject: ['$BX24'],
-  props: {
-    href: {
-      type: String,
-      required: true,
-      validator(value) {
-        return typeof value === 'string';
-      },
-    },
-  },
-  name: 'app-link',
 });
+
+function onClick(e) {
+  if ($BX24) {
+    e.preventDefault();
+    $BX24.openLink(props.href);
+  }
+}
+
+function onMiddleClick(e) {
+  if ($BX24) {
+    e.preventDefault();
+    $BX24.openLink(props.href, true);
+  }
+}
 </script>

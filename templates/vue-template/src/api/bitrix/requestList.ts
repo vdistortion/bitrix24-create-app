@@ -1,15 +1,18 @@
-import config from '../../config';
+import config from '@/config';
 
 export default (isAdmin) => ({
   initParams() {
     const options = {
       info: ['app.info'],
       user: ['user.current'],
-      users: ['user.get', {
-        FILTER: {
-          USER_TYPE: 'employee',
+      users: [
+        'user.get',
+        {
+          FILTER: {
+            USER_TYPE: 'employee',
+          },
         },
-      }],
+      ],
       department: {
         method: 'user.get',
         params: {
