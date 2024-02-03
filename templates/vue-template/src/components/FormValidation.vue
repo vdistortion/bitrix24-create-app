@@ -71,12 +71,12 @@ function onReset() {
   data.form.email = '';
   data.form.password = '';
   data.form.passwordConfirm = '';
-  v$.$reset();
+  v$.value.$reset();
 }
 
 function onSubmit() {
-  v$.$touch();
-  if (v$.$error) return;
+  v$.value.$touch();
+  if (v$.value.$error) return;
   console.info({
     email: data.form.email,
     password: btoa(data.form.password),

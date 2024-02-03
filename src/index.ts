@@ -153,7 +153,7 @@ function postProcessNode(options: CliOptions) {
   return true;
 }
 
-const SKIP_FILES = ['node_modules', '.template.json', 'test', 'src'];
+const SKIP_FILES = ['node_modules', '.template.json'];
 
 function createDirectoryContents(templatePath: string, projectName: string, config: TemplateConfig) {
   const filesToCreate = fs.readdirSync(templatePath);
