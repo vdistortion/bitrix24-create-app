@@ -1,7 +1,7 @@
 {
   "name": "bitrix24-create-app",
   "description": "Command line for create a project with your own templates",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "GPL",
   "private": false,
   "main": "./dist/index.js",
@@ -18,6 +18,7 @@
     "rest",
     "promises",
     "components",
+    "typescript",
     "bitrix24",
     "bx24"
   ],

@@ -83,7 +83,9 @@ inquirer.prompt(QUESTIONS).then((response: Object) => {
 function showMessage(options: CliOptions) {
   console.log('');
   console.log(chalk.green('Done.'));
-  console.log(chalk.green(`Go into the project: cd ${options.projectName}`));
+  console.log(chalk.green('Go into the project:'));
+  console.log(chalk.green(`cd ${options.projectName}`));
+  console.log(chalk.green('git init'));
 
   const message = options.config.postMessage;
 
@@ -135,7 +137,7 @@ function postProcessNode(options: CliOptions) {
   let cmd = '';
 
   if (shell.which('npm')) {
-    cmd = 'npm i';
+    cmd = 'npm ci';
   }
 
   if (cmd) {
@@ -151,7 +153,7 @@ function postProcessNode(options: CliOptions) {
   return true;
 }
 
-const SKIP_FILES = ['node_modules', '.template.json'];
+const SKIP_FILES = ['node_modules', '.template.json', 'test', 'src'];
 
 function createDirectoryContents(templatePath: string, projectName: string, config: TemplateConfig) {
   const filesToCreate = fs.readdirSync(templatePath);
