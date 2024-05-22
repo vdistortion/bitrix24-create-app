@@ -1,5 +1,5 @@
 <table class="placement-list">
-  @for (item of list; track item.placement) {
+  @for (item of list; track $index) {
     <tbody>
     @if (item.bind) {
       <tr>

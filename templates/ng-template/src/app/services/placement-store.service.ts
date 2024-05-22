@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BitrixService } from './bitrix.service';
 
+export interface IPlacement {
+  placement: string;
+  name: string;
+  bind: boolean;
+}
+
+export interface IList {
+  [key: string]: IPlacement;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class PlacementStoreService {
   private batch: any;
-  private placementList: string[] = [];
+  private placementList: IList = {};
 
   constructor(private bitrixService: BitrixService) {
     this.batch = this.bitrixService.batch;
@@ -21,15 +31,17 @@ export class PlacementStoreService {
     return this.placementList;
   }
 
-  setList(list: string[]) {
+  setList(list: IList) {
     this.placementList = list;
   }
 
   bind(item: { placement: string; name: string }) {
-    this.batch.bind(item.placement, item.name).then(this.setList);
+    this.batch
+      .bind(item.placement, item.name)
+      .then((list: IList) => this.setList(list));
   }
 
   unbind(placement: string) {
-    this.batch.unbind(placement).then(this.setList);
+    this.batch.unbind(placement).then((list: IList) => this.setList(list));
   }
 }

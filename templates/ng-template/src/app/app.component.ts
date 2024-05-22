@@ -13,14 +13,18 @@ import { environment } from '../environments/environment';
     @if (isDev) {
       <dev-panel></dev-panel>
     }
-    <router-outlet></router-outlet>
+    @if (isApp) {
+      <router-outlet></router-outlet>
+    }
   `,
 })
 export class AppComponent {
   protected isDev: boolean = false;
+  protected isApp: boolean = false;
 
   constructor(private bitrixService: BitrixService) {
     Bitrix24.init().then((BX24: any) => {
+      this.isApp = true;
       this.bitrixService.init(BX24);
       this.isDev = environment.TEST_DOMAINS.includes(BX24.getDomain());
     });
