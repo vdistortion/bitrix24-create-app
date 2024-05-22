@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import Bitrix24 from 'bitrix24-library';
+import { BitrixService } from './services/bitrix.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +11,9 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'ng-template';
+  constructor(private bitrixService: BitrixService) {
+    Bitrix24.init().then((BX24: any) => {
+      bitrixService.BX24 = BX24;
+    });
+  }
 }

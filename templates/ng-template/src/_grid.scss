@@ -1,0 +1,533 @@
+$columns: 24;
+$atom: (100% / $columns);
+
+$break_w1600: 1600px;
+$break_w1366: 1366px;
+$break_w1200: 1200px;
+$break_w992: 992px;
+$break_w768: 768px;
+$break_w480: 480px;
+$break_w320: 320px;
+
+$offset: 2%;
+$offset_w1600: $offset;
+$offset_w1366: $offset;
+$offset_w1200: $offset;
+$offset_w992: $offset;
+$offset_w768: $offset;
+$offset_w480: $offset;
+$offset_w320: $offset;
+
+$offset_one_side: ($offset / 2);
+$offset_w1600_one_side: ($offset_w1600 / 2);
+$offset_w1366_one_side: ($offset_w1366 / 2);
+$offset_w1200_one_side: ($offset_w1200 / 2);
+$offset_w992_one_side: ($offset_w992 / 2);
+$offset_w768_one_side: ($offset_w768 / 2);
+$offset_w480_one_side: ($offset_w480 / 2);
+$offset_w320_one_side: ($offset_w320 / 2);
+
+$fields: 30px;
+$fields_w768: 20px;
+
+@mixin wrapper-full(){
+  padding-left: $fields;
+  padding-right: $fields;
+
+  @include w768-block(){
+    padding-left: $fields_w768;
+    padding-right: $fields_w768;
+  }
+}
+
+@mixin row-offsets(){
+  margin-left: ($offset_one_side * -1);
+  margin-right: ($offset_one_side * -1);
+}
+
+@mixin col-offsets($type){
+  #{$type}-left: $offset_one_side;
+  #{$type}-right: $offset_one_side;
+}
+
+@mixin wrapper(){
+  max-width: 1920px;
+  margin: 0 auto;
+  @include wrapper-full();
+}
+
+@mixin row-flex(){
+  display: flex;
+  flex-wrap: wrap;
+  @include row-offsets();
+}
+
+@mixin row-float(){
+  @include row-offsets();
+  @include clearfix();
+}
+
+@mixin row-ib(){
+  @include row-offsets();
+}
+
+@mixin col(){
+  box-sizing: border-box;
+  word-wrap: break-word;
+  @include col-offsets(margin);
+}
+
+@mixin col-float(){
+  float: left;
+}
+
+@mixin col-ib(){
+  display: inline-block;
+  vertical-align: top;
+}
+
+@mixin col-padding(){
+  word-wrap: break-word;
+  @include col-offsets(padding);
+}
+
+@mixin col-size($n){
+  width: $atom * $n - $offset;
+}
+
+@mixin col-size-w1600($n){
+  @include w1600(width, $atom * $n - $offset_w1600);
+}
+
+@mixin col-size-w1366($n){
+  @include w1366(width, $atom * $n - $offset_w1366);
+}
+
+@mixin col-size-w1200($n){
+  @include w1200(width, $atom * $n - $offset_w1200);
+}
+
+@mixin col-size-w992($n){
+  @include w992(width, $atom * $n - $offset_w992);
+}
+
+@mixin col-size-w768($n){
+  @include w768(width, $atom * $n - $offset_w768);
+}
+
+@mixin col-size-w480($n){
+  @include w480(width, $atom * $n - $offset_w480);
+}
+
+@mixin col-size-w320($n){
+  @include w320(width, $atom * $n - $offset_w320);
+}
+
+@mixin shift($n){
+  margin-left: $atom * $n + $offset_one_side;
+  margin-right: $atom * $n + $offset_one_side;
+}
+
+@mixin shift-left($n){
+  margin-left: $atom * $n + $offset_one_side;
+}
+
+@mixin shift-right($n){
+  margin-right: $atom * $n + $offset_one_side;
+}
+
+@mixin shift-padding($n){
+  padding-left: $atom * $n + $offset_one_side;
+  padding-right: $atom * $n + $offset_one_side;
+}
+
+@mixin shift-padding-left($n){
+  padding-left: $atom * $n + $offset_one_side;
+}
+
+@mixin shift-padding-right($n){
+  padding-right: $atom * $n + $offset_one_side;
+}
+
+@mixin shift-w1600($n){
+  @include w1600(margin-left, $atom * $n + $offset_w1600_one_side);
+  @include w1600(margin-right, $atom * $n + $offset_w1600_one_side);
+}
+
+@mixin shift-w1600-left($n){
+  @include w1600(margin-left, $atom * $n + $offset_w1600_one_side);
+}
+
+@mixin shift-w1600-right($n){
+  @include w1600(margin-right, $atom * $n + $offset_w1600_one_side);
+}
+
+@mixin shift-w1600-padding($n){
+  @include w1600(padding-left, $atom * $n + $offset_w1600_one_side);
+  @include w1600(padding-right, $atom * $n + $offset_w1600_one_side);
+}
+
+@mixin shift-w1600-padding-left($n){
+  @include w1600(padding-left, $atom * $n + $offset_w1600_one_side);
+}
+
+@mixin shift-w1600-padding-right($n){
+  @include w1600(padding-right, $atom * $n + $offset_w1600_one_side);
+}
+
+@mixin shift-w1366($n){
+  @include w1366(margin-left, $atom * $n + $offset_w1366_one_side);
+  @include w1366(margin-right, $atom * $n + $offset_w1366_one_side);
+}
+
+@mixin shift-w1366-left($n){
+  @include w1366(margin-left, $atom * $n + $offset_w1366_one_side);
+}
+
+@mixin shift-w1366-right($n){
+  @include w1366(margin-right, $atom * $n + $offset_w1366_one_side);
+}
+
+@mixin shift-w1366-padding($n){
+  @include w1366(padding-left, $atom * $n + $offset_w1366_one_side);
+  @include w1366(padding-right, $atom * $n + $offset_w1366_one_side);
+}
+
+@mixin shift-w1366-padding-left($n){
+  @include w1366(padding-left, $atom * $n + $offset_w1366_one_side);
+}
+
+@mixin shift-w1366-padding-right($n){
+  @include w1366(padding-right, $atom * $n + $offset_w1366_one_side);
+}
+
+@mixin shift-w1200($n){
+  @include w1200(margin-left, $atom * $n + $offset_w1200_one_side);
+  @include w1200(margin-right, $atom * $n + $offset_w1200_one_side);
+}
+
+@mixin shift-w1200-left($n){
+  @include w1200(margin-left, $atom * $n + $offset_w1200_one_side);
+}
+
+@mixin shift-w1200-right($n){
+  @include w1200(margin-right, $atom * $n + $offset_w1200_one_side);
+}
+
+@mixin shift-w1200-padding($n){
+  @include w1200(padding-left, $atom * $n + $offset_w1200_one_side);
+  @include w1200(padding-right, $atom * $n + $offset_w1200_one_side);
+}
+
+@mixin shift-w1200-padding-left($n){
+  @include w1200(padding-left, $atom * $n + $offset_w1200_one_side);
+}
+
+@mixin shift-w1200-padding-right($n){
+  @include w1200(padding-right, $atom * $n + $offset_w1200_one_side);
+}
+
+@mixin shift-w992($n){
+  @include w992(margin-left, $atom * $n + $offset_w992_one_side);
+  @include w992(margin-right, $atom * $n + $offset_w992_one_side);
+}
+
+@mixin shift-w992-left($n){
+  @include w992(margin-left, $atom * $n + $offset_w992_one_side);
+}
+
+@mixin shift-w992-right($n){
+  @include w992(margin-right, $atom * $n + $offset_w992_one_side);
+}
+
+@mixin shift-w992-padding($n){
+  @include w992(padding-left, $atom * $n + $offset_w992_one_side);
+  @include w992(padding-right, $atom * $n + $offset_w992_one_side);
+}
+
+@mixin shift-w992-padding-left($n){
+  @include w992(padding-left, $atom * $n + $offset_w992_one_side);
+}
+
+@mixin shift-w992-padding-right($n){
+  @include w992(padding-right, $atom * $n + $offset_w992_one_side);
+}
+
+@mixin shift-w768($n){
+  @include w768(margin-left, $atom * $n + $offset_w768_one_side);
+  @include w768(margin-right, $atom * $n + $offset_w768_one_side);
+}
+
+@mixin shift-w768-left($n){
+  @include w768(margin-left, $atom * $n + $offset_w768_one_side);
+}
+
+@mixin shift-w768-right($n){
+  @include w768(margin-right, $atom * $n + $offset_w768_one_side);
+}
+
+@mixin shift-w768-padding($n){
+  @include w768(padding-left, $atom * $n + $offset_w768_one_side);
+  @include w768(padding-right, $atom * $n + $offset_w768_one_side);
+}
+
+@mixin shift-w768-padding-left($n){
+  @include w768(padding-left, $atom * $n + $offset_w768_one_side);
+}
+
+@mixin shift-w768-padding-right($n){
+  @include w768(padding-right, $atom * $n + $offset_w768_one_side);
+}
+
+@mixin shift-w480($n){
+  @include w480(margin-left, $atom * $n + $offset_w480_one_side);
+  @include w480(margin-right, $atom * $n + $offset_w480_one_side);
+}
+
+@mixin shift-w480-left($n){
+  @include w480(margin-left, $atom * $n + $offset_w480_one_side);
+}
+
+@mixin shift-w480-right($n){
+  @include w480(margin-right, $atom * $n + $offset_w480_one_side);
+}
+
+@mixin shift-w480-padding($n){
+  @include w480(padding-left, $atom * $n + $offset_w480_one_side);
+  @include w480(padding-right, $atom * $n + $offset_w480_one_side);
+}
+
+@mixin shift-w480-padding-left($n){
+  @include w480(padding-left, $atom * $n + $offset_w480_one_side);
+}
+
+@mixin shift-w480-padding-right($n){
+  @include w480(padding-right, $atom * $n + $offset_w480_one_side);
+}
+
+@mixin shift-w320($n){
+  @include w320(margin-left, $atom * $n + $offset_w320_one_side);
+  @include w320(margin-right, $atom * $n + $offset_w320_one_side);
+}
+
+@mixin shift-w320-left($n){
+  @include w320(margin-left, $atom * $n + $offset_w320_one_side);
+}
+
+@mixin shift-w320-right($n){
+  @include w320(margin-right, $atom * $n + $offset_w320_one_side);
+}
+
+@mixin shift-w320-padding($n){
+  @include w320(padding-left, $atom * $n + $offset_w320_one_side);
+  @include w320(padding-right, $atom * $n + $offset_w320_one_side);
+}
+
+@mixin shift-w320-padding-left($n){
+  @include w320(padding-left, $atom * $n + $offset_w320_one_side);
+}
+
+@mixin shift-w320-padding-right($n){
+  @include w320(padding-right, $atom * $n + $offset_w320_one_side);
+}
+
+@mixin w1600($name, $value){
+  @media screen and (max-width: $break_w1600){
+    #{$name}: $value;
+  }
+}
+
+@mixin w1600-block(){
+  @media screen and (max-width: $break_w1600){
+    @content;
+  }
+}
+
+@mixin w1366($name, $value){
+  @media screen and (max-width: $break_w1366){
+    #{$name}: $value;
+  }
+}
+
+@mixin w1366-block(){
+  @media screen and (max-width: $break_w1366){
+    @content;
+  }
+}
+
+@mixin w1200($name, $value){
+  @media screen and (max-width: $break_w1200){
+    #{$name}: $value;
+  }
+}
+
+@mixin w1200-block(){
+  @media screen and (max-width: $break_w1200){
+    @content;
+  }
+}
+
+@mixin w992($name, $value){
+  @media screen and (max-width: $break_w992){
+    #{$name}: $value;
+  }
+}
+
+@mixin w992-block(){
+  @media screen and (max-width: $break_w992){
+    @content;
+  }
+}
+
+@mixin w768($name, $value){
+  @media screen and (max-width: $break_w768){
+    #{$name}: $value;
+  }
+}
+
+@mixin w768-block(){
+  @media screen and (max-width: $break_w768){
+    @content;
+  }
+}
+
+@mixin w480($name, $value){
+  @media screen and (max-width: $break_w480){
+    #{$name}: $value;
+  }
+}
+
+@mixin w480-block(){
+  @media screen and (max-width: $break_w480){
+    @content;
+  }
+}
+
+@mixin w320($name, $value){
+  @media screen and (max-width: $break_w320){
+    #{$name}: $value;
+  }
+}
+
+@mixin w320-block(){
+  @media screen and (max-width: $break_w320){
+    @content;
+  }
+}
+
+@mixin from($min_width){
+  @media screen and (min-width: $min_width){
+    @content;
+  }
+}
+
+@mixin to($max_width){
+  @media screen and (max-width: $max_width){
+    @content;
+  }
+}
+
+@mixin from-to($min_width, $max_width){
+  @media screen and (min-width: $min_width) and (max-width: $max_width){
+    @content;
+  }
+}
+
+@mixin u-row-flex($offset){
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: ($offset / -2);
+  margin-right: ($offset / -2);
+}
+
+@mixin u-col($offset){
+  box-sizing: border-box;
+  word-wrap: break-word;
+  margin-left: ($offset / 2);
+  margin-right: ($offset / 2);
+}
+
+@mixin u-size($n, $columns, $offset){
+  width: #{calc(100% / #{$columns} * #{$n} - #{$offset})};
+}
+
+@mixin reset(){
+  body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,input,textarea,p,blockquote,th,td{
+    margin: 0;
+    padding: 0;
+  }
+  table{
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  fieldset,img,abbr{
+    border: 0;
+  }
+  address,caption,cite,code,dfn,em,strong,th,var{
+    font-style: normal;
+    font-weight: normal;
+  }
+  ul li{
+    list-style: none;
+  }
+  caption,th{
+    text-align: left;
+  }
+  h1,h2,h3,h4,h5,h6{
+    font-size: 100%;
+    font-weight: normal;
+  }
+  sup{
+    vertical-align: text-top;
+  }
+  sub{
+    vertical-align: text-bottom;
+  }
+  input,textarea,select{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  legend{
+    color: #000;
+  }
+  article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,main{
+    display: block;
+  }
+  img{
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@mixin debug($background, $outline){
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  
+  > div{
+    height: inherit;
+    @include wrapper();
+    
+    > div{
+      height: inherit;
+      @include row-flex();
+      
+      > div{
+        @include col();
+        @include col-size(1);
+        height: inherit;
+        outline: $outline;
+        background: $background;
+      }
+    }
+  }
+}
+
+@mixin clearfix(){
+  &::after{
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
