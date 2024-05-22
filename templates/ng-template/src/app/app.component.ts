@@ -13,7 +13,7 @@ import { BitrixService } from './services/bitrix.service';
 export class AppComponent {
   constructor(private bitrixService: BitrixService) {
     Bitrix24.init().then((BX24: any) => {
-      bitrixService.BX24 = BX24;
+      bitrixService.init(BX24);
     });
   }
 }
