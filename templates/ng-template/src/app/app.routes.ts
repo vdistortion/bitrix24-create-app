@@ -6,14 +6,14 @@ import { ExamplePageComponent } from './pages/example-page/example-page.componen
 export const routes: Routes = [
   {
     path: '',
-    component: HomePageComponent
+    component: HomePageComponent,
   },
   {
     path: 'placement',
-    component: PlacementPageComponent
+    component: PlacementPageComponent,
   },
   {
     path: 'example',
-    component: ExamplePageComponent
-  }
+    component: ExamplePageComponent,
+  },
 ];
