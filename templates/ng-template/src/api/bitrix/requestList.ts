@@ -1,4 +1,4 @@
-const pathHandler = [window.location.origin, window.location.pathname].join('');
+import { environment } from '../../environments/environment';
 
 type TMethod = string;
 type TParams = {
@@ -60,7 +60,7 @@ export default (isAdmin: boolean) => ({
         method: 'placement.bind',
         params: {
           PLACEMENT: placement,
-          HANDLER: pathHandler,
+          HANDLER: environment.PATH_HANDLER,
           LANG_ALL: {
             ru: {
               TITLE: name,
@@ -78,7 +78,7 @@ export default (isAdmin: boolean) => ({
         method: 'placement.unbind',
         params: {
           PLACEMENT: placement,
-          HANDLER: pathHandler,
+          HANDLER: environment.PATH_HANDLER,
         },
       },
       ...this.placementList(),

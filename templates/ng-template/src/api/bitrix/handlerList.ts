@@ -56,8 +56,8 @@ function parseId(user: IUser) {
   return user.ID;
 }
 
-function parseUsers(users: IUser[]) {
-  return users.reduce((acc: IUsers, user) => {
+function parseUsers(users: IUser[]): IUsers {
+  return users.reduce((acc: IUsers, user: IUser) => {
     const { ID } = user;
     acc[ID] = parseUser(user);
     return acc;
@@ -91,7 +91,7 @@ function parseUser(user: IUser) {
   };
 }
 
-function parsePlacementList(placementList: IPlacement[]) {
+function parsePlacementList(placementList: IPlacement[]): IPlacements {
   function getItem(
     placement: string,
     name = environment.APP_NAME,
@@ -99,17 +99,20 @@ function parsePlacementList(placementList: IPlacement[]) {
   ) {
     return { placement, name, bind };
   }
-  const defaultPlacement = environment.PLACEMENT.reduce(
-    (acc: IPlacements, placement) => {
+  const defaultPlacement: IPlacements = environment.PLACEMENT.reduce(
+    (acc: IPlacements, placement: string) => {
       acc[placement] = getItem(placement);
       return acc;
     },
     {},
   );
-  const realPlacement = placementList.reduce((acc: IPlacements, item) => {
-    acc[item.placement] = getItem(item.placement, item.title, true);
-    return acc;
-  }, {});
+  const realPlacement: IPlacements = placementList.reduce(
+    (acc: IPlacements, item: IPlacement) => {
+      acc[item.placement] = getItem(item.placement, item.title, true);
+      return acc;
+    },
+    {},
+  );
 
   return {
     ...defaultPlacement,
