@@ -6,11 +6,12 @@ import {
   IList,
 } from '../../services/placement-store.service';
 import { environment } from '../../../environments/environment';
+import { UserListsComponent } from '../../components/user-lists/user-lists.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [LoaderComponent],
+  imports: [LoaderComponent, UserListsComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })

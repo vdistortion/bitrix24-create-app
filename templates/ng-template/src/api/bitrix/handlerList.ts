@@ -15,6 +15,7 @@ interface IUser {
 
 interface IUsers {
   [key: string]: {
+    id: string;
     fullName: string;
     active: boolean;
     position: string;
@@ -65,6 +66,7 @@ function parseUsers(users: IUser[]): IUsers {
 }
 
 function parseUser(user: IUser) {
+  console.log(user);
   const {
     ID,
     NAME,
@@ -80,6 +82,7 @@ function parseUser(user: IUser) {
   const fullName = [NAME, LAST_NAME].join(' ');
 
   return {
+    id: ID,
     fullName: fullName.trim() ? fullName : EMAIL,
     active: ACTIVE,
     position: WORK_POSITION,

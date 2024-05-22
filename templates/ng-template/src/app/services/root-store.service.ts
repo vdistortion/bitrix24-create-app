@@ -7,18 +7,17 @@ import { BitrixService } from './bitrix.service';
 export class RootStoreService {
   private $BX24: any;
   private batch: any;
-  private currentId: string = '';
-  private department = [];
-  private users = {};
+  public currentId: string = '';
+  public department = [];
+  public users = {};
   private placementInfo = {};
   private domain: string;
-  private portal: string;
+  public portal: string;
   public loader: boolean = false;
   public appInfoId: number = 0;
   public appInfoCode: string = '';
 
   constructor(private bitrixService: BitrixService) {
-    console.log(this.bitrixService.BX24);
     this.$BX24 = this.bitrixService.BX24;
     this.batch = this.bitrixService.batch;
     this.domain = this.$BX24.getDomain();

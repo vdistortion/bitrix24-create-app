@@ -1,0 +1,16 @@
+<div class="user-toggle">
+  <button
+    class="user-toggle__button"
+    [class.active]="type === 'users'"
+    (click)="onClick('users')"
+  >
+    Сотрудники
+  </button>
+  <button
+    class="user-toggle__button"
+    [class.active]="type === 'disabled'"
+    (click)="onClick('disabled')"
+  >
+    Уволенные
+  </button>
+</div>
