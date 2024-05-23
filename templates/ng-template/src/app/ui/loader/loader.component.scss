@@ -24,7 +24,7 @@
 
     &::after {
       position: absolute;
-      content: "";
+      content: '';
       width: 1em;
       height: 1em;
       left: 1em;
@@ -36,7 +36,7 @@
       animation: app-loader 2s infinite;
 
       &::after {
-        background-color: rgba(black, .66);
+        background-color: rgba(black, 0.66);
         animation: app-loader 2s infinite;
         animation-delay: 0.5s;
       }
@@ -48,7 +48,7 @@
       animation-delay: 1.5s;
 
       &::after {
-        background-color: rgba(black, .33);
+        background-color: rgba(black, 0.33);
         animation: app-loader 2s infinite;
         animation-delay: 1s;
       }

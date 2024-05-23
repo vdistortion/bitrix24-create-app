@@ -8,7 +8,7 @@
     "build": "ng build && node archiving.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "grid": "node grid.js",
+    "grid": "node grid.js && npx sass-migrator division src/_grid.scss && prettier --write src/_grid.scss",
     "grep": "sh grep.sh",
     "format": "prettier --write src"
   },
