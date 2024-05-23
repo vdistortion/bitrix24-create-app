@@ -66,7 +66,6 @@ function parseUsers(users: IUser[]): IUsers {
 }
 
 function parseUser(user: IUser) {
-  console.log(user);
   const {
     ID,
     NAME,

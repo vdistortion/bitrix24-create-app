@@ -23,7 +23,6 @@ export class UserListsComponent {
 
   constructor(private rootStore: RootStoreService) {
     this.users = this.rootStore.users;
-    console.log(this.rootStore.users);
   }
 
   get usersEnabled(): IUsers {

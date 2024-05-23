@@ -13,7 +13,8 @@ export class UserToggleComponent {
   @Output() public click: EventEmitter<TType> = new EventEmitter<TType>();
   public type: TType = 'users';
 
-  protected onClick(type: TType) {
+  protected onClick(e: Event, type: TType) {
+    e.stopPropagation();
     this.type = type;
     this.click.emit(type);
   }
