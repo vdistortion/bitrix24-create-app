@@ -8,7 +8,6 @@ import { UserListsComponent } from '../../components/user-lists/user-lists.compo
   standalone: true,
   imports: [LoaderComponent, UserListsComponent],
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
   constructor(private rootStoreService: RootStoreService) {}

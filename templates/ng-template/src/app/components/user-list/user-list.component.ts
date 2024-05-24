@@ -2,22 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 import { RootStoreService } from '../../services/root-store.service';
 
-export interface IUser {
-  id: string;
-  fullName: string;
-  active: boolean;
-  position: string;
-  birthday: string | boolean;
-  photo: string;
-  department: number[];
-  href: string;
-  target: string;
-}
-
-export interface IUsers {
-  [key: string]: IUser;
-}
-
 @Component({
   selector: 'app-user-list',
   standalone: true,
@@ -64,9 +48,5 @@ export class UserListComponent implements OnInit {
 
   openMessenger(id: string) {
     this.bitrixService.BX24.im.openMessenger(id);
-  }
-
-  openHistory(id: string) {
-    this.bitrixService.BX24.im.openHistory(id);
   }
 }

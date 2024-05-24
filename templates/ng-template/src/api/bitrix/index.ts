@@ -1,5 +1,5 @@
 import getRequestList from './requestList';
-import handlerList, { IPlacements } from './handlerList';
+import handlerList from './handlerList';
 
 export default class BitrixBatch {
   private readonly isAdmin: boolean;

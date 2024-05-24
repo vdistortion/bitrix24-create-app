@@ -6,6 +6,5 @@ import { FormValidationComponent } from '../../components/form-validation/form-v
   standalone: true,
   imports: [FormValidationComponent],
   templateUrl: './example-page.component.html',
-  styleUrl: './example-page.component.scss',
 })
 export class ExamplePageComponent {}

@@ -25,7 +25,6 @@ import { BitrixService } from '../../services/bitrix.service';
   styleUrl: './dev-panel.component.scss',
 })
 export class DevPanelComponent {
-  protected isAdmin: boolean = false;
   protected buttons = [
     {
       admin: true,

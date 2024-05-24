@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
-import {
-  UserToggleComponent,
-  TType,
-} from '../user-toggle/user-toggle.component';
-import {
-  UserListComponent,
-  IUsers,
-  IUser,
-} from '../user-list/user-list.component';
+import { UserToggleComponent } from '../user-toggle/user-toggle.component';
+import { UserListComponent } from '../user-list/user-list.component';
 import { RootStoreService } from '../../services/root-store.service';
 
 @Component({
@@ -18,7 +11,7 @@ import { RootStoreService } from '../../services/root-store.service';
   styleUrl: './user-lists.component.scss',
 })
 export class UserListsComponent {
-  public type: TType = 'users';
+  public type: TUserType = 'users';
 
   constructor(private rootStore: RootStoreService) {}
 
@@ -36,7 +29,7 @@ export class UserListsComponent {
     return Object.fromEntries(list);
   }
 
-  setType(type: TType) {
+  setType(type: TUserType) {
     this.type = type;
   }
 }

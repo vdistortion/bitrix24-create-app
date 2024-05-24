@@ -6,7 +6,6 @@ import { BitrixService } from '../../services/bitrix.service';
   standalone: true,
   imports: [],
   templateUrl: './dev-panel-reload.component.html',
-  styleUrl: './dev-panel-reload.component.scss',
 })
 export class DevPanelReloadComponent implements OnInit {
   constructor(private bitrixService: BitrixService) {}

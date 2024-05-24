@@ -4,10 +4,7 @@ import Bitrix24 from 'bitrix24-library';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
 import { BitrixService } from './services/bitrix.service';
 import { RootStoreService } from './services/root-store.service';
-import {
-  PlacementStoreService,
-  IList,
-} from './services/placement-store.service';
+import { PlacementStoreService } from './services/placement-store.service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -37,7 +34,7 @@ export class AppComponent implements OnInit {
     const BX24 = await Bitrix24.init();
     this.bitrixService.init(BX24);
 
-    await this.rootStoreService.init().then((list: IList) => {
+    await this.rootStoreService.init().then((list: IPlacements) => {
       this.placementStoreService.setList(list);
     });
 

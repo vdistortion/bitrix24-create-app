@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-export type TType = 'users' | 'disabled';
-
 @Component({
   selector: 'app-user-toggle',
   standalone: true,
@@ -10,10 +8,11 @@ export type TType = 'users' | 'disabled';
   styleUrl: './user-toggle.component.scss',
 })
 export class UserToggleComponent {
-  @Output() public click: EventEmitter<TType> = new EventEmitter<TType>();
-  public type: TType = 'users';
+  @Output() public click: EventEmitter<TUserType> =
+    new EventEmitter<TUserType>();
+  public type: TUserType = 'users';
 
-  protected onClick(e: MouseEvent, type: TType) {
+  protected onClick(e: MouseEvent, type: TUserType) {
     e.stopPropagation();
     this.type = type;
     this.click.emit(type);

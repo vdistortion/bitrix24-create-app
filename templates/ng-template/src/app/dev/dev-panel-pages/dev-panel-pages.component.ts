@@ -6,7 +6,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './dev-panel-pages.component.html',
-  styleUrl: './dev-panel-pages.component.scss',
 })
 export class DevPanelPagesComponent {
   @Input({ required: true }) public path: string;

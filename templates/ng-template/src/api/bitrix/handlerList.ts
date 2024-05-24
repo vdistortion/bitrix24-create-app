@@ -1,47 +1,6 @@
 import { environment } from '../../environments/environment';
 import tools from '../../utils/helpers';
 
-interface IUser {
-  ID: string;
-  NAME: string;
-  EMAIL: string;
-  ACTIVE: boolean;
-  LAST_NAME: string;
-  PERSONAL_BIRTHDAY: string;
-  PERSONAL_PHOTO: string;
-  WORK_POSITION: string;
-  UF_DEPARTMENT: number[];
-}
-
-interface IUsers {
-  [key: string]: {
-    id: string;
-    fullName: string;
-    active: boolean;
-    position: string;
-    birthday: string | boolean;
-    photo: string;
-    department: number[];
-    href: string;
-    target: string;
-  };
-}
-
-interface IPlacement {
-  description: string;
-  handler: string;
-  placement: string;
-  title: string;
-}
-
-export interface IPlacements {
-  [key: string]: {
-    placement: string;
-    name: string;
-    bind: boolean;
-  };
-}
-
 export default {
   user: parseId,
   users: parseUsers,
@@ -49,23 +8,23 @@ export default {
   placementList: parsePlacementList,
 };
 
-function parseIds(users: IUser[]) {
+function parseIds(users: IUserRaw[]) {
   return users.map(parseId);
 }
 
-function parseId(user: IUser) {
+function parseId(user: IUserRaw) {
   return user.ID;
 }
 
-function parseUsers(users: IUser[]): IUsers {
-  return users.reduce((acc: IUsers, user: IUser) => {
+function parseUsers(users: IUserRaw[]): IUsers {
+  return users.reduce((acc: IUsers, user: IUserRaw) => {
     const { ID } = user;
     acc[ID] = parseUser(user);
     return acc;
   }, {});
 }
 
-function parseUser(user: IUser) {
+function parseUser(user: IUserRaw) {
   const {
     ID,
     NAME,
@@ -93,7 +52,7 @@ function parseUser(user: IUser) {
   };
 }
 
-function parsePlacementList(placementList: IPlacement[]): IPlacements {
+function parsePlacementList(placementList: IPlacementRaw[]): IPlacements {
   function getItem(
     placement: string,
     name = environment.APP_NAME,
@@ -109,7 +68,7 @@ function parsePlacementList(placementList: IPlacement[]): IPlacements {
     {},
   );
   const realPlacement: IPlacements = placementList.reduce(
-    (acc: IPlacements, item: IPlacement) => {
+    (acc: IPlacements, item: IPlacementRaw) => {
       acc[item.placement] = getItem(item.placement, item.title, true);
       return acc;
     },
