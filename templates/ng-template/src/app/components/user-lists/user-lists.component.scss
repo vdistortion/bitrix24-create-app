@@ -1,0 +1,9 @@
+@import '../../../grid';
+
+.user-lists {
+  @include wrapper();
+
+  &__wrapper {
+    margin-top: 40px;
+  }
+}

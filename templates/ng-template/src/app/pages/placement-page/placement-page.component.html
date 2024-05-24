@@ -1,0 +1,49 @@
+<table class="placement-list">
+  @for (item of list; track $index) {
+    <tbody>
+      @if (item.bind) {
+        <tr>
+          <td>
+            <small>{{ item.placement }}</small>
+          </td>
+          <td>
+            @if (item.placement === 'REST_APP_URI') {
+              <app-link [href]="link">
+                {{ item.name }}
+              </app-link>
+            } @else {
+              <span>{{ item.name }}</span>
+            }
+          </td>
+          <td>
+            <button data-color="danger" (click)="unbind(item.placement)">
+              Удалить
+            </button>
+          </td>
+        </tr>
+      } @else {
+        <tr>
+          <td>
+            <small>{{ item.placement }}</small>
+          </td>
+          <td>
+            <input
+              [(ngModel)]="item.name"
+              [placeholder]="item.placement"
+              data-inline
+            />
+          </td>
+          <td>
+            <button
+              [disabled]="!item.name"
+              data-color="primary"
+              (click)="bind(item)"
+            >
+              Добавить
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  }
+</table>

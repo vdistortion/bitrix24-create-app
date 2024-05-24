@@ -1,0 +1,31 @@
+<div class="user-list">
+  @for (user of getUsers(); track user.id) {
+    <div class="user-list__card">
+      <a
+        class="user"
+        [class]="classList(user.id)"
+        [href]="portal + user.href"
+        [target]="user.target"
+        [title]="getTitle(user)"
+        [attr.data-birthday]="user.birthday"
+        (click)="openLink($event, user.href)"
+        style="background-image: url('assets/nouserpic.svg')"
+      >
+        @if (user.photo) {
+          <img [src]="user.photo" [alt]="user.fullName" loading="lazy" />
+        }
+      </a>
+      <div class="user-list__buttons">
+        <button
+          data-color="light-border"
+          data-size="xs"
+          data-icon="chat"
+          data-round="true"
+          (click)="openMessenger(user.id)"
+        >
+          Открыть чат
+        </button>
+      </div>
+    </div>
+  }
+</div>
