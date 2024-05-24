@@ -1,7 +1,6 @@
 # bitrix24-create-app
 
-<img src="templates/ng-template/src/assets/angular.svg" alt="webstorm" width="40" height="40"/>
-<img src="templates/vue-template/public/vue.svg" alt="webstorm" width="30" height="40"/>
+<img src="templates/ng-template/src/assets/angular.svg" alt="webstorm" width="40" height="40"/><img src="templates/vue-template/public/vue.svg" alt="webstorm" width="30" height="40"/>
 
 Интерфейс командной строки для установки шаблонов приложений
 
