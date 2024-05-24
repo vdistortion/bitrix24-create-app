@@ -1,10 +1,10 @@
-import { ref, computed } from 'vue';
+import { ref, computed, type Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { useRootStore } from './RootStore';
 import { batch } from '@/api/bitrix';
 
 export const usePlacementStore = defineStore('placementStore', () => {
-  const placementList = ref([]);
+  const placementList: Ref<IPlacements> = ref({});
 
   const appLink = computed(() => {
     const rootStore = useRootStore();
@@ -14,15 +14,15 @@ export const usePlacementStore = defineStore('placementStore', () => {
     return encodeURI(link);
   });
 
-  function setList(list) {
+  function setList(list: IPlacements) {
     if (list) placementList.value = list;
   }
 
-  function bind(item) {
+  function bind(item: { placement: string; name: string }) {
     batch.bind(item.placement, item.name).then(setList);
   }
 
-  function unbind(placement) {
+  function unbind(placement: string) {
     batch.unbind(placement).then(setList);
   }
 

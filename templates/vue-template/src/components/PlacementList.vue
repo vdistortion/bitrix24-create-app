@@ -40,16 +40,17 @@ const placementStore = usePlacementStore();
 const placementList = computed(() => placementStore.placementList);
 const placementLink = computed(() => placementStore.appLink);
 
-function bind(item) {
+function bind(item: IPlacement) {
   placementStore.bind(item);
 }
 
-function unbind(placement) {
+function unbind(placement: string) {
   placementStore.unbind(placement);
 }
 </script>
 
-<style lang="stylus">
-.placement-list small
-  color gray
+<style lang="scss">
+.placement-list small {
+  color: gray;
+}
 </style>

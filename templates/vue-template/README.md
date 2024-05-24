@@ -1,5 +1,13 @@
 # <%= projectName %>
 
+### Запуск
+
+```sh
+# в корне проекта
+cp .env .env.development
+npm run dev
+```
+
 ### Команды
 
 ```bash
@@ -7,7 +15,6 @@ npm run dev    # development на локалке
 npm run watch  # development на сервере (записывает файлы на диск и следит за изменениями)
 npm run build  # production и сборка архива с приложением первого типа
 npm run format # prettier
-npm run lint   # eslint
 npm run grid   # пересборка сетки
 ```
 
@@ -19,12 +26,6 @@ npm run grep full # подробно
 ```
 
 ### Структура
-
-#### /backend/
-Каталог для API (для приложений второго типа)
-
-#### /public/index.php
-Просто подключает index.html, если сервер не настроен открывать файлы .html
 
 #### /.env
 ```dotenv
@@ -41,22 +42,10 @@ VITE_PLACEMENT=[]
 VITE_TEST_DOMAINS=[]
 ```
 
-#### /src/config.ts
-
-```ts
-export default {
-  path: {
-    root: '/', // путь до корня проекта
-    handler: '/index.html', // полный путь к индексному файлу
-    httpBaseUrl: '/backend/', // адрес для обращения к API
-  },
-};
-```
-
 #### /src/api/
 
 ```bash
-/src/api/index.ts # запросы к /backend/
+/src/api/index.ts # запросы к серверу
 /src/api/HttpClient.ts # подключение axios
 /src/api/bitrix/index.ts # класс для работы с API Битрикс24
 /src/api/bitrix/requestList.ts # batch-запросы
@@ -68,7 +57,7 @@ export default {
 * Обновление фрейма
 * Скачивание архива с приложением первого типа
 * Страница для администраторов портала со списком встраиваний (placement)
-* Страница со списком компонентов плагина vue-bitrix24
+* Страница со списком компонентов плагина `vue-bitrix24`
 * Отображается на порталах из списка `VITE_TEST_DOMAINS` (`.env`)
 
 #### /src/views/
@@ -76,7 +65,7 @@ export default {
 ```bash
 /src/views/HomePage.vue # главная страница приложения
 /src/views/PlacementPage.vue # список встраиваний
-/src/views/ExampleMain.vue # список доступных компонентов vue-bitrix24
+/src/views/ExamplePage.vue # список доступных компонентов vue-bitrix24
 ```
 
 ### Подключение vue-bitrix24
@@ -105,16 +94,18 @@ Bitrix24.init().then((BX24) => {
 * Список установленных приложений можно посмотреть тут https://DOMAIN.bitrix24.ru/devops/list/
 
 ### Ссылки
+* Vue (https://vuejs.org/)
 * Pinia (https://pinia.vuejs.org/)
 * Vite (https://vitejs.dev/)
 * axios (https://axios-http.com/ru/)
-* REST API (https://dev.1c-bitrix.ru/rest_help/)
 * TypeScript (https://www.typescriptlang.org/)
+* REST API (https://dev.1c-bitrix.ru/rest_help/)
 
-#### Связанные библиотеки
+#### Связанные пакеты
+* bitrix24-stickerpack-app (https://github.com/astrotrain55/bitrix24-stickerpack-app)
 * bitrix24-library (https://www.npmjs.com/package/bitrix24-library)
 * vue-bitrix24 (https://www.npmjs.com/package/vue-bitrix24)
 
-#### Сетка
-* smartgrid (https://www.npmjs.com/package/smart-grid)
-  * авторское описание на [YouTube](https://www.youtube.com/playlist?list=PLyeqauxei6je28tJvioIsE0bYnARh0UVz)
+#### Сетка smartgrid
+* npmjs (https://www.npmjs.com/package/smart-grid)
+* авторское описание на [YouTube](https://www.youtube.com/playlist?list=PLyeqauxei6je28tJvioIsE0bYnARh0UVz)

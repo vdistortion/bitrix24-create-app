@@ -21,7 +21,7 @@ const data = reactive({
     mdiReload,
     mdiDownload,
     mdiFormatListBulletedType,
-  },
+  } as { [key: string]: string },
 });
 
 const path = computed(() => data.icons[props.icon]);

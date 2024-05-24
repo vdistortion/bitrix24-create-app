@@ -13,9 +13,6 @@
         <img v-if="user.photo" :src="user.photo" :alt="user.fullName" loading="lazy" />
       </a>
       <div class="user-list__buttons">
-        <bx-button color="light-border" size="xs" :round="true" @click="openHistory(id)">
-          История
-        </bx-button>
         <bx-button
           color="light-border"
           size="xs"
@@ -23,7 +20,7 @@
           :round="true"
           @click="openMessenger(id)"
         >
-          Чат
+          Открыть чат
         </bx-button>
       </div>
     </div>
@@ -36,7 +33,7 @@ import { useRootStore } from '@/stores/RootStore';
 
 const store = useRootStore();
 
-const $BX24 = inject('$BX24');
+const $BX24: any = inject('$BX24');
 
 const props = defineProps({
   users: {
@@ -45,73 +42,86 @@ const props = defineProps({
   },
 });
 
-const department = computed(() => store.department);
+const department = computed(() => <string[]>store.department);
 const currentId = computed(() => store.currentId);
 const portal = computed(() => store.portal);
 
-function classList(id) {
+function classList(id: string) {
   return {
     department: department.value.includes(id),
     current: currentId.value === id,
   };
 }
 
-function getTitle(user) {
+function getTitle(user: any) {
   return [user.fullName, user.position].filter((s) => s).join('\n');
 }
 
-function openLink(href) {
+function openLink(href: string) {
   $BX24.openLink(href);
 }
 
-function openMessenger(id) {
+function openMessenger(id: string) {
   $BX24.im.openMessenger(id);
-}
-
-function openHistory(id) {
-  $BX24.im.openHistory(id);
 }
 </script>
 
-<style lang="stylus">
-size = 170px
+<style lang="scss">
+@import '@/assets/grid';
 
-.user-list
-  row-flex()
-  &__card
-    col()
-    col-size(3)
-    col-size-w1600(4)
-    col-size-w1200(6)
-  h1
-    col()
-    col-size(24)
-    text-align center
-    margin-bottom 20px
-  a.user
-    display block
-    margin 0 auto
-    width size
-    height size
-    border 5px solid black
-    border-radius 50%
-    background-image url("/nouserpic.svg")
-    background-color rgba(82,92,105,.23)
-    background-size 111px 124px
-    background-repeat no-repeat
-    background-position center
-    &.department
-      border-color coral
-    &.current
-      border-color currentColor
-    img
-      display block
-      object-fit cover
-      width 100%
-      height 100%
-      border-radius 50%
-      font-size 0
-  &__buttons
-    text-align center
-    margin 15px 0
+$size: 170px;
+
+.user-list {
+  @include row-flex();
+
+  &__card {
+    @include col();
+    @include col-size(3);
+    @include col-size-w1600(4);
+    @include col-size-w1200(6);
+  }
+
+  h1 {
+    @include col();
+    @include col-size(24);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  a.user {
+    display: block;
+    margin: 0 auto;
+    width: $size;
+    height: $size;
+    border: 5px solid black;
+    border-radius: 50%;
+    background-image: url('/nouserpic.svg');
+    background-color: rgba(82, 92, 105, 0.23);
+    background-size: 111px 124px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.department {
+      border-color: coral;
+    }
+
+    &.current {
+      border-color: currentColor;
+    }
+
+    img {
+      display: block;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      font-size: 0;
+    }
+  }
+
+  &__buttons {
+    text-align: center;
+    margin: 15px 0;
+  }
+}
 </style>

@@ -5,7 +5,7 @@ import App from './App.vue';
 import { bx24init } from './api/bitrix';
 import { Bitrix24, useBitrix24 } from './plugins/vue-bitrix24';
 
-Bitrix24.init().then((BX24) => {
+Bitrix24.init().then((BX24: any) => {
   bx24init(BX24);
 
   createApp(App)

@@ -39,10 +39,11 @@ const data = reactive({
 });
 
 const slot = computed(() => {
-  const tags = {
+  const tags: { image: string; text: string } = {
     image: '<img src="logo.png" alt="logo">',
     text: '<span>Текст</span>',
   };
+  //@ts-ignore
   return tags[data.slots.default];
 });
 

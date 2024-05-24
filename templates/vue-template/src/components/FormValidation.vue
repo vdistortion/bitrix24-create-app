@@ -33,8 +33,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, provide } from 'vue';
-import { useVuelidate, Validation } from '@vuelidate/core';
+import { reactive, computed, provide, type Ref } from 'vue';
+import { useVuelidate, type Validation } from '@vuelidate/core';
 import { email, required, minLength, sameAs, helpers } from '@vuelidate/validators';
 import FormErrorWrapper from './FormErrorWrapper.vue';
 
@@ -65,7 +65,7 @@ const rules = computed(() => ({
   },
 }));
 
-const v$: Validation = useVuelidate(rules, data);
+const v$: Ref<Validation> = useVuelidate(rules, data);
 
 function onReset() {
   data.form.email = '';
@@ -84,9 +84,18 @@ function onSubmit() {
 }
 </script>
 
-<style lang="stylus">
-.form-validation
-  &__buttons
-    margin-top 10px
-    text-align right
+<style lang="scss">
+.form-validation {
+  input {
+    width: 100%;
+  }
+
+  &__buttons {
+    text-align: right;
+
+    [type='submit'] {
+      margin-left: 10px;
+    }
+  }
+}
 </style>

@@ -32,6 +32,8 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
+
 const props = defineProps({
   name: {
     type: String,
@@ -42,43 +44,49 @@ const props = defineProps({
     default: '',
   },
   based: {
-    type: Array,
+    type: Array as PropType<any>,
     default: () => [],
   },
 });
 </script>
 
-<style>
+<style lang="scss">
 .example-table {
   margin: 10px;
-}
-.example-table caption {
-  font-weight: bold;
-}
-.example-table__components,
-.example-table__code,
-.example-table__params {
-  padding: 10px;
-}
-.example-table__components {
-  display: flex;
-  column-gap: 10px;
-  border-bottom: 1px solid;
-}
-.example-table__code {
-  width: 100%;
-  vertical-align: top;
-  margin-right: 20px;
-  padding: 10px;
-  background-color: #eee;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-.example-table__params {
-  display: flex;
-  flex-direction: column;
-}
-.example-table__params > *:not(:first-child) {
-  margin-top: 5px;
+
+  & caption {
+    font-weight: bold;
+  }
+
+  &__components,
+  &__code,
+  &__params {
+    padding: 10px;
+  }
+
+  &__components {
+    display: flex;
+    column-gap: 10px;
+    border-bottom: 1px solid;
+  }
+
+  &__code {
+    width: 100%;
+    vertical-align: top;
+    margin-right: 20px;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  &__params {
+    display: flex;
+    flex-direction: column;
+
+    & > *:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
 }
 </style>

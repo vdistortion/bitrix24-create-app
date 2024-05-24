@@ -25,19 +25,24 @@ const data = reactive({
 });
 
 const usersEnabled = computed(() => {
-  const list = Object.entries(store.users).filter(([_key, user]) => user.active);
+  const list = Object.entries(store.users as IUsers).filter(([_key, user]) => user.active);
   return Object.fromEntries(list);
 });
 
 const usersDisabled = computed(() => {
-  const list = Object.entries(store.users).filter(([_key, user]) => !user.active);
+  const list = Object.entries(store.users as IUsers).filter(([_key, user]) => !user.active);
   return Object.fromEntries(list);
 });
 </script>
 
-<style lang="stylus">
-.user-lists
-  wrapper()
-  &__wrapper
-    margin-top 40px
+<style lang="scss">
+@import '@/assets/grid';
+
+.user-lists {
+  @include wrapper();
+
+  &__wrapper {
+    margin-top: 40px;
+  }
+}
 </style>

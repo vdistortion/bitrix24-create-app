@@ -38,7 +38,7 @@ import ExampleForm from './ExampleForm.vue';
 import ExampleLink from './ExampleLink.vue';
 import ExampleEntitySelector from './ExampleEntitySelector.vue';
 
-const $BX24 = inject('$BX24');
+const $BX24: any = inject('$BX24');
 
 onMounted(() => {
   if (!$BX24) return;
@@ -46,7 +46,7 @@ onMounted(() => {
 
   RestCall.batch({
     scope: ['scope'],
-  }).then((response) => {
+  }).then((response: { scope: string[] }) => {
     if (response.scope.includes('user_brief')) {
       RestCall.batch({
         userCurrent: ['user.current'],
@@ -65,18 +65,20 @@ const data = reactive({
 });
 </script>
 
-<style>
+<style lang="scss">
 .example-main {
   display: flex;
   max-width: 1024px;
   margin: 0 auto;
-}
-.example-main__menu {
-  min-width: 200px;
-}
-.example-main__content {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
+
+  &__menu {
+    min-width: 200px;
+  }
+
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

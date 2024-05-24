@@ -1,16 +1,11 @@
 import { HttpClient } from './HttpClient';
 
 export default {
-  test(FormData = {}) {
+  post(url: string, FormData = {}) {
     return HttpClient({
-      url: 'index.php',
+      url,
       method: 'post',
       data: FormData,
-    }).then(this.handler);
-  },
-
-  handler(response) {
-    if (response.success) return response.data;
-    throw new Error(response.message);
+    });
   },
 };

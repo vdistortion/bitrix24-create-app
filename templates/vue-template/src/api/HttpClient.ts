@@ -1,10 +1,7 @@
 import { serialize } from 'object-to-formdata';
-import axios, { AxiosInstance } from 'axios';
-import config from '@/config';
+import axios, { type AxiosInstance } from 'axios';
 
 const instance: AxiosInstance = axios.create({
-  baseURL: config.path.httpBaseUrl,
-
   transformRequest: (data, headers) => {
     headers['Content-Type'] = 'multipart/form-data';
 

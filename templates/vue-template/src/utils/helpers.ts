@@ -7,7 +7,7 @@ export default {
     return [year, month, day].join('-');
   },
 
-  formatPrice(price, currency = 'RUB') {
+  formatPrice(price: number, currency = 'RUB') {
     return new Intl.NumberFormat('ru', {
       currency,
       style: 'currency',
@@ -15,11 +15,11 @@ export default {
     }).format(price);
   },
 
-  formatDate(date = Date.now()) {
+  formatDate(date: string | number = Date.now()) {
     return new Intl.DateTimeFormat('ru').format(new Date(date));
   },
 
-  formatDeclension(number, titles) {
+  formatDeclension(number: number, titles: string[]) {
     const cases = [2, 0, 1, 1, 1, 2];
     const word =
       titles[number % 100 > 4 && number % 100 < 20 ? 2 : cases[number % 10 < 5 ? number % 10 : 5]];

@@ -1,8 +1,8 @@
-import config from '@/config';
+const handler = [window.location.origin, window.location.pathname].join('');
 
-export default (isAdmin) => ({
-  initParams() {
-    const options = {
+export default (isAdmin: boolean) => ({
+  initParams(): TRequests {
+    const options: TRequests = {
       info: ['app.info'],
       user: ['user.current'],
       users: [
@@ -34,19 +34,19 @@ export default (isAdmin) => ({
     return options;
   },
 
-  placementList() {
+  placementList(): TRequests {
     return {
       placementList: ['placement.get'],
     };
   },
 
-  placementBind(placement, name) {
+  placementBind(placement: string, name: string): TRequests {
     return {
       placementBind: {
         method: 'placement.bind',
         params: {
           PLACEMENT: placement,
-          HANDLER: config.path.handler,
+          HANDLER: handler,
           LANG_ALL: {
             ru: {
               TITLE: name,
@@ -58,13 +58,13 @@ export default (isAdmin) => ({
     };
   },
 
-  placementUnbind(placement) {
+  placementUnbind(placement: string): TRequests {
     return {
       placementUnbind: {
         method: 'placement.unbind',
         params: {
           PLACEMENT: placement,
-          HANDLER: config.path.handler,
+          HANDLER: handler,
         },
       },
       ...this.placementList(),

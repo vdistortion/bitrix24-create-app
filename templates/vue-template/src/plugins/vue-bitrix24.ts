@@ -5,5 +5,5 @@ import BxInput from 'vue-bitrix24/BxInput';
 
 export { Bitrix24 };
 export const useBitrix24 = {
-  install: (app) => usePlugin.install(app, [BxButton, BxInput]),
+  install: (app: any) => usePlugin.install(app, [BxButton, BxInput]),
 };

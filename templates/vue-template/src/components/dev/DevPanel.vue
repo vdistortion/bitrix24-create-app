@@ -27,18 +27,25 @@ const $BX24 = inject('$BX24');
 const isVisible = computed(() => $BX24 && env.get('TEST_DOMAINS').includes($BX24.getDomain()));
 </script>
 
-<style lang="stylus">
-.dev-panel
-  display flex
-  align-items center
-  justify-content space-between
-  &__button-icon
-    text-decoration none
-    transition opacity .4s
-    opacity .4
-    color rgba(0, 0, 0, .5)
-    &:first-child
-      margin-right auto
-    &:hover
-      opacity 1
+<style lang="scss">
+.dev-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__button-icon {
+    text-decoration: none;
+    transition: opacity 0.4s;
+    opacity: 0.4;
+    color: rgba(0, 0, 0, 0.5);
+
+    &:first-child {
+      margin-right: auto;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
 </style>

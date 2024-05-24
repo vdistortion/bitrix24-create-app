@@ -1,9 +1,9 @@
-import fs from 'node:fs';
+import { createWriteStream } from 'node:fs';
 import archiver from 'archiver';
+import json from './package.json' assert { type: 'json' };
 
-const packageJson = JSON.parse(fs.readFileSync('./package.json'));
 const archive = archiver('zip', { zlib: { level: 9 } });
-const output = fs.createWriteStream(`${packageJson.name}.zip`);
+const output = createWriteStream(`${json.name}.zip`);
 const path = (name) => ['dist', name].join('/');
 const list = [
   {

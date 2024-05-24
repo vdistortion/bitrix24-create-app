@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 
-const $BX24 = inject('$BX24');
+const $BX24: any = inject('$BX24');
 
 const props = defineProps({
   href: {
@@ -16,14 +16,14 @@ const props = defineProps({
   },
 });
 
-function onClick(e) {
+function onClick(e: MouseEvent) {
   if ($BX24) {
     e.preventDefault();
     $BX24.openLink(props.href);
   }
 }
 
-function onMiddleClick(e) {
+function onMiddleClick(e: MouseEvent) {
   if ($BX24) {
     e.preventDefault();
     $BX24.openLink(props.href, true);
