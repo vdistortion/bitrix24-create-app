@@ -15,12 +15,9 @@ export interface IList {
   providedIn: 'root',
 })
 export class PlacementStoreService {
-  private batch: any;
   private placementList: IList = {};
 
-  constructor(private bitrixService: BitrixService) {
-    this.batch = this.bitrixService.batch;
-  }
+  constructor(private bitrixService: BitrixService) {}
 
   link(code: string, id: string) {
     const link = `/marketplace/view/${code}/?params[id]=${id}`;
@@ -36,12 +33,14 @@ export class PlacementStoreService {
   }
 
   bind(item: { placement: string; name: string }) {
-    this.batch
+    this.bitrixService.batch
       .bind(item.placement, item.name)
       .then((list: IList) => this.setList(list));
   }
 
   unbind(placement: string) {
-    this.batch.unbind(placement).then((list: IList) => this.setList(list));
+    this.bitrixService.batch
+      .unbind(placement)
+      .then((list: IList) => this.setList(list));
   }
 }
