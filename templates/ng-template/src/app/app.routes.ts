@@ -7,6 +7,7 @@ export const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
+    pathMatch: 'full',
   },
   {
     path: 'placement',
@@ -15,5 +16,9 @@ export const routes: Routes = [
   {
     path: 'example',
     component: ExamplePageComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];

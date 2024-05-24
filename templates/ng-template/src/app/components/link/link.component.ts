@@ -9,23 +9,20 @@ import { BitrixService } from '../../services/bitrix.service';
 })
 export class LinkComponent {
   @Input({ required: true }) public href: string;
-  private readonly $BX24: any;
 
-  constructor(private bitrixService: BitrixService) {
-    this.$BX24 = this.bitrixService.BX24;
-  }
+  constructor(private bitrixService: BitrixService) {}
 
-  onClick(e: Event) {
-    if (this.$BX24) {
+  onClick(e: MouseEvent) {
+    if (this.bitrixService.BX24) {
       e.preventDefault();
-      this.$BX24.openLink(this.href);
+      this.bitrixService.BX24.openLink(this.href);
     }
   }
 
-  onMiddleClick(e: Event) {
-    if (this.$BX24) {
+  onMiddleClick(e: MouseEvent) {
+    if (this.bitrixService.BX24) {
       e.preventDefault();
-      this.$BX24.openLink(this.href, true);
+      this.bitrixService.BX24.openLink(this.href, true);
     }
   }
 }

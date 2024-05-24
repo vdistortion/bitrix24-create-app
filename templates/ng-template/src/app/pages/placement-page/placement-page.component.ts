@@ -15,32 +15,27 @@ import { RootStoreService } from '../../services/root-store.service';
   styleUrl: './placement-page.component.scss',
 })
 export class PlacementPageComponent {
-  private placementStore: any;
-  private readonly appInfoId: any;
-  private readonly appInfoCode: any;
-
   constructor(
     private rootStoreService: RootStoreService,
     private placementStoreService: PlacementStoreService,
-  ) {
-    this.placementStore = this.placementStoreService;
-    this.appInfoId = this.rootStoreService.appInfoId;
-    this.appInfoCode = this.rootStoreService.appInfoCode;
-  }
+  ) {}
 
   get list(): IPlacement[] {
-    return Object.values(this.placementStore.list);
+    return Object.values(this.placementStoreService.list);
   }
 
   get link() {
-    return this.placementStore.link(this.appInfoCode, this.appInfoId);
+    return this.placementStoreService.link(
+      this.rootStoreService.appInfoCode,
+      this.rootStoreService.appInfoId,
+    );
   }
 
   bind(item: { placement: string; name: string; bind: boolean }) {
-    this.placementStore.bind(item);
+    this.placementStoreService.bind(item);
   }
 
   unbind(placement: string) {
-    this.placementStore.unbind(placement);
+    this.placementStoreService.unbind(placement);
   }
 }

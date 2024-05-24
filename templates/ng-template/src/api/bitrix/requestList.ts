@@ -1,5 +1,3 @@
-import { environment } from '../../environments/environment';
-
 type TMethod = string;
 type TParams = {
   [key: string]: any;
@@ -13,6 +11,8 @@ type TRequest = TRequestObject | TRequestArray;
 type TRequests = {
   [key: string]: TRequest;
 };
+
+const handler = [window.location.origin, window.location.pathname].join('');
 
 export default (isAdmin: boolean) => ({
   initParams(): TRequests {
@@ -60,7 +60,7 @@ export default (isAdmin: boolean) => ({
         method: 'placement.bind',
         params: {
           PLACEMENT: placement,
-          HANDLER: environment.PATH_HANDLER,
+          HANDLER: handler,
           LANG_ALL: {
             ru: {
               TITLE: name,
@@ -78,7 +78,7 @@ export default (isAdmin: boolean) => ({
         method: 'placement.unbind',
         params: {
           PLACEMENT: placement,
-          HANDLER: environment.PATH_HANDLER,
+          HANDLER: handler,
         },
       },
       ...this.placementList(),

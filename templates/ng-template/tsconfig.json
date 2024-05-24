@@ -2,6 +2,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

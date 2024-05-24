@@ -19,7 +19,7 @@ export class PlacementStoreService {
 
   constructor(private bitrixService: BitrixService) {}
 
-  link(code: string, id: string) {
+  link(code: string, id: string | number) {
     const link = `/marketplace/view/${code}/?params[id]=${id}`;
     return encodeURI(link);
   }

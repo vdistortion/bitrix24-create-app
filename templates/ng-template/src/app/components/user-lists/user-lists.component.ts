@@ -19,21 +19,18 @@ import { RootStoreService } from '../../services/root-store.service';
 })
 export class UserListsComponent {
   public type: TType = 'users';
-  private users: IUsers;
 
-  constructor(private rootStore: RootStoreService) {
-    this.users = this.rootStore.users;
-  }
+  constructor(private rootStore: RootStoreService) {}
 
   get usersEnabled(): IUsers {
-    const list = Object.entries(this.users).filter(
+    const list = Object.entries(this.rootStore.users as IUsers).filter(
       ([_key, user]: [string, IUser]) => user.active,
     );
     return Object.fromEntries(list);
   }
 
   get usersDisabled(): IUsers {
-    const list = Object.entries(this.users).filter(
+    const list = Object.entries(this.rootStore.users as IUsers).filter(
       ([_key, user]: [string, IUser]) => !user.active,
     );
     return Object.fromEntries(list);

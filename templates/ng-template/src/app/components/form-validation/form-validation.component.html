@@ -2,7 +2,7 @@
   <fieldset>
     <legend>Форма с валидацией</legend>
     <div class="form-error-wrapper">
-      <input formControlName="name" type="text" placeholder="Имя">
+      <input formControlName="name" type="text" placeholder="Имя" />
       @if (form.get('name')?.invalid && form.get('name')?.touched) {
         <div class="form-error-wrapper__error">
           @if (form.get('name')?.errors?.['required']) {
@@ -12,7 +12,11 @@
       }
     </div>
     <div class="form-error-wrapper">
-      <input formControlName="email" type="text" placeholder="Электронная почта">
+      <input
+        formControlName="email"
+        type="text"
+        placeholder="Электронная почта"
+      />
       @if (form.get('email')?.invalid && form.get('email')?.touched) {
         <div class="form-error-wrapper__error">
           @if (form.get('email')?.errors?.['required']) {
@@ -25,14 +29,20 @@
       }
     </div>
     <div class="form-error-wrapper">
-      <input formControlName="password" type="text" placeholder="Пароль">
+      <input formControlName="password" type="text" placeholder="Пароль" />
       @if (form.get('password')?.invalid && form.get('password')?.touched) {
         <div class="form-error-wrapper__error">
           @if (form.get('password')?.errors?.['required']) {
             <small>Поле обязательное!</small>
           }
           @if (form.get('password')?.errors?.['minlength']) {
-            <small>Не менее {{ form.get('password')?.errors?.['minlength']['requiredLength'] }} символов!</small>
+            <small>
+              Не менее
+              {{
+                form.get('password')?.errors?.['minlength']['requiredLength']
+              }}
+              символов!
+            </small>
           }
         </div>
       }

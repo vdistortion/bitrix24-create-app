@@ -9,9 +9,5 @@ import { environment } from '../../../environments/environment';
   styleUrl: './dev-panel-download.component.scss',
 })
 export class DevPanelDownloadComponent {
-  filename: string = `${environment.APP_NAME}, ${new Date().toLocaleString()}.zip`;
-  dirname: string = [
-    environment.PATH_HANDLER,
-    `${environment.APP_NAME}.zip`,
-  ].join('');
+  filename: string = `${environment.APP_NAME}.zip`;
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 export type TType = 'users' | 'disabled';
 
@@ -13,7 +13,7 @@ export class UserToggleComponent {
   @Output() public click: EventEmitter<TType> = new EventEmitter<TType>();
   public type: TType = 'users';
 
-  protected onClick(e: Event, type: TType) {
+  protected onClick(e: MouseEvent, type: TType) {
     e.stopPropagation();
     this.type = type;
     this.click.emit(type);

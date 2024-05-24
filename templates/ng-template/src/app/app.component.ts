@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import Bitrix24 from 'bitrix24-library';
+import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
+import { BitrixService } from './services/bitrix.service';
 import { RootStoreService } from './services/root-store.service';
 import {
   PlacementStoreService,
   IList,
 } from './services/placement-store.service';
-import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
 import { environment } from '../environments/environment';
-import { BitrixService } from './services/bitrix.service';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     private placementStoreService: PlacementStoreService,
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  async ngOnInit() {
     const BX24 = await Bitrix24.init();
     this.bitrixService.init(BX24);
 
@@ -47,10 +47,8 @@ export class AppComponent implements OnInit {
         this.verifyScopeLog(environment.SCOPE, scope);
       });
 
-    this.isDev = environment.TEST_DOMAINS.includes(
-      this.bitrixService.BX24.getDomain(),
-    );
-
+    // @ts-ignore
+    this.isDev = environment.TEST_DOMAINS.includes(BX24.getDomain());
     this.isApp = true;
   }
 

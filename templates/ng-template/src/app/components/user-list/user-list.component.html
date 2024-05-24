@@ -9,6 +9,7 @@
         [title]="getTitle(user)"
         [attr.data-birthday]="user.birthday"
         (click)="openLink($event, user.href)"
+        style="background-image: url('assets/nouserpic.svg')"
       >
         @if (user.photo) {
           <img [src]="user.photo" [alt]="user.fullName" loading="lazy" />

@@ -51,12 +51,11 @@ export class DevPanelComponent {
     mdiDownload,
   };
 
-  constructor(private bitrixService: BitrixService) {
-    this.isAdmin = this.bitrixService.BX24.isAdmin();
-  }
+  constructor(private bitrixService: BitrixService) {}
 
   protected get pages() {
-    if (this.isAdmin) return this.buttons;
+    const isAdmin = this.bitrixService.BX24.isAdmin();
+    if (isAdmin) return this.buttons;
     return this.buttons.filter((btn) => !btn.admin);
   }
 }

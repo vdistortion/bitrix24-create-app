@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 import { RootStoreService } from '../../services/root-store.service';
 
@@ -25,18 +25,18 @@ export interface IUsers {
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
   @Input({ required: true }) public users: IUsers;
-  private $BX24: any;
   private department: any;
-  private readonly currentId: any;
+  private currentId: any;
   protected portal: any;
 
   constructor(
     private bitrixService: BitrixService,
     private rootStoreService: RootStoreService,
-  ) {
-    this.$BX24 = this.bitrixService.BX24;
+  ) {}
+
+  ngOnInit() {
     this.department = this.rootStoreService.department;
     this.currentId = this.rootStoreService.currentId;
     this.portal = this.rootStoreService.portal;
@@ -57,16 +57,16 @@ export class UserListComponent {
     return [user.fullName, user.position].filter((s) => s).join('\n');
   }
 
-  openLink(e: Event, href: string) {
+  openLink(e: MouseEvent, href: string) {
     e.preventDefault();
-    this.$BX24.openLink(href);
+    this.bitrixService.BX24.openLink(href);
   }
 
   openMessenger(id: string) {
-    this.$BX24.im.openMessenger(id);
+    this.bitrixService.BX24.im.openMessenger(id);
   }
 
   openHistory(id: string) {
-    this.$BX24.im.openHistory(id);
+    this.bitrixService.BX24.im.openHistory(id);
   }
 }

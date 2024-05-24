@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 
 @Component({
@@ -8,14 +8,17 @@ import { BitrixService } from '../../services/bitrix.service';
   templateUrl: './dev-panel-reload.component.html',
   styleUrl: './dev-panel-reload.component.scss',
 })
-export class DevPanelReloadComponent {
-  constructor(private bitrixService: BitrixService) {
+export class DevPanelReloadComponent implements OnInit {
+  constructor(private bitrixService: BitrixService) {}
+
+  ngOnInit() {
     this.bitrixService.BX24.bind(window, 'keydown', (e: KeyboardEvent) => {
       if (e.ctrlKey && e.code === 'KeyR') {
         this.reload(e);
       }
     });
   }
+
   reload(e: Event) {
     e.preventDefault();
     window.location.reload();

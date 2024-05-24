@@ -16,7 +16,7 @@ import {
 export class FormValidationComponent implements OnInit {
   form: FormGroup;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
