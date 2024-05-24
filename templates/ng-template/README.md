@@ -1,27 +1,70 @@
-# ng-template
+# <%= projectName %>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+### Запуск
 
-## Development server
+```sh
+# в корне проекта
+cp src/environments/environment.ts src/environments/environment.development.ts
+npm start
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Команды
 
-## Code scaffolding
+```sh
+npm start         # development на локалке
+npm run watch     # development на сервере (записывает файлы на диск и следит за изменениями)
+npm run build     # production и сборка архива с приложением первого типа
+npm run format    # prettier
+npm run grid      # пересборка сетки
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Поиск файлов
+npm run grep list # список файлов
+npm run grep word # только полные слова
+npm run grep full # подробно
+```
 
-## Build
+### Структура
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### /src/environments/environment.ts
 
-## Running unit tests
+```sh
+SCOPE: []        # список скоупов, необходимых для работы приложения
+APP_NAME: ""     # название приложения
+PLACEMENT: []    # список мест для встраивания приложения
+TEST_DOMAINS: [] # список доменов, которые считаются тестовыми
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### /src/api/
 
-## Running end-to-end tests
+```sh
+/src/api/bitrix/index.ts       # класс для работы с API Битрикс24
+/src/api/bitrix/requestList.ts # batch-запросы
+/src/api/bitrix/handlerList.ts # обработка ответов
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### /src/app/dev/
 
-## Further help
+Панель управления для разработки, содержит:
+* Обновление фрейма
+* Скачивание архива с приложением первого типа
+* Страница для администраторов портала со списком встраиваний (placement)
+* Отображается на порталах из списка `TEST_DOMAINS` (`/src/environments/environment.ts`)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Подключение к Битрикс24
+
+* Создайте локальное приложение на существующем портале по ссылке https://DOMAIN.bitrix24.ru/devops/section/standard/
+  * Или создайте новый портал https://www.bitrix24.ru/create.php (для регистрации лучше использовать временную почту, например https://temp-mail.org/ru/)
+* "Путь вашего обработчика":
+  * `http://127.0.0.1:4200/index.html` для локальной разработки (`npm start`)
+  * `ПУТЬ_ДО_ПРИЛОЖЕНИЯ_НА_СЕРВЕРЕ/dist/ng-template/browser/index.html` для стандартной разработки (`npm run watch`)
+* Список установленных приложений можно посмотреть тут https://DOMAIN.bitrix24.ru/devops/list/
+
+### Ссылки
+* Angular (https://angular.dev/)
+* TypeScript (https://www.typescriptlang.org/)
+* bitrix24-library (https://www.npmjs.com/package/bitrix24-library)
+* REST API (https://dev.1c-bitrix.ru/rest_help/)
+
+#### Сетка
+* smartgrid (https://www.npmjs.com/package/smart-grid)
+  * авторское описание на [YouTube](https://www.youtube.com/playlist?list=PLyeqauxei6je28tJvioIsE0bYnARh0UVz)
