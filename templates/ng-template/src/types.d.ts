@@ -1,6 +1,3 @@
-declare module 'uuid';
-declare module 'bitrix24-library';
-
 // users
 type TUserType = 'users' | 'disabled';
 

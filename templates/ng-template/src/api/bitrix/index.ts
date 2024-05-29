@@ -1,3 +1,4 @@
+import { IBitrix24Library } from 'bitrix24-library';
 import getRequestList from './requestList';
 import handlerList from './handlerList';
 
@@ -6,7 +7,7 @@ export default class BitrixBatch {
   private readonly batch: any;
   private readonly requestList: any;
 
-  constructor(BX24: any) {
+  constructor(BX24: IBitrix24Library) {
     const instanceBatch = BX24.createBatch(handlerList);
     this.batch = instanceBatch.batch.bind(instanceBatch);
     this.isAdmin = BX24.isAdmin();

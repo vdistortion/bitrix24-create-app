@@ -13,16 +13,12 @@ export class LinkComponent {
   constructor(private bitrixService: BitrixService) {}
 
   onClick(e: MouseEvent) {
-    if (this.bitrixService.BX24) {
-      e.preventDefault();
-      this.bitrixService.BX24.openLink(this.href);
-    }
+    e.preventDefault();
+    this.bitrixService.BX24.openLink(this.href);
   }
 
   onMiddleClick(e: MouseEvent) {
-    if (this.bitrixService.BX24) {
-      e.preventDefault();
-      this.bitrixService.BX24.openLink(this.href, true);
-    }
+    e.preventDefault();
+    this.bitrixService.BX24.openLink(this.href, true);
   }
 }
