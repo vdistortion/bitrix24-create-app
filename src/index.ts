@@ -8,7 +8,7 @@ import * as template from './utils/template';
 import chalk from 'chalk';
 import * as yargs from 'yargs';
 
-const CHOICES = fs.readdirSync(path.join(__dirname, '..', 'templates'));
+const CHOICES = fs.readdirSync(path.join(__dirname, 'templates'));
 
 const QUESTIONS = [
   {
@@ -53,7 +53,7 @@ inquirer.prompt(QUESTIONS).then((response: Object) => {
   const answers = Object.assign({}, response, yargs.argv);
   const projectChoice = answers['template'];
   const projectName = answers['name'];
-  const templatePath = path.join(__dirname, '..', 'templates', projectChoice);
+  const templatePath = path.join(__dirname, 'templates', projectChoice);
   const tartgetPath = path.join(CURR_DIR, projectName);
   const templateConfig = getTemplateConfig(templatePath);
 
