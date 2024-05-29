@@ -8,4 +8,18 @@ export default {
       data: FormData,
     });
   },
+
+  get(url: string, params = {}) {
+    return HttpClient({
+      url,
+      method: 'get',
+      params,
+    });
+  },
+
+  getUser() {
+    return this.get('https://jsonplaceholder.typicode.com/users', {
+      _limit: 10,
+    });
+  },
 };

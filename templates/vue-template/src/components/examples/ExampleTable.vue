@@ -53,6 +53,7 @@ const props = defineProps({
 <style lang="scss">
 .example-table {
   margin: 10px;
+  width: 100%;
 
   & caption {
     font-weight: bold;

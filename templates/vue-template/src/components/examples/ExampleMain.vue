@@ -25,6 +25,8 @@
     <div class="example-main__content">
       <example-form v-if="data.componentVisible === 'form-validation'"></example-form>
       <example-link v-if="data.componentVisible === 'app-link'"></example-link>
+      <example-select v-if="data.componentVisible === 'bitrix-select'"></example-select>
+      <example-datepicker v-if="data.componentVisible === 'bitrix-datepicker'"></example-datepicker>
       <example-entity-selector
         v-if="data.componentVisible === 'bx-entity-selector'"
       ></example-entity-selector>
@@ -36,6 +38,8 @@
 import { onMounted, reactive, inject } from 'vue';
 import ExampleForm from './ExampleForm.vue';
 import ExampleLink from './ExampleLink.vue';
+import ExampleSelect from './ExampleSelect.vue';
+import ExampleDatepicker from './ExampleDatepicker.vue';
 import ExampleEntitySelector from './ExampleEntitySelector.vue';
 
 const $BX24: any = inject('$BX24');
@@ -59,7 +63,7 @@ onMounted(() => {
 const data = reactive({
   componentVisible: 'form-validation',
   componentsGroups: {
-    'bitrix24-create-app': ['form-validation', 'app-link'],
+    'bitrix24-create-app': ['form-validation', 'app-link', 'bitrix-select', 'bitrix-datepicker'],
     'vue-bitrix24': ['bx-entity-selector'],
   },
 });

@@ -2,6 +2,7 @@
 declare module 'vue-bitrix24/*';
 declare module 'bitrix24-library';
 declare module '@jamescoyle/vue-icon';
+declare module 'vue-select';
 declare module 'window.console';
 
 interface IUser {
