@@ -1,17 +1,11 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import Bitrix24, { type IBitrix24Library } from 'bitrix24-library';
 import router from './router';
 import App from './App.vue';
 import { bx24init } from './api/bitrix';
-import { Bitrix24, useBitrix24 } from './plugins/vue-bitrix24';
 
-Bitrix24.init().then((BX24: any) => {
+Bitrix24.init().then((BX24: IBitrix24Library) => {
   bx24init(BX24);
-
-  createApp(App)
-    .use(createPinia())
-    .use(router)
-    .use(useBitrix24)
-    .provide('$BX24', BX24)
-    .mount('#app');
+  createApp(App).use(createPinia()).use(router).provide('$BX24', BX24).mount('#app');
 });

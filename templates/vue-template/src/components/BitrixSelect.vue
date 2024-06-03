@@ -1,10 +1,10 @@
 <template>
   <vue-select
-    class="bx-select"
-    :options="options"
-    :label="label"
-    :multiple="multiple"
-    :clearable="clearable"
+    class="bitrix-select"
+    :options="props.options"
+    :label="props.label"
+    :multiple="props.multiple"
+    :clearable="props.clearable"
   >
     <template #open-indicator="{ attributes }">
       <button class="ui-ctl-after ui-ctl-icon-angle" v-bind="attributes"></button>
@@ -12,61 +12,58 @@
   </vue-select>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { inject } from 'vue';
 import VueSelect from 'vue-select';
+import type { IBitrix24Library } from 'bitrix24-library';
 import { loadStyles } from 'vue-bitrix24/loadStyles';
 
-export default defineComponent({
-  created() {
-    loadStyles(this.$BX24);
+const $BX24: IBitrix24Library | undefined = inject('$BX24');
+
+loadStyles($BX24);
+
+const props = defineProps({
+  options: {
+    type: Array,
+    default: () => [],
   },
-  props: {
-    options: {
-      type: Array,
-      default: () => [],
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    multiple: {
-      type: Boolean,
-      default: false,
-    },
-    clearable: {
-      type: Boolean,
-      default: false,
-    },
+  label: {
+    type: String,
+    default: '',
   },
-  inject: ['$BX24'],
-  components: { VueSelect },
-  name: 'bitrix-select',
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
 <style>
 @import 'vue-select/dist/vue-select.css';
 
-.bx-select {
+.bitrix-select {
   width: 100%;
 }
 
-.bx-select:hover .vs__dropdown-toggle,
-.bx-select.vs--open .vs__dropdown-toggle {
+.bitrix-select:hover .vs__dropdown-toggle,
+.bitrix-select.vs--open .vs__dropdown-toggle {
   border-color: #66afe9;
 }
 
-.bx-select .vs__dropdown-toggle {
+.bitrix-select .vs__dropdown-toggle {
   transition: border-color 0.5s;
 }
 
-.bx-select .vs__dropdown-toggle,
-.bx-select .vs__selected {
+.bitrix-select .vs__dropdown-toggle,
+.bitrix-select .vs__selected {
   border-radius: 2px;
 }
 
-.bx-select .vs__selected {
+.bitrix-select .vs__selected {
   background-color: #bcedfc;
 }
 </style>

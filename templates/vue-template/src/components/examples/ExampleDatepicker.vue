@@ -29,13 +29,13 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
 import ExampleTable from '@/components/examples/ExampleTable.vue';
-import BitrixDatepicker from '@/components/BitrixDatepicker.vue';
+import BitrixDatepicker, { type PropAfter } from '@/components/BitrixDatepicker.vue';
 
 const data = reactive({
   props: {
     date: null,
     placeholder: 'BxInputDate',
-    after: 'after',
+    after: 'after' as PropAfter,
   },
   settings: {
     after: ['after', 'ext-after'],

@@ -36,13 +36,14 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, inject } from 'vue';
+import type { IBitrix24Library } from 'bitrix24-library';
 import ExampleForm from './ExampleForm.vue';
 import ExampleLink from './ExampleLink.vue';
 import ExampleSelect from './ExampleSelect.vue';
 import ExampleDatepicker from './ExampleDatepicker.vue';
 import ExampleEntitySelector from './ExampleEntitySelector.vue';
 
-const $BX24: any = inject('$BX24');
+const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
 onMounted(() => {
   if (!$BX24) return;

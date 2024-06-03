@@ -11,11 +11,11 @@ export const useRootStore = defineStore('rootStore', () => {
   const users = ref({});
   const placementInfo = ref({});
 
-  const domain = computed(() => BX24.getDomain());
-  const portal = computed(() => BX24.getDomain(true));
+  const domain = computed(() => (BX24 ? BX24.getDomain() : ''));
+  const portal = computed(() => (BX24 ? BX24.getDomain(true) : ''));
 
   function init() {
-    if (!BX24.placement) {
+    if (!BX24 || !BX24.placement) {
       return Promise.reject(new Error('Unable to initialize Bitrix24 JS library!'));
     }
     loader.value = true;
@@ -37,7 +37,7 @@ export const useRootStore = defineStore('rootStore', () => {
   }
 
   function appInfo() {
-    if (!BX24.createBatch) {
+    if (!BX24) {
       return Promise.reject(new Error('Unable to initialize Bitrix24 JS library!'));
     }
     const RestCall = BX24.createBatch();
@@ -48,7 +48,7 @@ export const useRootStore = defineStore('rootStore', () => {
       scope: ['scope'],
     }).then((response: any) => ({
       ...response,
-      placementInfo: BX24.placement.info(),
+      placementInfo: BX24 ? BX24.placement.info() : null,
     }));
   }
 

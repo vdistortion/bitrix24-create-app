@@ -29,11 +29,13 @@
 
 <script setup lang="ts">
 import { computed, inject } from 'vue';
+import type { IBitrix24Library } from 'bitrix24-library';
+import BxButton from 'vue-bitrix24/BxButton';
 import { useRootStore } from '@/stores/RootStore';
 
 const store = useRootStore();
 
-const $BX24: any = inject('$BX24');
+const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
 const props = defineProps({
   users: {
@@ -58,11 +60,11 @@ function getTitle(user: any) {
 }
 
 function openLink(href: string) {
-  $BX24.openLink(href);
+  if ($BX24) $BX24.openLink(href);
 }
 
 function openMessenger(id: string) {
-  $BX24.im.openMessenger(id);
+  if ($BX24) $BX24.im.openMessenger(id);
 }
 </script>
 

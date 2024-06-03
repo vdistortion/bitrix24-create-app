@@ -50,7 +50,8 @@ const data = reactive({
 });
 
 onMounted(() => {
-  api.getUser().then((userList) => {
+  api.getUsers(10).then((userList) => {
+    // @ts-ignore
     data.props.users = userList;
   });
 });

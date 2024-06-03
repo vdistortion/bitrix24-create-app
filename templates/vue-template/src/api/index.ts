@@ -17,9 +17,9 @@ export default {
     });
   },
 
-  getUser() {
+  getUsers(limit: number) {
     return this.get('https://jsonplaceholder.typicode.com/users', {
-      _limit: 10,
+      _limit: limit,
     });
   },
 };

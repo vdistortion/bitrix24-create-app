@@ -59,18 +59,16 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, inject, type PropType } from 'vue';
+import { reactive, computed, inject } from 'vue';
+import type { IBitrix24Library, IUser } from 'bitrix24-library';
 import BxEntitySelector from 'vue-bitrix24/BxEntitySelector';
 import ExampleTable from './ExampleTable.vue';
 
-const $BX24: any = inject('$BX24');
+const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
 const data = reactive({
   props: {
-    list: {
-      type: Array as PropType<IUserNew[]>,
-      default: [],
-    },
+    list: [] as IUser[],
     displayField: 'name',
     displayFieldLink: '',
     multiple: false,
@@ -105,21 +103,20 @@ const markup = computed(
 `,
 );
 
-function onClick(index: number, item: IUserNew) {
+function onClick(index: number, item: IUser) {
   if (!$BX24) return;
   console.info('click', index, item);
   $BX24.openLink(`/company/personal/user/${item.id}/`);
 }
 
-function onAuxClick(index: number, item: IUserNew) {
+function onAuxClick(index: number, item: IUser) {
   if (!$BX24) return;
   console.info('auxclick', index, item);
   $BX24.openLink(`/company/personal/user/${item.id}/`, true);
 }
 
-function onDelete(index: number, item: IUserNew) {
+function onDelete(index: number, item: IUser) {
   console.info('delete', index, item);
-  //@ts-ignore
   data.props.list.splice(index, 1);
 }
 
@@ -128,13 +125,11 @@ function onAdd() {
   if (!$BX24) return;
 
   if (data.props.multiple) {
-    $BX24.selectUsers().then((users: IUserNew[]) => {
-      //@ts-ignore
+    $BX24.selectUsers().then((users: IUser[]) => {
       data.props.list.push(...users);
     });
   } else {
-    $BX24.selectUser().then((user: IUserNew) => {
-      //@ts-ignore
+    $BX24.selectUser().then((user: IUser) => {
       data.props.list = [user];
     });
   }

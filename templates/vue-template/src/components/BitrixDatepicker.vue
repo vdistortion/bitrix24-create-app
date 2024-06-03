@@ -1,30 +1,30 @@
 <template>
   <vue-datepicker
-    :model-value="modelValue"
-    :placeholder="placeholder"
+    :model-value="props.modelValue"
+    :placeholder="props.placeholder"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <template #dp-input="{ value, onInput, onEnter, onTab }">
       <div
         class="ui-ctl"
         :class="{
-          'ui-ctl-after-icon': after === 'after',
-          'ui-ctl-ext-after-icon': after === 'ext-after',
+          'ui-ctl-after-icon': props.after === 'after',
+          'ui-ctl-ext-after-icon': props.after === 'ext-after',
         }"
         style="width: 100%"
       >
         <button
           class="ui-ctl-icon-calendar"
           :class="{
-            'ui-ctl-after': after === 'after',
-            'ui-ctl-ext-after': after === 'ext-after',
+            'ui-ctl-after': props.after === 'after',
+            'ui-ctl-ext-after': props.after === 'ext-after',
           }"
         ></button>
         <input
           class="ui-ctl-element"
           type="text"
           :value="value"
-          :placeholder="placeholder"
+          :placeholder="props.placeholder"
           @input="onInput"
           @keydown.enter="onEnter"
           @keydown.tab="onTab"
@@ -35,47 +35,46 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType } from 'vue';
-import VueDatepicker from '@vuepic/vue-datepicker';
-import { loadStyles } from 'vue-bitrix24/loadStyles';
-
 export type PropAfter = 'after' | 'ext-after';
 
 export type TypesProps = {
   after: PropAfter[];
 };
 
-export const props: TypesProps = {
+export const propsValues: TypesProps = {
   after: ['after', 'ext-after'],
 };
+</script>
 
-export default defineComponent({
-  created() {
-    loadStyles(this.$BX24);
+<script setup lang="ts">
+import { inject, type PropType } from 'vue';
+import VueDatepicker, { type ModelValue } from '@vuepic/vue-datepicker';
+import type { IBitrix24Library } from 'bitrix24-library';
+import { loadStyles } from 'vue-bitrix24/loadStyles';
+
+const $BX24: IBitrix24Library | undefined = inject('$BX24');
+
+loadStyles($BX24);
+
+const props = defineProps({
+  modelValue: {
+    type: [Date, Number, String, Object, Array, null] as PropType<ModelValue>,
+    default: null,
   },
-  props: {
-    modelValue: {
-      type: [Date, Number, String, Object, Array, null],
-      required: true,
-      default: null,
-    },
-    placeholder: {
-      type: String,
-      default: '',
-    },
-    after: {
-      type: String as PropType<PropAfter>,
-      default: 'after',
-      validator(value: PropAfter) {
-        return props.after.includes(value);
-      },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  after: {
+    type: String as PropType<PropAfter>,
+    default: 'after',
+    validator(value: PropAfter) {
+      return propsValues.after.includes(value);
     },
   },
-  emits: ['update:modelValue'],
-  inject: ['$BX24'],
-  components: { VueDatepicker },
-  name: 'bitrix-datepicker',
 });
+
+defineEmits(['update:modelValue']);
 </script>
 
 <style>

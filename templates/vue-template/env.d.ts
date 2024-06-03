@@ -1,9 +1,7 @@
 /// <reference types="vite/client" />
 declare module 'vue-bitrix24/*';
-declare module 'bitrix24-library';
 declare module '@jamescoyle/vue-icon';
 declare module 'vue-select';
-declare module 'window.console';
 declare module 'smart-grid';
 
 interface IUser {
@@ -50,17 +48,3 @@ interface IPlacement {
 interface IPlacements {
   [key: string]: IPlacement;
 }
-
-type TMethod = string;
-type TParams = {
-  [key: string]: any;
-};
-type TRequestObject = {
-  method: TMethod;
-  params?: TParams;
-};
-type TRequestArray = [method: TMethod, params?: TParams];
-type TRequest = TRequestObject | TRequestArray;
-type TRequests = {
-  [key: string]: TRequest;
-};

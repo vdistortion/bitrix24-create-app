@@ -12,12 +12,13 @@
 
 <script setup lang="ts">
 import { defineOptions, reactive, computed, inject } from 'vue';
+import type { IBitrix24Library } from 'bitrix24-library';
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const $BX24 = inject('$BX24');
+const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
 const data = reactive({
   buttons: [
@@ -42,7 +43,7 @@ const data = reactive({
   ],
 });
 
-const isAdmin = computed(() => $BX24.isAdmin());
+const isAdmin = computed(() => ($BX24 ? $BX24.isAdmin() : false));
 
 const pages = computed(() => {
   if (isAdmin.value) return data.buttons;
