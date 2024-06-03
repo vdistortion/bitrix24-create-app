@@ -1,7 +1,7 @@
 import { createWriteStream } from 'node:fs';
 import { sep } from 'node:path';
 import archiver from 'archiver';
-import json from './package.json' assert { type: 'json' };
+import json from './package.json';
 
 const archive = archiver('zip', { zlib: { level: 9 } });
 

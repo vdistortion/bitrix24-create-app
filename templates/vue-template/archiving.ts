@@ -1,6 +1,6 @@
 import { createWriteStream } from 'node:fs';
 import archiver from 'archiver';
-import json from './package.json' assert { type: 'json' };
+import json from './package.json';
 
 const archive = archiver('zip', { zlib: { level: 9 } });
 const output = createWriteStream(`${json.name}.zip`);

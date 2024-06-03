@@ -1,3 +1,5 @@
+declare module 'smart-grid';
+
 // users
 type TUserType = 'users' | 'disabled';
 

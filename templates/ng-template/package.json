@@ -5,10 +5,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "build": "ng build && node archiving.js",
+    "build": "ng build && tsx archiving.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "grid": "node grid.js && npx sass-migrator division src/_grid.scss && prettier --write src/_grid.scss",
+    "grid": "tsx grid.ts && npx sass-migrator division src/_grid.scss && prettier --write src/_grid.scss",
     "grep": "sh grep.sh",
     "format": "prettier --write src"
   },
@@ -32,6 +32,7 @@
     "@angular-devkit/build-angular": "^17.3.7",
     "@angular/cli": "^17.3.7",
     "@angular/compiler-cli": "^17.3.0",
+    "@types/archiver": "^6.0.2",
     "@types/jasmine": "~5.1.0",
     "archiver": "^7.0.1",
     "jasmine-core": "~5.1.0",
@@ -42,6 +43,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "3.2.5",
     "smart-grid": "^2.1.2",
+    "tsx": "^4.11.2",
     "typescript": "~5.4.2"
   }
 }
