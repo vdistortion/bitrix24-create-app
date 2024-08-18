@@ -3,15 +3,15 @@
     "rootDir": "src",
     "outDir": "dist",
     "target": "es5",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
-    "allowJs": true,
+    "lib": ["es6"],
+    "module": "esnext",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true
   },
   "exclude": [
