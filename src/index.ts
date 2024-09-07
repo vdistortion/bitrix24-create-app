@@ -9,12 +9,8 @@ import prompts from 'prompts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const SKIP_FILES = [
-  'node_modules',
-  'dist',
-  'config.template',
-  '.template.json',
-];
+const CONFIG_FILE: string = '.bca.config.json';
+const SKIP_FILES: string[] = ['node_modules', 'dist', CONFIG_FILE];
 
 async function main() {
   const response = await prompts({
@@ -36,52 +32,55 @@ async function main() {
       });
 
       if (folders.length === 0) {
-        console.info('Нет доступных папок для распаковки.');
+        console.info('There are no folders available for unpacking.');
         return;
       }
 
-      const responseFolder = await prompts({
+      const { selectedFolder } = await prompts({
         type: 'select',
         name: 'selectedFolder',
-        message: 'Выберите папку для распаковки:',
+        message: 'Select a folder for unpacking:',
         choices: folders.map((folder) => {
           const title = folder.includes('ng') ? red(folder) : green(folder);
           return { title, value: folder };
         }),
       });
+      const { projectName } = await prompts({
+        type: 'text',
+        name: 'projectName',
+        message: 'Enter the name of the project:',
+        initial: selectedFolder,
+      });
 
-      const destinationPath = join(
-        __dirname,
-        'destination',
-        responseFolder.selectedFolder,
-      );
+      const destinationPath = join(__dirname, projectName);
 
       const templateConfigContent = readFileSync(
-        join(folderPath, responseFolder.selectedFolder, '.template.json'),
+        join(folderPath, selectedFolder, CONFIG_FILE),
       );
       const { postMessage } = JSON.parse(templateConfigContent.toString());
 
       cp(
-        join(folderPath, responseFolder.selectedFolder),
+        join(folderPath, selectedFolder),
         destinationPath,
         {
           recursive: true,
           filter(source: string): boolean | Promise<boolean> {
             const isSkip = SKIP_FILES.some((name) =>
-              source.startsWith(
-                join(folderPath, responseFolder.selectedFolder, name),
-              ),
+              source.startsWith(join(folderPath, selectedFolder, name)),
             );
             return !isSkip;
           },
         },
         (err: Error) => {
           if (err) {
-            console.error('Ошибка при распаковке:', err);
+            console.error('Unpacking error:', err);
           } else {
-            console.info('Папка успешно распакована в', destinationPath);
             console.info(
-              responseFolder.selectedFolder.includes('ng')
+              'The folder has been successfully extracted to',
+              destinationPath,
+            );
+            console.info(
+              selectedFolder.includes('ng')
                 ? red(postMessage)
                 : green(postMessage),
             );
@@ -89,20 +88,20 @@ async function main() {
         },
       );
     } else {
-      console.error('Шаблоны не найдены.');
+      console.error('No templates found.');
     }
   } else if (response.action === 'clone') {
     const responseClone = await prompts({
       type: 'select',
       name: 'repo',
-      message: 'Введите URL репозитория для клонирования:',
+      message: 'Enter the URL of the repository to clone:',
       choices: [
         {
-          title: red('bitrix24-stickerpack-app'),
+          title: red('bitrix24-stickerpack-app (Angular example)'),
           value: 'bitrix24-stickerpack-app',
         },
         {
-          title: green('bitrix24-pricing-app'),
+          title: green('bitrix24-pricing-app (Vue example)'),
           value: 'bitrix24-pricing-app',
         },
       ],
@@ -112,11 +111,11 @@ async function main() {
       `git clone git@github.com:astrotrain55/${responseClone.repo}.git`,
       (err, stdout, stderr) => {
         if (err) {
-          console.error('Ошибка при клонировании: ', stderr);
+          console.error('Cloning error: ', stderr);
           return;
         }
         console.info(
-          `Репозиторий ${responseClone.repo} успешно клонирован.`,
+          `The ${responseClone.repo} repository has been successfully cloned.`,
           stdout,
         );
       },
