@@ -2,12 +2,19 @@
 import { exec } from 'child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { cp, existsSync, readdirSync, statSync } from 'node:fs';
+import { cp, existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { green, red } from 'kolorist';
 import prompts from 'prompts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const SKIP_FILES = [
+  'node_modules',
+  'dist',
+  'config.template',
+  '.template.json',
+];
 
 async function main() {
   const response = await prompts({
@@ -15,10 +22,7 @@ async function main() {
     name: 'action',
     message: 'What project template would you like to generate?',
     choices: [
-      {
-        title: 'Template',
-        value: 'unpack',
-      },
+      { title: 'Template', value: 'unpack' },
       { title: 'Repository', value: 'clone' },
     ],
   });
@@ -52,15 +56,35 @@ async function main() {
         responseFolder.selectedFolder,
       );
 
+      const templateConfigContent = readFileSync(
+        join(folderPath, responseFolder.selectedFolder, '.template.json'),
+      );
+      const { postMessage } = JSON.parse(templateConfigContent.toString());
+
       cp(
         join(folderPath, responseFolder.selectedFolder),
         destinationPath,
-        { recursive: true },
+        {
+          recursive: true,
+          filter(source: string): boolean | Promise<boolean> {
+            const isSkip = SKIP_FILES.some((name) =>
+              source.startsWith(
+                join(folderPath, responseFolder.selectedFolder, name),
+              ),
+            );
+            return !isSkip;
+          },
+        },
         (err: Error) => {
           if (err) {
             console.error('Ошибка при распаковке:', err);
           } else {
             console.info('Папка успешно распакована в', destinationPath);
+            console.info(
+              responseFolder.selectedFolder.includes('ng')
+                ? red(postMessage)
+                : green(postMessage),
+            );
           }
         },
       );
