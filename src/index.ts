@@ -9,8 +9,14 @@ import prompts from 'prompts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const GITIGNORE_FILE: string = 'template.gitignore';
 const CONFIG_FILE: string = '.bca.config.json';
-const SKIP_FILES: string[] = ['node_modules', 'dist', CONFIG_FILE];
+const SKIP_FILES: string[] = [
+  'node_modules',
+  'dist',
+  GITIGNORE_FILE,
+  CONFIG_FILE,
+];
 
 async function main() {
   const response = await prompts({
@@ -72,17 +78,27 @@ async function main() {
         (err: Error) => {
           if (err) {
             console.error('Unpacking error:', err);
-          } else {
-            console.info(
-              'The folder has been successfully extracted to',
-              projectName,
-            );
-            console.info(
-              selectedFolder.includes('ng')
-                ? red(postMessage)
-                : green(postMessage),
-            );
+            return;
           }
+
+          cp(
+            join(folderPath, selectedFolder, GITIGNORE_FILE),
+            join(projectName, '.gitignore'),
+            {},
+            (err: Error) => {
+              if (err) console.error('Error copying `.gitignore` file:', err);
+            },
+          );
+
+          console.info(
+            'The folder has been successfully extracted to',
+            projectName,
+          );
+          console.info(
+            selectedFolder.includes('ng')
+              ? red(postMessage)
+              : green(postMessage),
+          );
         },
       );
     } else {
