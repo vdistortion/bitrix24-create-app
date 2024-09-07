@@ -1,4 +1,4 @@
-import { IBitrix24Library } from 'bitrix24-library';
+import type { IBitrix24Library } from 'bitrix24-library';
 import getRequestList from './requestList';
 import handlerList from './handlerList';
 

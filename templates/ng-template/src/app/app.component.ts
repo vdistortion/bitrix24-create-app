@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import Bitrix24, { IBitrix24Library } from 'bitrix24-library';
+import Bitrix24, { type IBitrix24Library } from 'bitrix24-library';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
 import { BitrixService } from './services/bitrix.service';
 import { RootStoreService } from './services/root-store.service';

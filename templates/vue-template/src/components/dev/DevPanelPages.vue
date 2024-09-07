@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineOptions, reactive, computed, inject } from 'vue';
+import { reactive, computed, inject } from 'vue';
 import type { IBitrix24Library } from 'bitrix24-library';
 
 defineOptions({

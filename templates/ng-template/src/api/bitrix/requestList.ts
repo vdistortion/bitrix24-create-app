@@ -1,6 +1,6 @@
-import { BatchRequestType } from 'bitrix24-library';
+import type { BatchRequestType } from 'bitrix24-library';
 
-const handler = [window.location.origin, window.location.pathname].join('');
+const handler = [window.location.origin, 'index.html'].join('/');
 
 export default (isAdmin: boolean) => ({
   initParams(): BatchRequestType {

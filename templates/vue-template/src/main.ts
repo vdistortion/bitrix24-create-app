@@ -1,3 +1,4 @@
+import './load';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import Bitrix24, { type IBitrix24Library } from 'bitrix24-library';
