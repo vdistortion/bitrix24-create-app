@@ -52,8 +52,6 @@ async function main() {
         initial: selectedFolder,
       });
 
-      const destinationPath = join(__dirname, projectName);
-
       const templateConfigContent = readFileSync(
         join(folderPath, selectedFolder, CONFIG_FILE),
       );
@@ -61,7 +59,7 @@ async function main() {
 
       cp(
         join(folderPath, selectedFolder),
-        destinationPath,
+        projectName,
         {
           recursive: true,
           filter(source: string): boolean | Promise<boolean> {
@@ -77,7 +75,7 @@ async function main() {
           } else {
             console.info(
               'The folder has been successfully extracted to',
-              destinationPath,
+              projectName,
             );
             console.info(
               selectedFolder.includes('ng')
@@ -91,7 +89,7 @@ async function main() {
       console.error('No templates found.');
     }
   } else if (response.action === 'clone') {
-    const responseClone = await prompts({
+    const { repo } = await prompts({
       type: 'select',
       name: 'repo',
       message: 'Enter the URL of the repository to clone:',
@@ -108,14 +106,14 @@ async function main() {
     });
 
     exec(
-      `git clone git@github.com:astrotrain55/${responseClone.repo}.git`,
+      `git clone git@github.com:astrotrain55/${repo}.git`,
       (err, stdout, stderr) => {
         if (err) {
           console.error('Cloning error: ', stderr);
           return;
         }
         console.info(
-          `The ${responseClone.repo} repository has been successfully cloned.`,
+          `The ${repo} repository has been successfully cloned.`,
           stdout,
         );
       },
