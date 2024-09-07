@@ -1,9 +1,11 @@
 {
   "name": "bitrix24-create-app",
   "description": "Command line for create a project with your own templates",
-  "version": "1.0.11",
+  "version": "2.0.3",
+  "author": "Валентин <valentin.distortion@gmail.com>",
   "license": "GPL",
   "private": false,
+  "type": "module",
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
@@ -18,8 +20,6 @@
   "keywords": [
     "angular",
     "vue",
-    "api",
-    "rest",
     "promises",
     "components",
     "typescript",
@@ -27,24 +27,21 @@
     "bx24"
   ],
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "build": "tsc && shx rm -rf dist/templates && shx cp -r templates dist",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "build": "shx rm -rf dist && tsc && shx cp -r templates dist",
     "public": "npm run build && npm publish"
   },
   "dependencies": {
-    "ejs": "^3.1.7",
-    "inquirer": "^6.2.0",
-    "shelljs": "^0.8.5",
-    "yargs": "^12.0.1"
+    "kolorist": "^1.8.0",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@types/ejs": "^2.6.0",
-    "@types/inquirer": "^0.0.43",
-    "@types/node": "^10.9.4",
-    "@types/shelljs": "^0.8.0",
-    "@types/yargs": "^11.1.1",
-    "shx": "^0.3.2",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.0.3"
+    "@types/node": "^22.4.0",
+    "@types/prompts": "^2.4.9",
+    "prettier": "3.3.3",
+    "shx": "^0.3.4",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
   }
 }

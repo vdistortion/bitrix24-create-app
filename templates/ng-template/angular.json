@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-template": {
+    "bitrix24-create-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ng-template",
+            "outputPath": "dist/bitrix24-create-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -50,7 +50,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/ng-template.zip"
+              "src/bitrix24-create-app.zip"
             ],
             "styles": [
               "src/styles.scss"
@@ -91,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ng-template:build:production"
+              "buildTarget": "bitrix24-create-app:build:production"
             },
             "development": {
-              "buildTarget": "ng-template:build:development"
+              "buildTarget": "bitrix24-create-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "ng-template:build"
+            "buildTarget": "bitrix24-create-app:build"
           }
         },
         "test": {

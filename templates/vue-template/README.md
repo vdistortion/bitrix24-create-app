@@ -1,4 +1,4 @@
-# <%= projectName %>
+# bitrix24-create-app
 
 ### Запуск
 
@@ -31,9 +31,6 @@ npm run grep full # подробно
 ```dotenv
 # список скоупов, необходимых для работы приложения
 VITE_SCOPE=[]
-
-# название приложения
-VITE_APP_NAME=""
 
 # список мест для встраивания приложения
 VITE_PLACEMENT=[]

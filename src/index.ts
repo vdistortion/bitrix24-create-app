@@ -1,184 +1,140 @@
 #!/usr/bin/env node
+import { exec } from 'child_process';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { cp, existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { green, red } from 'kolorist';
+import prompts from 'prompts';
 
-import * as inquirer from 'inquirer';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as shell from 'shelljs';
-import * as template from './utils/template';
-import chalk from 'chalk';
-import * as yargs from 'yargs';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const CHOICES = fs.readdirSync(path.join(__dirname, 'templates'));
-
-const QUESTIONS = [
-  {
-    name: 'template',
-    type: 'list',
-    message: 'What project template would you like to generate?',
-    choices: CHOICES,
-    when: () => !yargs.argv['template']
-  },
-  {
-    name: 'name',
-    type: 'input',
-    message: 'Project name:',
-    when: () => !yargs.argv['name'],
-    validate: (input: string) => {
-      if (/^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(input)) return true;
-      else return 'Invalid project name';
-    }
-  }
+const GITIGNORE_FILE: string = 'template.gitignore';
+const CONFIG_FILE: string = '.bca.config.json';
+const SKIP_FILES: string[] = [
+  'node_modules',
+  'dist',
+  GITIGNORE_FILE,
+  CONFIG_FILE,
 ];
 
-const CURR_DIR = process.cwd();
-
-const TEMPLATE_DATA: template.TemplateData = {
-  projectName: '',
-};
-
-export interface TemplateConfig {
-  files?: string[]
-  postMessage?: string
-}
-
-export interface CliOptions {
-  projectName: string
-  templateName: string
-  templatePath: string
-  tartgetPath: string
-  config: TemplateConfig
-}
-
-inquirer.prompt(QUESTIONS).then((response: Object) => {
-  const answers = Object.assign({}, response, yargs.argv);
-  const projectChoice = answers['template'];
-  const projectName = answers['name'];
-  const templatePath = path.join(__dirname, 'templates', projectChoice);
-  const tartgetPath = path.join(CURR_DIR, projectName);
-  const templateConfig = getTemplateConfig(templatePath);
-
-  const options: CliOptions = {
-    projectName,
-    templateName: projectChoice,
-    templatePath,
-    tartgetPath,
-    config: templateConfig
-  };
-
-  TEMPLATE_DATA.projectName = projectName;
-
-  if (!createProject(tartgetPath)) {
-    return;
-  }
-
-  createDirectoryContents(templatePath, projectName, templateConfig);
-
-  if (!postProcess(options)) {
-    return;
-  }
-
-  showMessage(options);
-});
-
-function showMessage(options: CliOptions) {
-  console.log('');
-  console.log(chalk.green('Done.'));
-  console.log(chalk.green('Go into the project:'));
-  console.log(chalk.green(`cd ${options.projectName}`));
-  console.log(chalk.green('git init'));
-
-  const message = options.config.postMessage;
-
-  if (message) {
-    console.log('');
-    console.log(chalk.yellow(message));
-    console.log('');
-  }
-}
-
-function getTemplateConfig(templatePath: string): TemplateConfig {
-  const configPath = path.join(templatePath, '.template.json');
-
-  if (!fs.existsSync(configPath)) return {};
-
-  const templateConfigContent = fs.readFileSync(configPath);
-
-  if (templateConfigContent) {
-    return JSON.parse(templateConfigContent.toString());
-  }
-
-  return {};
-}
-
-function createProject(projectPath: string) {
-  if (fs.existsSync(projectPath)) {
-    console.log(chalk.red(`Folder ${projectPath} exists. Delete or use another name.`));
-    return false;
-  }
-
-  fs.mkdirSync(projectPath);
-  return true;
-}
-
-function postProcess(options: CliOptions) {
-  if (isNode(options)) {
-    return postProcessNode(options);
-  }
-  return true;
-}
-
-function isNode(options: CliOptions) {
-  return fs.existsSync(path.join(options.templatePath, 'package.json'));
-}
-
-function postProcessNode(options: CliOptions) {
-  shell.cd(options.tartgetPath);
-
-  let cmd = '';
-
-  if (shell.which('npm')) {
-    cmd = 'npm ci';
-  }
-
-  if (cmd) {
-    const result = shell.exec(cmd);
-
-    if (result.code !== 0) {
-      return false;
-    }
-  } else {
-    console.log(chalk.red('No npm found. Cannot run installation.'));
-  }
-
-  return true;
-}
-
-const SKIP_FILES = ['node_modules', '.template.json'];
-
-function createDirectoryContents(templatePath: string, projectName: string, config: TemplateConfig) {
-  const filesToCreate = fs.readdirSync(templatePath);
-
-  filesToCreate.forEach((file) => {
-    const origFilePath = path.join(templatePath, file);
-    const stats = fs.statSync(origFilePath);
-
-    if (SKIP_FILES.indexOf(file) > -1) return;
-
-    if (stats.isFile()) {
-      const writePath = path.join(CURR_DIR, projectName, file);
-      const favicon = ['public', 'favicon.ico'].join(path.sep);
-
-      if (origFilePath.includes(favicon)) {
-        fs.copyFileSync(origFilePath, writePath);
-      } else if (origFilePath.includes('config.template')) {
-        fs.copyFileSync(origFilePath, writePath.replace('config.template', '.gitignore'));
-      } else {
-        const contents = template.render(fs.readFileSync(origFilePath, 'utf8'), TEMPLATE_DATA);
-        fs.writeFileSync(writePath, contents, 'utf8');
-      }
-    } else if (stats.isDirectory()) {
-      fs.mkdirSync(path.join(CURR_DIR, projectName, file));
-      createDirectoryContents(path.join(templatePath, file), path.join(projectName, file), config);
-    }
+async function main() {
+  const response = await prompts({
+    type: 'select',
+    name: 'action',
+    message: 'What project template would you like to generate?',
+    choices: [
+      { title: 'Template', value: 'unpack' },
+      { title: 'Repository', value: 'clone' },
+    ],
   });
+
+  if (response.action === 'unpack') {
+    const folderPath = join(__dirname, 'templates');
+
+    if (existsSync(folderPath)) {
+      const folders = readdirSync(folderPath).filter((file) => {
+        return statSync(join(folderPath, file)).isDirectory();
+      });
+
+      if (folders.length === 0) {
+        console.info('There are no folders available for unpacking.');
+        return;
+      }
+
+      const { selectedFolder } = await prompts({
+        type: 'select',
+        name: 'selectedFolder',
+        message: 'Select a folder for unpacking:',
+        choices: folders.map((folder) => {
+          const title = folder.includes('ng') ? red(folder) : green(folder);
+          return { title, value: folder };
+        }),
+      });
+      const { projectName } = await prompts({
+        type: 'text',
+        name: 'projectName',
+        message: 'Enter the name of the project:',
+        initial: selectedFolder,
+      });
+
+      const templateConfigContent = readFileSync(
+        join(folderPath, selectedFolder, CONFIG_FILE),
+      );
+      const { postMessage } = JSON.parse(templateConfigContent.toString());
+
+      cp(
+        join(folderPath, selectedFolder),
+        projectName,
+        {
+          recursive: true,
+          filter(source: string): boolean | Promise<boolean> {
+            const isSkip = SKIP_FILES.some((name) =>
+              source.startsWith(join(folderPath, selectedFolder, name)),
+            );
+            return !isSkip;
+          },
+        },
+        (err: Error) => {
+          if (err) {
+            console.error('Unpacking error:', err);
+            return;
+          }
+
+          cp(
+            join(folderPath, selectedFolder, GITIGNORE_FILE),
+            join(projectName, '.gitignore'),
+            {},
+            (err: Error) => {
+              if (err) console.error('Error copying `.gitignore` file:', err);
+            },
+          );
+
+          console.info(
+            'The folder has been successfully extracted to',
+            projectName,
+          );
+          console.info(
+            selectedFolder.includes('ng')
+              ? red(postMessage)
+              : green(postMessage),
+          );
+        },
+      );
+    } else {
+      console.error('No templates found.');
+    }
+  } else if (response.action === 'clone') {
+    const { repo } = await prompts({
+      type: 'select',
+      name: 'repo',
+      message: 'Enter the URL of the repository to clone:',
+      choices: [
+        {
+          title: red('bitrix24-stickerpack-app (Angular example)'),
+          value: 'bitrix24-stickerpack-app',
+        },
+        {
+          title: green('bitrix24-pricing-app (Vue example)'),
+          value: 'bitrix24-pricing-app',
+        },
+      ],
+    });
+
+    exec(
+      `git clone git@github.com:astrotrain55/${repo}.git`,
+      (err, stdout, stderr) => {
+        if (err) {
+          console.error('Cloning error: ', stderr);
+          return;
+        }
+        console.info(
+          `The ${repo} repository has been successfully cloned.`,
+          stdout,
+        );
+      },
+    );
+  }
 }
+
+main().catch(console.error);
