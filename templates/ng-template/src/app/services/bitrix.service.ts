@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IBitrix24Library } from 'bitrix24-library';
+import type { IBitrix24Library } from 'bitrix24-library';
 import BitrixBatch from '../../api/bitrix';
 
 @Injectable({

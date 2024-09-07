@@ -25,8 +25,12 @@
       </tr>
     </tbody>
     <tfoot v-if="props.based.length">
-      Component based on
-      <a :href="props.based[0]" target="_blank">{{ props.based[1] ?? props.based[0] }}</a>
+      <tr>
+        <td>
+          Component based on
+          <a :href="props.based[0]" target="_blank">{{ props.based[1] ?? props.based[0] }}</a>
+        </td>
+      </tr>
     </tfoot>
   </table>
 </template>
