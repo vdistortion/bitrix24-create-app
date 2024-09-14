@@ -2,7 +2,7 @@
 [![NPM Version](https://img.shields.io/npm/v/bitrix24-create-app?style=flat&logo=npm&label=version&color=cb3837)](https://www.npmjs.com/package/bitrix24-create-app)
 [![NPM Downloads](https://img.shields.io/npm/dw/bitrix24-create-app?style=flat&logo=npm&color=cb3837)](https://www.npmjs.com/package/bitrix24-create-app)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/bitrix24-create-app?style=flat&logo=npm&color=cb3837)](https://www.npmjs.com/package/bitrix24-create-app)
-[![GitHub repo size](https://img.shields.io/github/repo-size/astrotrain55/to-webp-json?style=flat&logo=github)](https://github.com/astrotrain55/bitrix24-create-app)
+[![GitHub repo size](https://img.shields.io/github/repo-size/astrotrain55/bitrix24-create-app?style=flat&logo=github)](https://github.com/astrotrain55/bitrix24-create-app)
 [![GitHub Repo stars](https://img.shields.io/github/stars/astrotrain55/bitrix24-create-app?style=flat&logo=github)](https://github.com/astrotrain55/bitrix24-create-app)
 [![GitHub Created At](https://img.shields.io/github/created-at/astrotrain55/bitrix24-create-app?style=flat&logo=github)](https://github.com/astrotrain55/bitrix24-create-app)
 
