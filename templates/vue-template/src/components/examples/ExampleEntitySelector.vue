@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { reactive, computed, inject } from 'vue';
 import type { IBitrix24Library, IUser } from 'bitrix24-library';
-import BxEntitySelector from 'vue-bitrix24/BxEntitySelector';
+import { BxEntitySelector } from 'vue-bitrix24';
 import ExampleTable from './ExampleTable.vue';
 
 const $BX24: IBitrix24Library | undefined = inject('$BX24');

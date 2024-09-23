@@ -50,7 +50,7 @@ export const propsValues: TypesProps = {
 import { inject, type PropType } from 'vue';
 import VueDatepicker, { type ModelValue } from '@vuepic/vue-datepicker';
 import type { IBitrix24Library } from 'bitrix24-library';
-import { loadStyles } from 'vue-bitrix24/loadStyles';
+import { loadStyles } from 'vue-bitrix24';
 
 const $BX24: IBitrix24Library | undefined = inject('$BX24');
 

@@ -74,19 +74,6 @@ VITE_TEST_DOMAINS=[]
 /src/views/ExamplePage.vue # список доступных компонентов vue-bitrix24
 ```
 
-### Подключение vue-bitrix24
-
-```ts
-// src/main.ts
-import { createApp } from 'vue';
-import { Bitrix24, useBitrix24 } from './plugins/vue-bitrix24';
-import App from './App.vue';
-
-Bitrix24.init().then((BX24) => {
-  createApp(App).use(useBitrix24).provide('$BX24', BX24).mount('#app');
-});
-```
-
 ### Подключение к Битрикс24
 
 ![alt text Установка для локальной разработки](example.jpg)

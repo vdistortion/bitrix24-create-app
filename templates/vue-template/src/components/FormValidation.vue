@@ -36,8 +36,7 @@
 import { reactive, computed, provide, type Ref } from 'vue';
 import { useVuelidate, type Validation } from '@vuelidate/core';
 import { email, required, minLength, sameAs, helpers } from '@vuelidate/validators';
-import BxButton from 'vue-bitrix24/BxButton';
-import BxInput from 'vue-bitrix24/BxInput';
+import { BxButton, BxInput } from 'vue-bitrix24';
 import FormErrorWrapper from './FormErrorWrapper.vue';
 
 provide('$BX24', null);

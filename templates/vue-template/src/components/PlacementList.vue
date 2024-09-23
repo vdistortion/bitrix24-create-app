@@ -32,8 +32,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import BxButton from 'vue-bitrix24/BxButton';
-import BxInput from 'vue-bitrix24/BxInput';
+import { BxButton, BxInput } from 'vue-bitrix24';
 import { usePlacementStore } from '@/stores/PlacementStore';
 import AppLink from './AppLink.vue';
 

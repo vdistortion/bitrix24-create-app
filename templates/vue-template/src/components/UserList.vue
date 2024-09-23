@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue';
 import type { IBitrix24Library } from 'bitrix24-library';
-import BxButton from 'vue-bitrix24/BxButton';
+import { BxButton } from 'vue-bitrix24';
 import { useRootStore } from '@/stores/RootStore';
 
 const store = useRootStore();

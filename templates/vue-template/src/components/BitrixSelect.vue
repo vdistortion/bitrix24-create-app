@@ -16,7 +16,7 @@
 import { inject } from 'vue';
 import VueSelect from 'vue-select';
 import type { IBitrix24Library } from 'bitrix24-library';
-import { loadStyles } from 'vue-bitrix24/loadStyles';
+import { loadStyles } from 'vue-bitrix24';
 
 const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
