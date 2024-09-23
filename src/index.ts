@@ -2,7 +2,7 @@
 import { exec } from 'child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { cp, existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { cp, existsSync, readdirSync, statSync } from 'node:fs';
 import { green, red } from 'kolorist';
 import prompts from 'prompts';
 
@@ -10,13 +10,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const GITIGNORE_FILE: string = 'template.gitignore';
-const CONFIG_FILE: string = '.bca.config.json';
-const SKIP_FILES: string[] = [
-  'node_modules',
-  'dist',
-  GITIGNORE_FILE,
-  CONFIG_FILE,
-];
+const SKIP_FILES: string[] = ['node_modules', 'dist', GITIGNORE_FILE];
+const NG_POST_MESSAGE = `Explore the Docs ${red('https://angular.dev/')}`;
+const VUE_POST_MESSAGE = `Vue’s official documentation provides you with all information you need to get started ${green('https://vuejs.org/')}`;
 
 async function main() {
   const response = await prompts({
@@ -58,11 +54,6 @@ async function main() {
         initial: selectedFolder,
       });
 
-      const templateConfigContent = readFileSync(
-        join(folderPath, selectedFolder, CONFIG_FILE),
-      );
-      const { postMessage } = JSON.parse(templateConfigContent.toString());
-
       cp(
         join(folderPath, selectedFolder),
         projectName,
@@ -95,9 +86,7 @@ async function main() {
             projectName,
           );
           console.info(
-            selectedFolder.includes('ng')
-              ? red(postMessage)
-              : green(postMessage),
+            selectedFolder.includes('ng') ? NG_POST_MESSAGE : VUE_POST_MESSAGE,
           );
         },
       );
