@@ -9,7 +9,8 @@ import prompts from 'prompts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const SKIP_FILES: string[] = ['node_modules', 'dist'];
+const GITIGNORE_FILE: string = 'template.gitignore';
+const SKIP_FILES: string[] = ['node_modules', 'dist', GITIGNORE_FILE];
 const NG_POST_MESSAGE = 'Explore the Docs https://angular.dev/';
 const VUE_POST_MESSAGE =
   'Vue’s official documentation provides you with all information you need to get started https://vuejs.org/';
@@ -73,6 +74,15 @@ async function main() {
             console.error('Unpacking error:', err);
             return;
           }
+
+          cp(
+            join(folderPath, selectedFolder, GITIGNORE_FILE),
+            join(projectName, '.gitignore'),
+            {},
+            (err: Error) => {
+              if (err) console.error('Error copying `.gitignore` file:', err);
+            },
+          );
 
           console.info(
             'The folder has been successfully extracted to',

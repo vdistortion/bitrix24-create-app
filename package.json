@@ -15,9 +15,7 @@
     "bitrix24-create-app": "./dist/index.js"
   },
   "files": [
-    "dist",
-    "dist/templates/ng-template/.gitignore",
-    "dist/templates/vue-template/.gitignore"
+    "dist"
   ],
   "keywords": [
     "angular",
