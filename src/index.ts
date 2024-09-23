@@ -11,8 +11,11 @@ const __dirname = dirname(__filename);
 
 const GITIGNORE_FILE: string = 'template.gitignore';
 const SKIP_FILES: string[] = ['node_modules', 'dist', GITIGNORE_FILE];
-const NG_POST_MESSAGE = `Explore the Docs ${red('https://angular.dev/')}`;
-const VUE_POST_MESSAGE = `Vue’s official documentation provides you with all information you need to get started ${green('https://vuejs.org/')}`;
+const NG_POST_MESSAGE = 'Explore the Docs https://angular.dev/';
+const VUE_POST_MESSAGE =
+  'Vue’s official documentation provides you with all information you need to get started https://vuejs.org/';
+const NG_REPO_EXAMPLE = 'bitrix24-stickerpack-app';
+const VUE_REPO_EXAMPLE = 'bitrix24-pricing-app';
 
 async function main() {
   const response = await prompts({
@@ -83,7 +86,7 @@ async function main() {
 
           console.info(
             'The folder has been successfully extracted to',
-            projectName,
+            projectName.includes('ng') ? red(projectName) : green(projectName),
           );
           console.info(
             selectedFolder.includes('ng') ? NG_POST_MESSAGE : VUE_POST_MESSAGE,
@@ -100,12 +103,12 @@ async function main() {
       message: 'Enter the URL of the repository to clone:',
       choices: [
         {
-          title: red('bitrix24-stickerpack-app (Angular example)'),
-          value: 'bitrix24-stickerpack-app',
+          title: red(`${NG_REPO_EXAMPLE} (Angular example)`),
+          value: NG_REPO_EXAMPLE,
         },
         {
-          title: green('bitrix24-pricing-app (Vue example)'),
-          value: 'bitrix24-pricing-app',
+          title: green(`${VUE_REPO_EXAMPLE} (Vue example)`),
+          value: VUE_REPO_EXAMPLE,
         },
       ],
     });
@@ -114,11 +117,11 @@ async function main() {
       `git clone git@github.com:astrotrain55/${repo}.git`,
       (err, stdout, stderr) => {
         if (err) {
-          console.error('Cloning error: ', stderr);
+          console.error('Cloning error:', stderr);
           return;
         }
         console.info(
-          `The ${repo} repository has been successfully cloned.`,
+          `The ${`https://github.com/astrotrain55/${repo}`} repository has been successfully cloned.`,
           stdout,
         );
       },
