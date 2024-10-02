@@ -6,7 +6,7 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/astrotrain55/bitrix24-create-app?style=flat&logo=github)](https://github.com/astrotrain55/bitrix24-create-app)
 [![GitHub Created At](https://img.shields.io/github/created-at/astrotrain55/bitrix24-create-app?style=flat&logo=github)](https://github.com/astrotrain55/bitrix24-create-app)
 
-<img src="angular.svg" alt="angular" width="40" height="40"/><img src="vue.svg" alt="vue" width="30" height="40"/>
+<img src="docs/public/angular.svg" alt="angular" width="40" height="40"/><img src="docs/public/vue.svg" alt="vue" width="30" height="40"/>
 
 Command line for create a project with your own templates
 
