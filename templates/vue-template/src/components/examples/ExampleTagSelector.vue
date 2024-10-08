@@ -107,9 +107,17 @@
 
 <script setup lang="ts">
 import { reactive, computed, inject } from 'vue';
-import type { IBitrix24Library, IUser } from 'bitrix24-library';
+import type { IBitrix24Library } from 'bitrix24-library';
 import { BxTagSelector } from 'vue-bitrix24';
 import ExampleTable from './ExampleTable.vue';
+
+interface IUser {
+  id: string;
+  name: string;
+  photo: string;
+  position: string;
+  url: string;
+}
 
 const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
@@ -207,13 +215,13 @@ function onAdd(text: string) {
   if (data.props.multiple) {
     $BX24.selectUsers().then((users: IUser[]) => {
       users.forEach((user) => {
-        user.icon = fakeIcon;
+        user.photo = fakeIcon;
       });
       data.props.list.push(...users);
     });
   } else {
     $BX24.selectUser().then((user: IUser) => {
-      user.icon = fakeIcon;
+      user.photo = fakeIcon;
       data.props.list = [user];
     });
   }
