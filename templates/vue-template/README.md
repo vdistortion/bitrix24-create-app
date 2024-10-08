@@ -96,8 +96,8 @@ VITE_TEST_DOMAINS=[]
 
 - vue-bitrix24 (https://www.npmjs.com/package/vue-bitrix24)
 - bitrix24-library (https://www.npmjs.com/package/bitrix24-library)
-- bitrix24-pricing-app (https://github.com/astrotrain55/bitrix24-pricing-app)
-- bitrix24-stickerpack-app (https://github.com/astrotrain55/bitrix24-stickerpack-app)
+- bitrix24-pricing-app (https://github.com/vdistortion/bitrix24-pricing-app)
+- bitrix24-stickerpack-app (https://github.com/vdistortion/bitrix24-stickerpack-app)
 
 #### Сетка
 

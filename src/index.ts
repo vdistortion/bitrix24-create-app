@@ -114,14 +114,14 @@ async function main() {
     });
 
     exec(
-      `git clone git@github.com:astrotrain55/${repo}.git`,
+      `git clone git@github.com:vdistortion/${repo}.git`,
       (err, stdout, stderr) => {
         if (err) {
           console.error('Cloning error:', stderr);
           return;
         }
         console.info(
-          `The ${`https://github.com/astrotrain55/${repo}`} repository has been successfully cloned.`,
+          `The ${`https://github.com/vdistortion/${repo}`} repository has been successfully cloned.`,
           stdout,
         );
       },

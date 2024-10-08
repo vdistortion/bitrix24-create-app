@@ -17,7 +17,7 @@ export default defineConfig({
       },
       {
         text: 'ui-bitrix24',
-        link: 'https://astrotrain55.github.io/ui-bitrix24/',
+        link: 'https://vdistortion.github.io/ui-bitrix24/',
       },
     ],
 
@@ -34,11 +34,11 @@ export default defineConfig({
         items: [
           {
             text: 'bitrix24-stickerpack-app',
-            link: 'https://github.com/astrotrain55/bitrix24-stickerpack-app',
+            link: 'https://github.com/vdistortion/bitrix24-stickerpack-app',
           },
           {
             text: 'bitrix24-pricing-app',
-            link: 'https://github.com/astrotrain55/bitrix24-pricing-app',
+            link: 'https://github.com/vdistortion/bitrix24-pricing-app',
           },
         ],
       },
@@ -51,7 +51,7 @@ export default defineConfig({
       },
       {
         icon: 'github',
-        link: 'https://github.com/astrotrain55/bitrix24-create-app',
+        link: 'https://github.com/vdistortion/bitrix24-create-app',
       },
     ],
   },

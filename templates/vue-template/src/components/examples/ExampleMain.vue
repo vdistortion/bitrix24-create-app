@@ -12,7 +12,7 @@
           </li>
           <li v-if="group === 'vue-bitrix24'">
             <a
-              href="https://astrotrain55.github.io/vue-bitrix24/"
+              href="https://vdistortion.github.io/vue-bitrix24/"
               target="_blank"
               style="margin-left: 5px"
             >

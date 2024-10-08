@@ -9,7 +9,7 @@
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:astrotrain55/bitrix24-create-app.git"
+    "url": "git@github.com:vdistortion/bitrix24-create-app.git"
   },
   "bin": {
     "bitrix24-create-app": "./dist/index.js"
