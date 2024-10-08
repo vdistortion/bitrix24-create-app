@@ -27,9 +27,7 @@
       <example-link v-if="data.componentVisible === 'app-link'"></example-link>
       <example-select v-if="data.componentVisible === 'bitrix-select'"></example-select>
       <example-datepicker v-if="data.componentVisible === 'bitrix-datepicker'"></example-datepicker>
-      <example-entity-selector
-        v-if="data.componentVisible === 'bx-entity-selector'"
-      ></example-entity-selector>
+      <example-tag-selector v-if="data.componentVisible === 'bx-tag-selector'"></example-tag-selector>
     </div>
   </main>
 </template>
@@ -41,7 +39,7 @@ import ExampleForm from './ExampleForm.vue';
 import ExampleLink from './ExampleLink.vue';
 import ExampleSelect from './ExampleSelect.vue';
 import ExampleDatepicker from './ExampleDatepicker.vue';
-import ExampleEntitySelector from './ExampleEntitySelector.vue';
+import ExampleTagSelector from './ExampleTagSelector.vue';
 
 const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
@@ -65,7 +63,7 @@ const data = reactive({
   componentVisible: 'form-validation',
   componentsGroups: {
     'bitrix24-create-app': ['form-validation', 'app-link', 'bitrix-select', 'bitrix-datepicker'],
-    'vue-bitrix24': ['bx-entity-selector'],
+    'vue-bitrix24': ['bx-tag-selector'],
   },
 });
 </script>
