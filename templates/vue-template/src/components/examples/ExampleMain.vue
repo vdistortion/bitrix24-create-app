@@ -12,7 +12,7 @@
           </li>
           <li v-if="group === 'vue-bitrix24'">
             <a
-              href="https://vdistortion.github.io/vue-bitrix24/"
+              href="https://vdistortion.github.io/ui-bitrix24/"
               target="_blank"
               style="margin-left: 5px"
             >
@@ -27,7 +27,9 @@
       <example-link v-if="data.componentVisible === 'app-link'"></example-link>
       <example-select v-if="data.componentVisible === 'bitrix-select'"></example-select>
       <example-datepicker v-if="data.componentVisible === 'bitrix-datepicker'"></example-datepicker>
-      <example-tag-selector v-if="data.componentVisible === 'bx-tag-selector'"></example-tag-selector>
+      <example-tag-selector
+        v-if="data.componentVisible === 'bx-tag-selector'"
+      ></example-tag-selector>
     </div>
   </main>
 </template>
