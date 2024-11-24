@@ -13,7 +13,7 @@ export default defineConfig({
       { text: 'Docs', link: '/ng-template' },
       {
         text: 'bitrix24-library',
-        link: 'https://www.npmjs.com/package/bitrix24-library',
+        link: 'https://vdistortion.github.io/bitrix24-library/',
       },
       {
         text: 'ui-bitrix24',

@@ -7,6 +7,7 @@
   "private": false,
   "type": "module",
   "main": "./dist/index.js",
+  "homepage": "https://vdistortion.github.io/bitrix24-create-app/",
   "repository": {
     "type": "git",
     "url": "git@github.com:vdistortion/bitrix24-create-app.git"
