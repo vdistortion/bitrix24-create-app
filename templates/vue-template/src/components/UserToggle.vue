@@ -20,12 +20,9 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 
-const props = defineProps({
-  defaultType: {
-    type: String,
-    required: true,
-  },
-});
+const props = defineProps<{
+  defaultType: string;
+}>();
 
 const emit = defineEmits(['click']);
 

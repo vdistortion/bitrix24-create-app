@@ -7,12 +7,9 @@ import { reactive, computed } from 'vue';
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType } from '@mdi/js';
 
-const props = defineProps({
-  icon: {
-    type: String,
-    required: true,
-  },
-});
+const props = defineProps<{
+  icon: string;
+}>();
 
 const data = reactive({
   icons: {

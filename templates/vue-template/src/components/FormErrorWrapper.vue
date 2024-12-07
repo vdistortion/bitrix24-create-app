@@ -11,19 +11,18 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
 import type { ErrorObject } from '@vuelidate/core';
 
-const props = defineProps({
-  errors: {
-    type: Array as PropType<ErrorObject[]>,
-    default: () => [],
+const props = withDefaults(
+  defineProps<{
+    errors?: ErrorObject[];
+    blur?: boolean;
+  }>(),
+  {
+    errors: () => [],
+    blur: true,
   },
-  blur: {
-    type: Boolean,
-    default: true,
-  },
-});
+);
 </script>
 
 <style lang="scss">

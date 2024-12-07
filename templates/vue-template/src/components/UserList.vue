@@ -1,9 +1,9 @@
 <template>
   <div class="user-list">
-    <div v-for="(user, id) in props.users" :key="id" class="user-list__card">
+    <div v-for="user in props.users" :key="user.id" class="user-list__card">
       <a
         class="user"
-        :class="classList(id)"
+        :class="classList(user.id)"
         :href="`${portal}${user.href}`"
         :target="user.target"
         :title="getTitle(user)"
@@ -18,7 +18,7 @@
           size="xs"
           icon="chat"
           :round="true"
-          @click="openMessenger(id)"
+          @click="openMessenger(user.id)"
         >
           Открыть чат
         </bx-button>
@@ -37,12 +37,9 @@ const store = useRootStore();
 
 const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
-const props = defineProps({
-  users: {
-    type: Object,
-    required: true,
-  },
-});
+const props = defineProps<{
+  users: IUsers;
+}>();
 
 const department = computed(() => <string[]>store.department);
 const currentId = computed(() => store.currentId);

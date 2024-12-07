@@ -10,12 +10,9 @@ import type { IBitrix24Library } from 'bitrix24-library';
 
 const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
-const props = defineProps({
-  href: {
-    type: String,
-    required: true,
-  },
-});
+const props = defineProps<{
+  href: string;
+}>();
 
 function onClick(e: MouseEvent) {
   if ($BX24) {

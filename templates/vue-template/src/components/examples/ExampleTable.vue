@@ -36,22 +36,16 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
-
-const props = defineProps({
-  name: {
-    type: String,
-    default: '',
+const props = withDefaults(
+  defineProps<{
+    name: string;
+    code: string;
+    based?: string[];
+  }>(),
+  {
+    based: () => [],
   },
-  code: {
-    type: String,
-    default: '',
-  },
-  based: {
-    type: Array as PropType<string[]>,
-    default: () => [],
-  },
-});
+);
 </script>
 
 <style lang="scss">

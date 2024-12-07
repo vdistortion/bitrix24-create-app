@@ -43,7 +43,7 @@ const slot = computed(() => {
     image: '<img src="logo.png" alt="logo">',
     text: '<span>Текст</span>',
   };
-  //@ts-ignore
+  // @ts-ignore
   return tags[data.slots.default];
 });
 

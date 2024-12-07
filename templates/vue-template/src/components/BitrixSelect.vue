@@ -22,24 +22,19 @@ const $BX24: IBitrix24Library | undefined = inject('$BX24');
 
 loadStyles($BX24);
 
-const props = defineProps({
-  options: {
-    type: Array,
-    default: () => [],
+const props = withDefaults(
+  defineProps<{
+    options: any[];
+    label?: string;
+    multiple?: boolean;
+    clearable?: boolean;
+  }>(),
+  {
+    label: '',
+    multiple: false,
+    clearable: false,
   },
-  label: {
-    type: String,
-    default: '',
-  },
-  multiple: {
-    type: Boolean,
-    default: false,
-  },
-  clearable: {
-    type: Boolean,
-    default: false,
-  },
-});
+);
 </script>
 
 <style>
