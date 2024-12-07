@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserToggleComponent } from '../user-toggle/user-toggle.component';
 import { UserListComponent } from '../user-list/user-list.component';
 import { RootStoreService } from '../../services/root-store.service';
 
 @Component({
   selector: 'app-user-lists',
-  standalone: true,
   imports: [UserToggleComponent, UserListComponent],
   templateUrl: './user-lists.component.html',
   styleUrl: './user-lists.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListsComponent {
   public type: TUserType = 'users';

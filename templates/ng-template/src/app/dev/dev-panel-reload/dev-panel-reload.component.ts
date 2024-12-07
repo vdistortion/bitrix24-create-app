@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 
 @Component({
   selector: 'dev-panel-reload',
-  standalone: true,
   imports: [],
   templateUrl: './dev-panel-reload.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevPanelReloadComponent implements OnInit {
   constructor(private bitrixService: BitrixService) {}

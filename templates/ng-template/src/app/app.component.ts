@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import Bitrix24, { type IBitrix24Library } from 'bitrix24-library';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
@@ -9,8 +9,8 @@ import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, DevPanelComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (isDev) {
       <dev-panel></dev-panel>

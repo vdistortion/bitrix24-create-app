@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 
 @Component({
   selector: 'app-link',
-  standalone: true,
   imports: [],
   templateUrl: './link.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
   @Input({ required: true }) public href: string;

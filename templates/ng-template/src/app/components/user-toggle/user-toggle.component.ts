@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user-toggle',
-  standalone: true,
   imports: [],
   templateUrl: './user-toggle.component.html',
   styleUrl: './user-toggle.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserToggleComponent {
   @Output() public click: EventEmitter<TUserType> =

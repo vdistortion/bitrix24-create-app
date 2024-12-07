@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -8,10 +8,10 @@ import {
 
 @Component({
   selector: 'app-form-validation',
-  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './form-validation.component.html',
   styleUrl: './form-validation.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormValidationComponent implements OnInit {
   form: FormGroup;

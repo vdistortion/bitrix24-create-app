@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 import { RootStoreService } from '../../services/root-store.service';
 
 @Component({
   selector: 'app-user-list',
-  standalone: true,
   imports: [],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent implements OnInit {
   @Input({ required: true }) public users: IUsers;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LinkComponent } from '../../components/link/link.component';
 import { PlacementStoreService } from '../../services/placement-store.service';
@@ -6,10 +6,10 @@ import { RootStoreService } from '../../services/root-store.service';
 
 @Component({
   selector: 'app-placement-page',
-  standalone: true,
   imports: [FormsModule, LinkComponent],
   templateUrl: './placement-page.component.html',
   styleUrl: './placement-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlacementPageComponent {
   constructor(

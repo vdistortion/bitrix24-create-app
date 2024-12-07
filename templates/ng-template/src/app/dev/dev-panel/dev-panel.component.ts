@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   mdiDownload,
   mdiFormatListBulletedType,
@@ -14,7 +14,6 @@ import { BitrixService } from '../../services/bitrix.service';
 
 @Component({
   selector: 'dev-panel',
-  standalone: true,
   imports: [
     DevPanelReloadComponent,
     DevPanelPagesComponent,
@@ -23,6 +22,7 @@ import { BitrixService } from '../../services/bitrix.service';
   ],
   templateUrl: './dev-panel.component.html',
   styleUrl: './dev-panel.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevPanelComponent {
   protected buttons = [
