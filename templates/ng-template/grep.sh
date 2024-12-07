@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Ищем в каталоге
+# Ищем в текущем каталоге
 cd ${PWD}
 
 # Список каталогов, в которых искать не нужно
-for var in node_modules dist .angular .git .idea .vscode; do
+for var in node_modules dist .git .idea .angular .vscode; do
   exclude=$exclude"--exclude-dir="$var" "
 done
 
 # Список файлов, в которых искать не нужно
-for var in package-lock.json; do
+for var in package-lock.json LICENSE; do
   exclude=$exclude"--exclude="$var" "
 done
 
