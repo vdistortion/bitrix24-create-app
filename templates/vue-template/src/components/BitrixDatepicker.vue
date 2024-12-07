@@ -2,6 +2,7 @@
   <vue-datepicker
     :model-value="props.modelValue"
     :placeholder="props.placeholder"
+    :clearable="false"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <template #dp-input="{ value, onInput, onEnter, onTab }">
