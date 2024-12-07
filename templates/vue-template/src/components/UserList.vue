@@ -69,23 +69,23 @@ function openMessenger(id: string) {
 </script>
 
 <style lang="scss">
-@import '@/assets/grid';
+@use '@/assets/grid' as grid;
 
 $size: 170px;
 
 .user-list {
-  @include row-flex();
+  @include grid.row-flex();
 
   &__card {
-    @include col();
-    @include col-size(3);
-    @include col-size-w1600(4);
-    @include col-size-w1200(6);
+    @include grid.col();
+    @include grid.col-size(3);
+    @include grid.col-size-w1600(4);
+    @include grid.col-size-w1200(6);
   }
 
   h1 {
-    @include col();
-    @include col-size(24);
+    @include grid.col();
+    @include grid.col-size(24);
     text-align: center;
     margin-bottom: 20px;
   }

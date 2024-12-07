@@ -36,10 +36,10 @@ const usersDisabled = computed(() => {
 </script>
 
 <style lang="scss">
-@import '@/assets/grid';
+@use '@/assets/grid' as grid;
 
 .user-lists {
-  @include wrapper();
+  @include grid.wrapper();
 
   &__wrapper {
     margin-top: 40px;

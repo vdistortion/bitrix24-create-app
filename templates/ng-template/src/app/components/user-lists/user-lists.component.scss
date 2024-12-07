@@ -1,7 +1,7 @@
-@import '../../../grid';
+@use '../../../grid' as grid;
 
 .user-lists {
-  @include wrapper();
+  @include grid.wrapper();
 
   &__wrapper {
     margin-top: 40px;
