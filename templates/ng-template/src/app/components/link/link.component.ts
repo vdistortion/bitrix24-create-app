@@ -14,11 +14,11 @@ export class LinkComponent {
 
   onClick(e: MouseEvent) {
     e.preventDefault();
-    this.bitrixService.BX24.openLink(this.href);
+    this.bitrixService.openLink(this.href);
   }
 
   onMiddleClick(e: MouseEvent) {
     e.preventDefault();
-    this.bitrixService.BX24.openLink(this.href, true);
+    this.bitrixService.openLink(this.href, true);
   }
 }

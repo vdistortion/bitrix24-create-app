@@ -1,10 +1,8 @@
-import type { BatchRequestType } from 'bitrix24-library';
-
 const handler = [window.location.origin, 'index.html'].join('/');
 
 export default (isAdmin: boolean) => ({
-  initParams(): BatchRequestType {
-    const options: BatchRequestType = {
+  initParams() {
+    const options = {
       info: ['app.info'],
       user: ['user.current'],
       users: [
@@ -36,13 +34,13 @@ export default (isAdmin: boolean) => ({
     return options;
   },
 
-  placementList(): BatchRequestType {
+  placementList() {
     return {
       placementList: ['placement.get'],
     };
   },
 
-  placementBind(placement: string, name: string): BatchRequestType {
+  placementBind(placement: string, name: string) {
     return {
       placementBind: {
         method: 'placement.bind',
@@ -60,7 +58,7 @@ export default (isAdmin: boolean) => ({
     };
   },
 
-  placementUnbind(placement: string): BatchRequestType {
+  placementUnbind(placement: string) {
     return {
       placementUnbind: {
         method: 'placement.unbind',

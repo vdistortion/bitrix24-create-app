@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import type { IBitrix24Batch } from 'bitrix24-library';
 import { BitrixService } from './bitrix.service';
 
 @Injectable({
@@ -23,7 +22,7 @@ export class RootStoreService {
       );
     }
     this.loader = true;
-    this.portal = this.bitrixService.BX24.getDomain(true);
+    this.portal = `https://${this.bitrixService.BX24.getDomain()}`;
 
     return this.bitrixService.batch
       .load()
@@ -46,7 +45,7 @@ export class RootStoreService {
         new Error('Unable to initialize Bitrix24 JS library!'),
       );
     }
-    const RestCall: IBitrix24Batch = this.bitrixService.BX24.createBatch();
+    const RestCall = this.bitrixService.BX24.createBatch();
 
     return RestCall.batch({
       appInfo: ['app.info'],

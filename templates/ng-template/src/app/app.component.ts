@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import Bitrix24, { type IBitrix24Library } from 'bitrix24-library';
+import { Bitrix24, type IBitrix24Library } from 'bitrix24-library';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
 import { BitrixService } from './services/bitrix.service';
 import { RootStoreService } from './services/root-store.service';
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const BX24: IBitrix24Library = await Bitrix24.init();
+    const BX24: IBitrix24Library = await Bitrix24();
     this.bitrixService.init(BX24);
 
     await this.rootStoreService.init().then((list: IPlacements) => {

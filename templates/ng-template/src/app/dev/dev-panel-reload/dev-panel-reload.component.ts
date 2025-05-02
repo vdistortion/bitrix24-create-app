@@ -11,8 +11,8 @@ export class DevPanelReloadComponent implements OnInit {
   constructor(private bitrixService: BitrixService) {}
 
   ngOnInit() {
-    this.bitrixService.BX24.bind(window, 'keydown', (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.code === 'KeyR') {
+    this.bitrixService.BX24.bind(window, 'keydown', (e) => {
+      if (e instanceof KeyboardEvent && e.ctrlKey && e.code === 'KeyR') {
         this.reload(e);
       }
     });

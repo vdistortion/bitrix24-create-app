@@ -43,7 +43,7 @@ export class UserListComponent implements OnInit {
 
   openLink(e: MouseEvent, href: string) {
     e.preventDefault();
-    this.bitrixService.BX24.openLink(href);
+    this.bitrixService.openLink(href);
   }
 
   openMessenger(id: string) {
