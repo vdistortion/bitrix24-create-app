@@ -11,14 +11,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, inject } from 'vue';
-import type { IBitrix24Library } from 'bitrix24-library';
+import { reactive, computed } from 'vue';
+import { useBitrix24 } from '@/api/bitrix';
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const $BX24: IBitrix24Library | undefined = inject('$BX24');
+const { BX24 } = useBitrix24();
 
 const data = reactive({
   buttons: [
@@ -43,10 +43,8 @@ const data = reactive({
   ],
 });
 
-const isAdmin = computed(() => ($BX24 ? $BX24.isAdmin() : false));
-
 const pages = computed(() => {
-  if (isAdmin.value) return data.buttons;
+  if (BX24.isAdmin()) return data.buttons;
   return data.buttons.filter((btn) => !btn.admin);
 });
 </script>

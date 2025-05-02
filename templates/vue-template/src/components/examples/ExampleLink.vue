@@ -49,11 +49,11 @@ const slot = computed(() => {
 
 const markup = computed(
   () => `
-<app-link
+<AppLink
   href="${data.props.href}"
 >
   ${slot.value}
-</app-link>
+</AppLink>
 `,
 );
 </script>

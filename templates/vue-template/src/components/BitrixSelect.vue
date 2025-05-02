@@ -13,14 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
 import VueSelect from 'vue-select';
-import type { IBitrix24Library } from 'bitrix24-library';
 import { loadStyles } from 'vue-bitrix24';
+import { useBitrix24 } from '@/api/bitrix';
 
-const $BX24: IBitrix24Library | undefined = inject('$BX24');
+const { BX24 } = useBitrix24();
 
-loadStyles($BX24);
+loadStyles(BX24);
 
 const props = withDefaults(
   defineProps<{

@@ -1,8 +1,9 @@
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { batch, BX24 } from '@/api/bitrix';
+import { useBitrix24 } from '@/api/bitrix';
 
 export const useRootStore = defineStore('rootStore', () => {
+  const { batch, BX24 } = useBitrix24();
   const loader = ref(false);
   const appInfoId = ref(0);
   const appInfoCode = ref('');
@@ -11,13 +12,7 @@ export const useRootStore = defineStore('rootStore', () => {
   const users = ref({});
   const placementInfo = ref({});
 
-  const domain = computed(() => (BX24 ? BX24.getDomain() : ''));
-  const portal = computed(() => (BX24 ? BX24.getDomain(true) : ''));
-
   function init() {
-    if (!BX24 || !BX24.placement) {
-      return Promise.reject(new Error('Unable to initialize Bitrix24 JS library!'));
-    }
     loader.value = true;
     placementInfo.value = BX24.placement.info();
 
@@ -36,10 +31,7 @@ export const useRootStore = defineStore('rootStore', () => {
       });
   }
 
-  function appInfo() {
-    if (!BX24) {
-      return Promise.reject(new Error('Unable to initialize Bitrix24 JS library!'));
-    }
+  async function appInfo() {
     const RestCall = BX24.createBatch();
 
     return RestCall.batch({
@@ -48,7 +40,7 @@ export const useRootStore = defineStore('rootStore', () => {
       scope: ['scope'],
     }).then((response: any) => ({
       ...response,
-      placementInfo: BX24 ? BX24.placement.info() : null,
+      placementInfo: BX24.placement.info(),
     }));
   }
 
@@ -60,8 +52,6 @@ export const useRootStore = defineStore('rootStore', () => {
     department,
     users,
     placementInfo,
-    domain,
-    portal,
     init,
     appInfo,
   };

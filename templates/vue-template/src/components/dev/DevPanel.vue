@@ -15,17 +15,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
-import type { IBitrix24Library } from 'bitrix24-library';
+import { computed } from 'vue';
 import env from '@/env';
 import DevPanelReload from './DevPanelReload.vue';
 import DevPanelPages from './DevPanelPages.vue';
 import DevPanelDownload from './DevPanelDownload.vue';
 import AppIcon from '../AppIcon.vue';
+import { useBitrix24 } from '@/api/bitrix';
 
-const $BX24: IBitrix24Library | undefined = inject('$BX24');
+const { BX24 } = useBitrix24();
 
-const isVisible = computed(() => $BX24 && env.get('TEST_DOMAINS').includes($BX24.getDomain()));
+const isVisible = computed(() => env.get('TEST_DOMAINS').includes(BX24.getDomain()));
 </script>
 
 <style lang="scss">

@@ -106,20 +106,19 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, inject } from 'vue';
-import type { IBitrix24Library } from 'bitrix24-library';
+import { reactive, computed } from 'vue';
+import type { IUser as IUserReadonly } from 'bitrix24-library';
 import { BxTagSelector } from 'vue-bitrix24';
 import ExampleTable from './ExampleTable.vue';
+import { useBitrix24 } from '@/api/bitrix';
 
-interface IUser {
-  id: string;
-  name: string;
-  photo: string;
-  position: string;
-  url: string;
-}
+const { BX24, openLink } = useBitrix24();
 
-const $BX24: IBitrix24Library | undefined = inject('$BX24');
+type Mutable<T> = {
+  -readonly [K in keyof T]: T[K];
+};
+
+type IUser = Mutable<Omit<IUserReadonly, 'sub'|'sup'>>
 
 const data = reactive({
   props: {
@@ -149,7 +148,7 @@ const data = reactive({
 
 const markup = computed(
   () => `
-<bx-tag-selector
+<BxTagSelector
   :list="[]"
   placeholder="${data.props.placeholder}"
   display-field-name="${data.props.displayFieldName}"
@@ -174,7 +173,7 @@ const markup = computed(
   @delete="onDelete(index, item)"
   @enter="onEnter(text)"
   @input="onInput(text)"
-></bx-tag-selector>
+></BxTagSelector>
 `,
 );
 
@@ -191,15 +190,13 @@ function onInput(text: string) {
 }
 
 function onClick(index: number, item: IUser) {
-  if (!$BX24) return;
   console.info('click', index, item);
-  $BX24.openLink(`/company/personal/user/${item.id}/`);
+  openLink(`/company/personal/user/${item.id}/`);
 }
 
 function onAuxClick(index: number, item: IUser) {
-  if (!$BX24) return;
   console.info('auxclick', index, item);
-  $BX24.openLink(`/company/personal/user/${item.id}/`, true);
+  openLink(`/company/personal/user/${item.id}/`, true);
 }
 
 function onDelete(index: number, item: IUser) {
@@ -209,20 +206,32 @@ function onDelete(index: number, item: IUser) {
 
 function onAdd(text: string) {
   console.info('add', text);
-  if (!$BX24) return;
   const fakeIcon = 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png';
 
   if (data.props.multiple) {
-    $BX24.selectUsers().then((users: IUser[]) => {
-      users.forEach((user) => {
-        user.photo = fakeIcon;
-      });
-      data.props.list.push(...users);
+    BX24.selectUsersAsync(true).then((users) => {
+      if (Array.isArray(users)) {
+        users.forEach((user) => {
+          data.props.list.push({
+            id: user.id,
+            name: user.name,
+            photo: fakeIcon,
+            position: user.position,
+            url: user.url,
+          });
+        });
+      }
     });
   } else {
-    $BX24.selectUser().then((user: IUser) => {
-      user.photo = fakeIcon;
-      data.props.list = [user];
+    BX24.selectUsersAsync().then((user) => {
+      if (Array.isArray(user)) return;
+      data.props.list = [{
+        id: user.id,
+        name: user.name,
+        photo: fakeIcon,
+        position: user.position,
+        url: user.url,
+      }];
     });
   }
 }

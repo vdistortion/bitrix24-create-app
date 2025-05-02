@@ -4,7 +4,7 @@
       <a
         class="user"
         :class="classList(user.id)"
-        :href="`${portal}${user.href}`"
+        :href="`https://${domain}${user.href}`"
         :target="user.target"
         :title="getTitle(user)"
         :data-birthday="user.birthday"
@@ -28,14 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
-import type { IBitrix24Library } from 'bitrix24-library';
+import { computed } from 'vue';
 import { BxButton } from 'vue-bitrix24';
 import { useRootStore } from '@/stores/RootStore';
+import { useBitrix24 } from '@/api/bitrix';
 
 const store = useRootStore();
-
-const $BX24: IBitrix24Library | undefined = inject('$BX24');
+const { BX24, openLink } = useBitrix24();
 
 const props = defineProps<{
   users: IUsers;
@@ -43,7 +42,7 @@ const props = defineProps<{
 
 const department = computed(() => <string[]>store.department);
 const currentId = computed(() => store.currentId);
-const portal = computed(() => store.portal);
+const domain = BX24.getDomain();
 
 function classList(id: string) {
   return {
@@ -56,12 +55,8 @@ function getTitle(user: any) {
   return [user.fullName, user.position].filter((s) => s).join('\n');
 }
 
-function openLink(href: string) {
-  if ($BX24) $BX24.openLink(href);
-}
-
 function openMessenger(id: string) {
-  if ($BX24) $BX24.im.openMessenger(id);
+  BX24.im.openMessenger(id);
 }
 </script>
 

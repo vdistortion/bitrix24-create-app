@@ -1,9 +1,10 @@
 import { ref, computed, type Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { useRootStore } from './RootStore';
-import { batch } from '@/api/bitrix';
+import { useBitrix24 } from '@/api/bitrix';
 
 export const usePlacementStore = defineStore('placementStore', () => {
+  const { batch } = useBitrix24();
   const placementList: Ref<IPlacements> = ref({});
 
   const appLink = computed(() => {

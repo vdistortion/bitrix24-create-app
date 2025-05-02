@@ -1,30 +1,23 @@
 <template>
-  <a :href="props.href" target="_blank" @click="onClick" @auxclick="onMiddleClick">
+  <a :href="props.href" target="_blank" @click.prevent="onClick" @auxclick.prevent="onMiddleClick">
     <slot></slot>
   </a>
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
-import type { IBitrix24Library } from 'bitrix24-library';
+import { useBitrix24 } from '@/api/bitrix';
 
-const $BX24: IBitrix24Library | undefined = inject('$BX24');
+const { openLink } = useBitrix24();
 
 const props = defineProps<{
   href: string;
 }>();
 
-function onClick(e: MouseEvent) {
-  if ($BX24) {
-    e.preventDefault();
-    $BX24.openLink(props.href);
-  }
+function onClick() {
+  openLink(props.href);
 }
 
-function onMiddleClick(e: MouseEvent) {
-  if ($BX24) {
-    e.preventDefault();
-    $BX24.openLink(props.href, true);
-  }
+function onMiddleClick() {
+  openLink(props.href, true);
 }
 </script>

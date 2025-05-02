@@ -58,12 +58,12 @@ onMounted(() => {
 
 const markup = computed(
   () => `
-<bitrix-select
+<BitrixSelect
   label="${data.props.label}"
   :options="[users]"
   :multiple="${data.props.multiple}"
   :clearable="false"
-></bitrix-select>
+></BitrixSelect>
 `,
 );
 </script>

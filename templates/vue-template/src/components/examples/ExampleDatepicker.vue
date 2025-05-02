@@ -44,11 +44,11 @@ const data = reactive({
 
 const markup = computed(
   () => `
-<bitrix-datepicker
+<BitrixDatepicker
   v-model="${data.props.date}"
   placeholder="${data.props.placeholder}"
   after="${data.props.after}"
-></bitrix-datepicker>
+></BitrixDatepicker>
 `,
 );
 </script>
