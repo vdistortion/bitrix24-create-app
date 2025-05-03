@@ -12,8 +12,8 @@ Command line for create a project with your own templates
 
 ### Templates
 
-* [ng-template](https://github.com/vdistortion/bitrix24-create-app/tree/master/templates/ng-template#readme) (Angular 18, RxJS, TypeScript, SCSS, [bitrix24-library](https://www.npmjs.com/package/bitrix24-library))
-* [vue-template](https://github.com/vdistortion/bitrix24-create-app/tree/master/templates/vue-template#readme) (Vue 3, Pinia, TypeScript, SCSS, [vue-bitrix24](https://www.npmjs.com/package/vue-bitrix24), [bitrix24-library](https://www.npmjs.com/package/bitrix24-library))
+* [ng-template](https://github.com/vdistortion/bitrix24-create-app/tree/master/templates/ng-template#readme) (Angular 19, RxJS, TypeScript, SCSS, [bitrix24-library](https://www.npmjs.com/package/bitrix24-library))
+* [vue-template](https://github.com/vdistortion/bitrix24-create-app/tree/master/templates/vue-template#readme) (Vue 3.5, Pinia, TypeScript, SCSS, [vue-bitrix24](https://www.npmjs.com/package/vue-bitrix24), [bitrix24-library](https://www.npmjs.com/package/bitrix24-library))
 
 ### Use
 

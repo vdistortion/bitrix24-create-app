@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Bitrix24, type IBitrix24Library } from 'bitrix24-library';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';

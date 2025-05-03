@@ -118,7 +118,7 @@ type Mutable<T> = {
   -readonly [K in keyof T]: T[K];
 };
 
-type IUser = Mutable<Omit<IUserReadonly, 'sub'|'sup'>>
+type IUser = Mutable<Omit<IUserReadonly, 'sub' | 'sup'>>;
 
 const data = reactive({
   props: {
@@ -225,13 +225,15 @@ function onAdd(text: string) {
   } else {
     BX24.selectUsersAsync().then((user) => {
       if (Array.isArray(user)) return;
-      data.props.list = [{
-        id: user.id,
-        name: user.name,
-        photo: fakeIcon,
-        position: user.position,
-        url: user.url,
-      }];
+      data.props.list = [
+        {
+          id: user.id,
+          name: user.name,
+          photo: fakeIcon,
+          position: user.position,
+          url: user.url,
+        },
+      ];
     });
   }
 }

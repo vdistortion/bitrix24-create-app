@@ -1,4 +1,8 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LinkComponent } from '../../components/link/link.component';
 import { PlacementStoreService } from '../../services/placement-store.service';
