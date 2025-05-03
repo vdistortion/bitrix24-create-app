@@ -10,6 +10,11 @@ export default createRouter({
       component: HomePage,
     },
     {
+      path: '/generator',
+      name: 'generator-page',
+      component: () => import('./views/GeneratorPage.vue'),
+    },
+    {
       path: '/placement',
       name: 'placement-page',
       component: () => import('./views/PlacementPage.vue'),

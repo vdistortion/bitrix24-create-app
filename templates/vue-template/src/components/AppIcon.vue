@@ -1,14 +1,23 @@
 <template>
-  <svg-icon type="mdi" :path="path"></svg-icon>
+  <svg-icon type="mdi" :path="path" :size="size"></svg-icon>
 </template>
 
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
 import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiHome, mdiTools, mdiReload, mdiDownload, mdiFormatListBulletedType } from '@mdi/js';
+import {
+  mdiHome,
+  mdiTools,
+  mdiReload,
+  mdiDownload,
+  mdiFormatListBulletedType,
+  mdiHelpCircleOutline,
+  mdiReceiptTextPlus,
+} from '@mdi/js';
 
 const props = defineProps<{
   icon: string;
+  size?: number;
 }>();
 
 const data = reactive({
@@ -18,6 +27,8 @@ const data = reactive({
     mdiReload,
     mdiDownload,
     mdiFormatListBulletedType,
+    mdiHelpCircleOutline,
+    mdiReceiptTextPlus,
   } as { [key: string]: string },
 });
 

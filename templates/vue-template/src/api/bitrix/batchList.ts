@@ -35,4 +35,8 @@ export default class BitrixBatch {
     }
     return Promise.resolve([]);
   }
+
+  addEntities(params: any) {
+    return this.batch(params).then((result: any) => result);
+  }
 }

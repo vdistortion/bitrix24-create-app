@@ -29,6 +29,12 @@ const data = reactive({
       icon: 'mdiHome',
     },
     {
+      admin: false,
+      path: '/generator',
+      title: 'Генератор сущностей',
+      icon: 'mdiReceiptTextPlus',
+    },
+    {
       admin: true,
       path: '/placement',
       title: 'Настройки встраивания',
