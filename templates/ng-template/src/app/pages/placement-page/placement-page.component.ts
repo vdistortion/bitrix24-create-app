@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LinkComponent } from '../../components/link/link.component';
 import { PlacementStoreService } from '../../services/placement-store.service';
@@ -13,6 +13,7 @@ import { RootStoreService } from '../../services/root-store.service';
 })
 export class PlacementPageComponent {
   constructor(
+    private cdr: ChangeDetectorRef,
     private rootStoreService: RootStoreService,
     private placementStoreService: PlacementStoreService,
   ) {}
@@ -28,11 +29,13 @@ export class PlacementPageComponent {
     );
   }
 
-  bind(item: { placement: string; name: string; bind: boolean }) {
-    this.placementStoreService.bind(item);
+  async bind(item: { placement: string; name: string; bind: boolean }) {
+    await this.placementStoreService.bind(item);
+    this.cdr.markForCheck();
   }
 
-  unbind(placement: string) {
-    this.placementStoreService.unbind(placement);
+  async unbind(placement: string) {
+    await this.placementStoreService.unbind(placement);
+    this.cdr.markForCheck();
   }
 }

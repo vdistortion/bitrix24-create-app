@@ -1,4 +1,4 @@
-const handler = [window.location.origin, 'index.html'].join('/');
+const handler = [window.location.origin, window.location.pathname].join('');
 
 export default (isAdmin: boolean) => ({
   initParams() {
@@ -64,7 +64,6 @@ export default (isAdmin: boolean) => ({
         method: 'placement.unbind',
         params: {
           PLACEMENT: placement,
-          HANDLER: handler,
         },
       },
       ...this.placementList(),

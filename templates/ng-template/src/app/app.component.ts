@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Bitrix24, type IBitrix24Library } from 'bitrix24-library';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   protected isApp: boolean = false;
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private bitrixService: BitrixService,
     private rootStoreService: RootStoreService,
     private placementStoreService: PlacementStoreService,
@@ -44,7 +45,7 @@ export class AppComponent implements OnInit {
         this.verifyScopeLog(environment.SCOPE, scope);
       });
 
-    // @ts-ignore
+    this.cdr.markForCheck();
     this.isDev = environment.TEST_DOMAINS.includes(BX24.getDomain());
     this.isApp = true;
   }

@@ -23,13 +23,13 @@ export class PlacementStoreService {
   }
 
   bind(item: { placement: string; name: string }) {
-    this.bitrixService.batch
+    return this.bitrixService.batch
       .bind(item.placement, item.name)
       .then((list: IPlacements) => this.setList(list));
   }
 
   unbind(placement: string) {
-    this.bitrixService.batch
+    return this.bitrixService.batch
       .unbind(placement)
       .then((list: IPlacements) => this.setList(list));
   }

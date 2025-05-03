@@ -11,6 +11,14 @@
               <app-link [href]="link">
                 {{ item.name }}
               </app-link>
+            } @else if (item.placement === 'CRM_ANALYTICS_MENU') {
+              <app-link href="/report/analytics/">
+                {{ item.name }}
+              </app-link>
+            } @else if (item.placement === 'CRM_DEAL_DETAIL_TAB') {
+              <app-link href="/crm/deal/list/">
+                {{ item.name }}
+              </app-link>
             } @else {
               <span>{{ item.name }}</span>
             }
