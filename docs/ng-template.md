@@ -1,6 +1,6 @@
 # ng-template
 
-Angular 18, RxJS, TypeScript, SCSS, bitrix24-library
+Angular 19, RxJS, TypeScript, SCSS, bitrix24-library
 
 ### Запуск
 

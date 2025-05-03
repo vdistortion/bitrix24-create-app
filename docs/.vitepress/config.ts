@@ -42,6 +42,23 @@ export default defineConfig({
           },
         ],
       },
+      {
+        text: 'More packages',
+        items: [
+          {
+            text: 'bitrix24-library',
+            link: 'https://www.npmjs.com/package/bitrix24-library',
+          },
+          {
+            text: 'vue-bitrix24',
+            link: 'https://www.npmjs.com/package/vue-bitrix24',
+          },
+          {
+            text: 'react-bitrix24',
+            link: 'https://www.npmjs.com/package/react-bitrix24',
+          },
+        ],
+      },
     ],
 
     socialLinks: [

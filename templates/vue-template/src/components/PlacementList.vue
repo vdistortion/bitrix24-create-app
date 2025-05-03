@@ -9,6 +9,12 @@
           <app-link v-if="item.placement === 'REST_APP_URI'" :href="placementLink">
             {{ item.name }}
           </app-link>
+          <app-link v-else-if="item.placement === 'CRM_ANALYTICS_MENU'" href="/report/analytics/">
+            {{ item.name }}
+          </app-link>
+          <app-link v-else-if="item.placement === 'CRM_DEAL_DETAIL_TAB'" href="/crm/deal/list/">
+            {{ item.name }}
+          </app-link>
           <span v-else>{{ item.name }}</span>
         </td>
         <td>

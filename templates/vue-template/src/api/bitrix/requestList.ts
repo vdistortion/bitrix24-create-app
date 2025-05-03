@@ -64,7 +64,6 @@ export default (isAdmin: boolean) => ({
         method: 'placement.unbind',
         params: {
           PLACEMENT: placement,
-          HANDLER: handler,
         },
       },
       ...this.placementList(),
