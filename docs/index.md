@@ -15,12 +15,12 @@ hero:
 
 features:
   - title: ng-template
-    details: Angular 18, RxJS, TypeScript, SCSS, bitrix24-library
+    details: Angular 19, RxJS, TypeScript, SCSS, bitrix24-library
     link: /ng-template
     icon:
       src: './angular.svg'
   - title: vue-template
-    details: Vue 3, Pinia, TypeScript, SCSS, bitrix24-library, vue-bitrix24
+    details: Vue 3.5, Pinia, TypeScript, SCSS, bitrix24-library, vue-bitrix24
     link: /vue-template
     icon:
       src: './vue.svg'
