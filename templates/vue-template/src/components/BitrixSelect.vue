@@ -1,10 +1,10 @@
 <template>
   <vue-select
     class="bitrix-select"
-    :options="props.options"
-    :label="props.label"
-    :multiple="props.multiple"
-    :clearable="props.clearable"
+    :options="options"
+    :label="label"
+    :multiple="multiple"
+    :clearable="clearable"
   >
     <template #open-indicator="{ attributes }">
       <button class="ui-ctl-after ui-ctl-icon-angle" v-bind="attributes"></button>
@@ -21,19 +21,12 @@ const { BX24 } = useBitrix24();
 
 loadStyles(BX24);
 
-const props = withDefaults(
-  defineProps<{
-    options: any[];
-    label?: string;
-    multiple?: boolean;
-    clearable?: boolean;
-  }>(),
-  {
-    label: '',
-    multiple: false,
-    clearable: false,
-  },
-);
+const { options, label = '', multiple = false, clearable = false } = defineProps<{
+  options: any[];
+  label?: string;
+  multiple?: boolean;
+  clearable?: boolean;
+}>();
 </script>
 
 <style>

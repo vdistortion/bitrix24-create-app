@@ -1,9 +1,7 @@
 <template>
   <table class="example-table">
     <caption>
-      {{
-        props.name
-      }}
+      {{ name }}
     </caption>
     <tbody>
       <tr>
@@ -20,15 +18,15 @@
           </div>
         </td>
         <td>
-          <pre class="example-table__code" v-text="props.code.trim()"></pre>
+          <pre class="example-table__code" v-text="code.trim()"></pre>
         </td>
       </tr>
     </tbody>
-    <tfoot v-if="props.based.length">
+    <tfoot v-if="based.length">
       <tr>
         <td colspan="2">
           Component based on
-          <a :href="props.based[0]" target="_blank">{{ props.based[1] ?? props.based[0] }}</a>
+          <a :href="based[0]" target="_blank">{{ based[1] ?? based[0] }}</a>
         </td>
       </tr>
     </tfoot>
@@ -36,16 +34,11 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
-    name: string;
-    code: string;
-    based?: string[];
-  }>(),
-  {
-    based: () => [],
-  },
-);
+const { name, code, based = [] } = defineProps<{
+  name: string;
+  code: string;
+  based?: string[];
+}>();
 </script>
 
 <style lang="scss">

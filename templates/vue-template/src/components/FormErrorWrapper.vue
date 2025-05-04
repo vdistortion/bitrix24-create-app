@@ -2,7 +2,7 @@
   <div class="form-error-wrapper">
     <slot></slot>
 
-    <transition-group v-if="props.blur && props.errors.length">
+    <transition-group v-if="blur && errors.length">
       <div v-for="error in errors" :key="error.$uid" class="form-error-wrapper__error">
         {{ error.$message }}
       </div>
@@ -13,16 +13,10 @@
 <script setup lang="ts">
 import type { ErrorObject } from '@vuelidate/core';
 
-const props = withDefaults(
-  defineProps<{
-    errors?: ErrorObject[];
-    blur?: boolean;
-  }>(),
-  {
-    errors: () => [],
-    blur: true,
-  },
-);
+const { errors = [], blur = true } = defineProps<{
+  errors?: ErrorObject[];
+  blur?: boolean;
+}>();
 </script>
 
 <style lang="scss">

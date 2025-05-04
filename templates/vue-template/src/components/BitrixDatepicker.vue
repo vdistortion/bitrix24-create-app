@@ -1,7 +1,7 @@
 <template>
   <vue-datepicker
-    :model-value="props.modelValue"
-    :placeholder="props.placeholder"
+    :model-value="modelValue"
+    :placeholder="placeholder"
     :clearable="false"
     @update:model-value="$emit('update:modelValue', $event)"
   >
@@ -9,23 +9,23 @@
       <div
         class="ui-ctl"
         :class="{
-          'ui-ctl-after-icon': props.after === 'after',
-          'ui-ctl-ext-after-icon': props.after === 'ext-after',
+          'ui-ctl-after-icon': after === 'after',
+          'ui-ctl-ext-after-icon': after === 'ext-after',
         }"
         style="width: 100%"
       >
         <button
           class="ui-ctl-icon-calendar"
           :class="{
-            'ui-ctl-after': props.after === 'after',
-            'ui-ctl-ext-after': props.after === 'ext-after',
+            'ui-ctl-after': after === 'after',
+            'ui-ctl-ext-after': after === 'ext-after',
           }"
         ></button>
         <input
           class="ui-ctl-element"
           type="text"
           :value="value"
-          :placeholder="props.placeholder"
+          :placeholder="placeholder"
           @input="onInput"
           @keydown.enter="onEnter"
           @keydown.tab="onTab"
@@ -48,18 +48,11 @@ const { BX24 } = useBitrix24();
 
 loadStyles(BX24);
 
-const props = withDefaults(
-  defineProps<{
-    modelValue?: ModelValue;
-    placeholder?: string;
-    after?: PropAfter;
-  }>(),
-  {
-    modelValue: null,
-    placeholder: '',
-    after: 'after',
-  },
-);
+const { modelValue = null, placeholder = '', after = 'after' } = defineProps<{
+  modelValue?: ModelValue;
+  placeholder?: string;
+  after?: PropAfter;
+}>();
 
 defineEmits(['update:modelValue']);
 </script>
