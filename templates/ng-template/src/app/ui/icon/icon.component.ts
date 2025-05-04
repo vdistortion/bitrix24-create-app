@@ -9,4 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class IconComponent {
   @Input({ required: true }) public path: string;
+  @Input() public size: number = 24;
 }

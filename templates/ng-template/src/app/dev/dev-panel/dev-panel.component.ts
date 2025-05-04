@@ -3,6 +3,7 @@ import {
   mdiDownload,
   mdiFormatListBulletedType,
   mdiHome,
+  mdiReceiptTextPlus,
   mdiReload,
   mdiTools,
 } from '@mdi/js';
@@ -31,6 +32,12 @@ export class DevPanelComponent {
       path: '/',
       title: 'На главную',
       icon: mdiHome,
+    },
+    {
+      admin: false,
+      path: '/generator',
+      title: 'Генератор сущностей',
+      icon: mdiReceiptTextPlus,
     },
     {
       admin: true,

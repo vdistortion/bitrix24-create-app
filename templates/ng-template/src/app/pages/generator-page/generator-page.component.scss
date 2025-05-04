@@ -1,0 +1,17 @@
+.generator-list {
+  small {
+    color: gray;
+  }
+
+  &__link {
+    color: #185ccf;
+    text-decoration: none;
+    border-bottom: 1px dashed;
+  }
+
+  &__icon {
+    cursor: pointer;
+    color: #185ccf;
+    margin-left: 5px;
+  }
+}
