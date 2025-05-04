@@ -21,7 +21,12 @@ const { BX24 } = useBitrix24();
 
 loadStyles(BX24);
 
-const { options, label = '', multiple = false, clearable = false } = defineProps<{
+const {
+  options,
+  label = '',
+  multiple = false,
+  clearable = false,
+} = defineProps<{
   options: any[];
   label?: string;
   multiple?: boolean;

@@ -19,7 +19,9 @@
           <bx-input v-model="item.count" inline></bx-input>
         </td>
         <td>
-          <bx-button color="primary" @click="add(item)">Создать</bx-button>
+          <bx-button color="primary" :disabled="disabledButton" @click="add(item)">
+            Создать
+          </bx-button>
         </td>
       </tr>
     </tbody>
@@ -50,6 +52,7 @@ type EntityType = {
 const { batch } = useBitrix24();
 const placeholder = 'bitrix24-create-app';
 const defaultCount = 10;
+const disabledButton = ref(false);
 const userId = ref(1);
 const entities = ref<EntityType[]>([
   {
@@ -111,6 +114,7 @@ const entities = ref<EntityType[]>([
 ]);
 
 function add(entity: EntityType) {
+  disabledButton.value = true;
   const count = Number(entity.count);
   const params = [];
   const title = (number: number) => `${entity.name} #${number} (${placeholder})`;
@@ -132,8 +136,11 @@ function add(entity: EntityType) {
     .then((entities: any) => {
       console.log(entities);
     })
-    .catch((entities: any) => {
-      console.log(entities);
+    .catch((errors: any) => {
+      console.log(errors);
+    })
+    .finally(() => {
+      disabledButton.value = false;
     });
 }
 </script>

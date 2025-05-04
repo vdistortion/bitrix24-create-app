@@ -1,7 +1,9 @@
 <template>
   <table class="example-table">
     <caption>
-      {{ name }}
+      {{
+        name
+      }}
     </caption>
     <tbody>
       <tr>
@@ -34,7 +36,11 @@
 </template>
 
 <script setup lang="ts">
-const { name, code, based = [] } = defineProps<{
+const {
+  name,
+  code,
+  based = [],
+} = defineProps<{
   name: string;
   code: string;
   based?: string[];

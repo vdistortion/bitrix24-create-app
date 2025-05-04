@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import { mdiHelpCircleOutline } from '@mdi/js';
 import { BitrixService } from '../../services/bitrix.service';
 import { FormsModule } from '@angular/forms';
@@ -29,6 +33,7 @@ type EntityType = {
 export class GeneratorPageComponent {
   mdiHelpCircleOutline = mdiHelpCircleOutline;
   placeholder = 'bitrix24-create-app';
+  disabledButton = false;
   defaultCount = 10;
   userId = 1;
   entities: EntityType[] = [
@@ -90,9 +95,13 @@ export class GeneratorPageComponent {
     },
   ];
 
-  constructor(private bitrixService: BitrixService) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private bitrixService: BitrixService,
+  ) {}
 
   add(entity: EntityType) {
+    this.disabledButton = true;
     const count = Number(entity.count);
     const params = [];
     const title = (number: number) =>
@@ -117,6 +126,10 @@ export class GeneratorPageComponent {
       })
       .catch((entities: any) => {
         console.log(entities);
+      })
+      .finally(() => {
+        this.disabledButton = false;
+        this.cdr.markForCheck();
       });
   }
 }

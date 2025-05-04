@@ -48,7 +48,11 @@ const { BX24 } = useBitrix24();
 
 loadStyles(BX24);
 
-const { modelValue = null, placeholder = '', after = 'after' } = defineProps<{
+const {
+  modelValue = null,
+  placeholder = '',
+  after = 'after',
+} = defineProps<{
   modelValue?: ModelValue;
   placeholder?: string;
   after?: PropAfter;
