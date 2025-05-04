@@ -31,7 +31,7 @@ const data = reactive({
     {
       admin: false,
       path: '/generator',
-      title: 'Генератор сущностей',
+      title: 'Генератор данных',
       icon: 'mdiReceiptTextPlus',
     },
     {
