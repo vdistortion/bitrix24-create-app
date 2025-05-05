@@ -12,7 +12,6 @@ import {
   mdiDownload,
   mdiFormatListBulletedType,
   mdiHelpCircleOutline,
-  mdiReceiptTextPlus,
 } from '@mdi/js';
 
 const props = defineProps<{
@@ -28,8 +27,7 @@ const data = reactive({
     mdiDownload,
     mdiFormatListBulletedType,
     mdiHelpCircleOutline,
-    mdiReceiptTextPlus,
-  } as { [key: string]: string },
+  } as Record<string, string>,
 });
 
 const path = computed(() => data.icons[props.icon]);

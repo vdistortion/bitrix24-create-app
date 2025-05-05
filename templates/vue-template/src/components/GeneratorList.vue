@@ -16,10 +16,16 @@
           </span>
         </td>
         <td>
-          <bx-input v-model="item.count" inline></bx-input>
+          <bx-input v-model="item.count" size="xs" inline></bx-input>
         </td>
         <td>
-          <bx-button color="primary" :disabled="disabledButton" @click="add(item)">
+          <bx-button
+            size="xs"
+            color="primary"
+            icon="add"
+            :disabled="disabledButton"
+            @click="add(item)"
+          >
             Создать
           </bx-button>
         </td>

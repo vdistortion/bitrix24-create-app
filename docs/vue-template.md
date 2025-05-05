@@ -73,8 +73,7 @@ VITE_TEST_DOMAINS=[]
 
 ```bash
 /src/views/HomePage.vue # главная страница приложения
-/src/views/GeneratorPage.vue # генератор данных
-/src/views/PlacementPage.vue # список встраиваний
+/src/views/SettingsPage.vue # настройки
 /src/views/ExamplePage.vue # список доступных компонентов vue-bitrix24
 ```
 

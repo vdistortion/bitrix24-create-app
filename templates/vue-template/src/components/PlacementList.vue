@@ -18,7 +18,9 @@
           <span v-else>{{ item.name }}</span>
         </td>
         <td>
-          <bx-button color="danger" @click="unbind(item.placement)">Удалить</bx-button>
+          <bx-button size="xs" color="danger" icon="remove" @click="unbind(item.placement)">
+            Удалить
+          </bx-button>
         </td>
       </tr>
       <tr v-else>
@@ -26,10 +28,18 @@
           <small>{{ item.placement }}</small>
         </td>
         <td>
-          <bx-input v-model="item.name" :placeholder="item.placement" inline></bx-input>
+          <bx-input v-model="item.name" :placeholder="item.placement" size="xs" inline></bx-input>
         </td>
         <td>
-          <bx-button :disabled="!item.name" color="primary" @click="bind(item)">Добавить</bx-button>
+          <bx-button
+            size="xs"
+            color="primary"
+            icon="add"
+            :disabled="!item.name"
+            @click="bind(item)"
+          >
+            Добавить
+          </bx-button>
         </td>
       </tr>
     </tbody>
