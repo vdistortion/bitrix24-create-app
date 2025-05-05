@@ -1,10 +1,14 @@
 <template>
   <dev-panel></dev-panel>
   <router-view></router-view>
+  <bx-alert v-if="scopeWarning" title="🔥" size="xs" color="warning">
+    {{ scopeWarning }}
+  </bx-alert>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import { BxAlert } from 'vue-bitrix24';
 import { useRootStore } from '@/stores/RootStore';
 import { usePlacementStore } from '@/stores/PlacementStore';
 import DevPanel from './components/dev/DevPanel.vue';
@@ -13,28 +17,21 @@ import env from './env';
 const store = useRootStore();
 const placementStore = usePlacementStore();
 
-function init() {
-  return store.init();
-}
-
-function setList(list: IPlacements) {
-  placementStore.setList(list);
-}
-
-function verifyScopeLog(scopeList: string[], requiredList: string[]) {
-  [...scopeList, ...requiredList].forEach((scope: string) => {
-    const message = `🔥 scope "${scope}" `;
-    if (!scopeList.includes(scope)) console.info(message + 'excess');
-    if (!requiredList.includes(scope)) console.info(message + 'not found');
-  });
-}
+const scopeWarning = ref('');
 
 store.appInfo().then((info: { scope: string[] }) => {
-  verifyScopeLog(env.get('SCOPE'), info.scope);
+  const list: string[] = [];
+
+  env.get('SCOPE').forEach((scope: string) => {
+    if (!info.scope.includes(scope)) list.push(scope);
+  });
+
+  if (list.length === 1) scopeWarning.value = `Не подключен scope ${list.join(', ')}`;
+  if (list.length > 1) scopeWarning.value = `Не подключены scope: ${list.join(', ')}`;
 });
 
 onMounted(() => {
-  init().then(setList);
+  store.init().then(placementStore.setList);
 });
 </script>
 
