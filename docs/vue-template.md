@@ -5,24 +5,20 @@ Vue 3.5, Pinia, TypeScript, SCSS, vue-bitrix24, bitrix24-library
 ### Запуск
 
 ```sh
-# в корне проекта
 cp .env .env.development
 npm run dev
 ```
 
 ### Команды
 
-```bash
+```sh
 npm run dev    # development на локалке
-npm run watch  # development на сервере (записывает файлы на диск и следит за изменениями)
+npm run watch  # development на сервере
 npm run build  # production и сборка архива с приложением первого типа
 npm run format # prettier
 npm run grid   # пересборка сетки
-```
 
-#### Поиск файлов
-
-```bash
+# Поиск файлов
 npm run grep list # список файлов
 npm run grep word # только полные слова
 npm run grep full # подробно
@@ -48,7 +44,7 @@ VITE_TEST_DOMAINS=[]
 
 #### /src/api/
 
-```bash
+```sh
 /src/api/index.ts # запросы к серверу
 /src/api/HttpClient.ts # подключение axios
 /src/api/bitrix/index.ts # класс для работы с API Битрикс24
@@ -62,40 +58,29 @@ VITE_TEST_DOMAINS=[]
 
 - Обновление фрейма
 - Скачивание архива с приложением первого типа
-- Страница с добавлением задач, сделок, компаний, контактов и лидов
+- Добавление тестовых задач, сделок, компаний, контактов и лидов
 - Страница для администраторов портала со списком встраиваний (placement)
 - Страница со списком компонентов плагина `vue-bitrix24`
 - Отображается на порталах из списка `VITE_TEST_DOMAINS` (`.env`)
 
-#### /src/views/
+#### /src/views/ExamplePage.vue
 
-Список страниц приложения
-
-```bash
-/src/views/HomePage.vue # главная страница приложения
-/src/views/SettingsPage.vue # настройки
-/src/views/ExamplePage.vue # список доступных компонентов vue-bitrix24
-```
+Список доступных компонентов vue-bitrix24 (https://vdistortion.github.io/ui-bitrix24/vue/)
 
 ### Подключение к Битрикс24
 
-- Создайте локальное приложение на существующем портале по ссылке https://DOMAIN.bitrix24.ru/devops/section/standard/
-  - Или создайте новый портал https://www.bitrix24.ru/create.php (для регистрации лучше использовать временную почту, например https://temp-mail.org/ru/)
+- Создайте локальное приложение на существующем портале по ссылке `/devops/section/standard/`
+  - Или создайте новый портал https://www.bitrix24.ru/create.php (для регистрации лучше использовать временную почту, например https://temp-mail.org)
 - "Путь вашего обработчика":
   - `http://127.0.0.1:4200/index.html` для локальной разработки (`npm run dev`)
-  - `ПУТЬ_ДО_ПРИЛОЖЕНИЯ_НА_СЕРВЕРЕ/dist/index.html` для стандартной разработки (`npm run watch`)
-- Список установленных приложений можно посмотреть тут https://DOMAIN.bitrix24.ru/devops/list/
+  - `/dist/index.html` для стандартной разработки (`npm run watch`)
+- Список установленных приложений можно посмотреть тут `/devops/list/`
 
 ### Ссылки
 
 - Vue (https://vuejs.org/)
 - Pinia (https://pinia.vuejs.org/)
-- Vite (https://vitejs.dev/)
-- axios (https://axios-http.com/ru/)
 - TypeScript (https://www.typescriptlang.org/)
-- REST API (https://dev.1c-bitrix.ru/rest_help/)
-
-#### Сетка
-
-- npmjs (https://www.npmjs.com/package/smart-grid)
+- REST API (https://apidocs.bitrix24.ru/)
+- smart-grid (https://www.npmjs.com/package/smart-grid)
   - авторское описание на [YouTube](https://www.youtube.com/playlist?list=PLyeqauxei6je28tJvioIsE0bYnARh0UVz)
