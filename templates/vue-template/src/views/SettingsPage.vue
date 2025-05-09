@@ -3,7 +3,7 @@
     <fieldset>
       <legend>Настройки портала</legend>
       <div class="settings-page__buttons">
-        <app-link href="/devops/edit/application/1/">
+        <app-link :href="`/devops/edit/application/${store.appId}/`">
           <bx-button icon="setting" size="xs">Настройки приложения</bx-button>
         </app-link>
         <app-link href="/devops/section/standard/">
@@ -22,16 +22,22 @@
 
     <fieldset>
       <legend>Встраивание</legend>
-      <placement-list></placement-list>
+      <placement-list
+        v-if="store.scopeList.includes('placement') && store.isAdmin"
+      ></placement-list>
+      <span v-else>Нет прав</span>
     </fieldset>
   </div>
 </template>
 
 <script setup lang="ts">
 import { BxButton } from 'vue-bitrix24';
+import { useRootStore } from '@/stores/RootStore';
 import AppLink from '@/components/AppLink.vue';
 import GeneratorList from '@/components/GeneratorList.vue';
 import PlacementList from '@/components/PlacementList.vue';
+
+const store = useRootStore();
 </script>
 
 <style lang="scss">

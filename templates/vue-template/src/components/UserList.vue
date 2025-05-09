@@ -3,9 +3,8 @@
     <div v-for="user in props.users" :key="user.id" class="user-list__card">
       <a
         class="user"
-        :class="classList(user.id)"
         :href="`https://${domain}${user.href}`"
-        :target="user.target"
+        target="_blank"
         :title="getTitle(user)"
         :data-birthday="user.birthday"
         @click.prevent="openLink(user.href)"
@@ -20,7 +19,7 @@
           :round="true"
           @click="openMessenger(user.id)"
         >
-          Открыть чат
+          {{ user.fullName ?? 'Открыть чат' }}
         </bx-button>
       </div>
     </div>
@@ -28,28 +27,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { BxButton } from 'vue-bitrix24';
-import { useRootStore } from '@/stores/RootStore';
 import { useBitrix24 } from '@/api/bitrix';
 
-const store = useRootStore();
 const { BX24, openLink } = useBitrix24();
 
 const props = defineProps<{
   users: IUsers;
 }>();
 
-const department = computed(() => <string[]>store.department);
-const currentId = computed(() => store.currentId);
 const domain = BX24.getDomain();
-
-function classList(id: string) {
-  return {
-    department: department.value.includes(id),
-    current: currentId.value === id,
-  };
-}
 
 function getTitle(user: any) {
   return [user.fullName, user.position].filter((s) => s).join('\n');
@@ -95,11 +82,7 @@ $size: 170px;
     background-repeat: no-repeat;
     background-position: center;
 
-    &.department {
-      border-color: coral;
-    }
-
-    &.current {
+    &:hover {
       border-color: currentColor;
     }
 

@@ -1,58 +1,123 @@
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
+import type { LangType } from 'bitrix24-library';
 import { useBitrix24 } from '@/api/bitrix';
 
-export const useRootStore = defineStore('rootStore', () => {
-  const { batch, BX24 } = useBitrix24();
+type PlacementType<T extends object> = {
+  description: string;
+  handler: string;
+  langAll: Record<
+    LangType,
+    {
+      DESCRIPTION: string;
+      GROUP_NAME: string;
+      TITLE: string;
+    }
+  >;
+  options: T;
+  placement: string;
+  title: string;
+  userId: number;
+};
+
+type PlacementResponseType = {
+  placementList: IPlacements;
+};
+
+type UsersResponseType = {
+  users: IUserNew[];
+};
+
+type InitResponseType = {
+  appInfo: {
+    CODE: string;
+    ID: number;
+  };
+  profile: {
+    ID: string;
+  };
+  scope: string[];
+};
+
+export const useRootStore = defineStore('RootStore', () => {
+  const { BX24, batch } = useBitrix24();
+  const isAdmin = BX24.isAdmin();
+  const placementInfo = BX24.placement.info();
+
   const loader = ref(false);
-  const appInfoId = ref(0);
+  const appInfoId = ref(1);
   const appInfoCode = ref('');
-  const currentId = ref('');
-  const department = ref([]);
-  const users = ref({});
-  const placementInfo = ref({});
+  const scopeList = ref<string[]>([]);
+  const userId = ref('');
+  const userList = ref<IUserNew[]>([]);
+  const placementList = ref<IPlacements>({});
 
-  function init() {
+  const loading = computed(() => loader.value);
+  const appId = computed(() => appInfoId.value);
+  const appCode = computed(() => appInfoCode.value);
+  const currentId = computed(() => userId.value);
+
+  const usersEnabled = computed(() => {
+    const list = Object.entries(userList.value).filter(([_key, user]) => user.active);
+    return Object.fromEntries(list);
+  });
+
+  const usersDisabled = computed(() => {
+    const list = Object.entries(userList.value).filter(([_key, user]) => !user.active);
+    return Object.fromEntries(list);
+  });
+
+  const appLink = computed(() => {
+    const link = `/marketplace/view/${appCode.value}/?params[id]=${appId.value}`;
+    return encodeURI(link);
+  });
+
+  async function init() {
     loader.value = true;
-    placementInfo.value = BX24.placement.info();
 
-    return batch
-      .load()
-      .then((response: any) => {
-        appInfoCode.value = response.info.CODE;
-        appInfoId.value = response.info.ID;
-        users.value = response.users;
-        currentId.value = response.user;
-        department.value = response.department;
-        return response.placementList;
-      })
-      .finally(() => {
-        loader.value = false;
-      });
+    const { appInfo, profile, scope } = (await batch.initParams()) as InitResponseType;
+    appInfoId.value = appInfo.ID;
+    appInfoCode.value = appInfo.CODE;
+    scopeList.value = scope;
+    userId.value = profile.ID;
+
+    if (scope.includes('placement') && isAdmin) {
+      const { placementList: list } = (await batch.placementList()) as PlacementResponseType;
+      placementList.value = list;
+    }
+
+    if (scope.includes('user_brief')) {
+      const { users } = (await batch.usersList()) as UsersResponseType;
+      userList.value = users;
+    }
+
+    loader.value = false;
   }
 
-  async function appInfo() {
-    const RestCall = BX24.createBatch();
+  async function bind(item: { placement: string; name: string }) {
+    const { placementList: list } = await batch.bind(item.placement, item.name);
+    placementList.value = list;
+  }
 
-    return RestCall.batch({
-      appInfo: ['app.info'],
-      profile: ['profile'],
-      scope: ['scope'],
-    }).then((response: any) => ({
-      ...response,
-      placementInfo: BX24.placement.info(),
-    }));
+  async function unbind(placement: string) {
+    const { placementList: list } = await batch.unbind(placement);
+    placementList.value = list;
   }
 
   return {
-    loader,
-    appInfoId,
-    appInfoCode,
-    currentId,
-    department,
-    users,
+    isAdmin,
     placementInfo,
+    appId,
+    appCode,
+    scopeList,
+    placementList,
+    loading,
+    currentId,
+    usersEnabled,
+    usersDisabled,
+    appLink,
     init,
-    appInfo,
+    bind,
+    unbind,
   };
 });

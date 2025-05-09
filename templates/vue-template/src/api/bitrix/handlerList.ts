@@ -1,6 +1,18 @@
 import env from '@/env';
 import tools from '@/utils/helpers';
 
+interface IUser {
+  ID: string;
+  NAME: string;
+  EMAIL: string;
+  ACTIVE: boolean;
+  LAST_NAME: string;
+  PERSONAL_BIRTHDAY: string;
+  PERSONAL_PHOTO?: string;
+  WORK_POSITION?: string;
+  UF_DEPARTMENT: number[];
+}
+
 export default {
   user: parseId,
   users: parseUsers,
@@ -24,7 +36,7 @@ function parseUsers(users: IUser[]): IUsers {
   }, {});
 }
 
-function parseUser(user: IUser) {
+function parseUser(user: IUser): IUserNew {
   const {
     ID,
     NAME,
@@ -43,12 +55,11 @@ function parseUser(user: IUser) {
     id: ID,
     fullName: fullName.trim() ? fullName : EMAIL,
     active: ACTIVE,
-    position: WORK_POSITION,
+    position: WORK_POSITION ?? '',
     birthday: PERSONAL_BIRTHDAY ? tools.formatDate(PERSONAL_BIRTHDAY) : false,
-    photo: PERSONAL_PHOTO,
+    photo: PERSONAL_PHOTO ?? '',
     department: UF_DEPARTMENT,
     href: `/company/personal/user/${ID}/`,
-    target: '_blank',
   };
 }
 

@@ -11,40 +11,25 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
-import { useBitrix24 } from '@/api/bitrix';
-
 defineOptions({
   inheritAttrs: false,
 });
 
-const { BX24 } = useBitrix24();
-
-const data = reactive({
-  buttons: [
-    {
-      admin: true,
-      path: '/',
-      title: 'На главную',
-      icon: 'mdiHome',
-    },
-    {
-      admin: true,
-      path: '/settings',
-      title: 'Настройки',
-      icon: 'mdiTools',
-    },
-    {
-      admin: false,
-      path: '/example',
-      title: 'Компоненты',
-      icon: 'mdiFormatListBulletedType',
-    },
-  ],
-});
-
-const pages = computed(() => {
-  if (BX24.isAdmin()) return data.buttons;
-  return data.buttons.filter((btn) => !btn.admin);
-});
+const pages = [
+  {
+    path: '/',
+    title: 'На главную',
+    icon: 'mdiHome',
+  },
+  {
+    path: '/settings',
+    title: 'Настройки',
+    icon: 'mdiTools',
+  },
+  {
+    path: '/example',
+    title: 'Компоненты',
+    icon: 'mdiFormatListBulletedType',
+  },
+];
 </script>

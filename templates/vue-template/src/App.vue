@@ -10,28 +10,24 @@
 import { onMounted, ref } from 'vue';
 import { BxAlert } from 'vue-bitrix24';
 import { useRootStore } from '@/stores/RootStore';
-import { usePlacementStore } from '@/stores/PlacementStore';
 import DevPanel from './components/dev/DevPanel.vue';
 import env from './env';
 
 const store = useRootStore();
-const placementStore = usePlacementStore();
 
 const scopeWarning = ref('');
 
-store.appInfo().then((info: { scope: string[] }) => {
-  const list: string[] = [];
-
-  env.get('SCOPE').forEach((scope: string) => {
-    if (!info.scope.includes(scope)) list.push(scope);
-  });
-
-  if (list.length === 1) scopeWarning.value = `Не подключен scope ${list.join(', ')}`;
-  if (list.length > 1) scopeWarning.value = `Не подключены scope: ${list.join(', ')}`;
-});
-
 onMounted(() => {
-  store.init().then(placementStore.setList);
+  store.init().then(() => {
+    const list: string[] = [];
+
+    env.get('SCOPE').forEach((scope: string) => {
+      if (!store.scopeList.includes(scope)) list.push(scope);
+    });
+
+    if (list.length === 1) scopeWarning.value = `Не подключен scope ${list.join(', ')}`;
+    if (list.length > 1) scopeWarning.value = `Не подключены scope: ${list.join(', ')}`;
+  });
 });
 </script>
 

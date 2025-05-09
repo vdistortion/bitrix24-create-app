@@ -44,6 +44,7 @@ const isVisible = computed(() => env.get('TEST_DOMAINS').includes(BX24.getDomain
       margin-right: auto;
     }
 
+    &.router-link-active,
     &:hover {
       opacity: 1;
     }

@@ -35,30 +35,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import { reactive } from 'vue';
 import ExampleForm from './ExampleForm.vue';
 import ExampleLink from './ExampleLink.vue';
 import ExampleSelect from './ExampleSelect.vue';
 import ExampleDatepicker from './ExampleDatepicker.vue';
 import ExampleTagSelector from './ExampleTagSelector.vue';
-import { useBitrix24 } from '@/api/bitrix';
-
-const { BX24 } = useBitrix24();
-
-onMounted(() => {
-  const RestCall = BX24.createBatch();
-
-  RestCall.batch({
-    scope: ['scope'],
-  }).then((response: any) => {
-    if (response.scope.includes('user_brief')) {
-      RestCall.batch({
-        userCurrent: ['user.current'],
-        users: ['user.get'],
-      }).then(console.info);
-    }
-  });
-});
 
 const data = reactive({
   componentVisible: 'form-validation',

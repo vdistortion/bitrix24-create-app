@@ -35,11 +35,11 @@
 import { computed, onMounted, reactive } from 'vue';
 import ExampleTable from '@/components/examples/ExampleTable.vue';
 import BitrixSelect from '@/components/BitrixSelect.vue';
-import api from '@/api';
+import api, { type IUserPlaceholder } from '@/api';
 
 const data = reactive({
   props: {
-    users: [],
+    users: [] as IUserPlaceholder[],
     label: 'name',
     multiple: false,
   },
@@ -51,7 +51,6 @@ const data = reactive({
 
 onMounted(() => {
   api.getUsers(10).then((userList) => {
-    // @ts-ignore
     data.props.users = userList;
   });
 });

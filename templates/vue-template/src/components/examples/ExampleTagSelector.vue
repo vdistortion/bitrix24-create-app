@@ -178,15 +178,15 @@ const markup = computed(
 );
 
 function onCreate() {
-  console.log('create');
+  console.info('create');
 }
 
 function onEnter(text: string) {
-  console.log('enter', text);
+  console.info('enter', text);
 }
 
 function onInput(text: string) {
-  console.log('input', text);
+  console.info('input', text);
 }
 
 function onClick(index: number, item: IUser) {
@@ -208,33 +208,28 @@ function onAdd(text: string) {
   console.info('add', text);
   const fakeIcon = 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png';
 
-  if (data.props.multiple) {
-    BX24.selectUsersAsync(true).then((users) => {
-      if (Array.isArray(users)) {
-        users.forEach((user) => {
-          data.props.list.push({
-            id: user.id,
-            name: user.name,
-            photo: fakeIcon,
-            position: user.position,
-            url: user.url,
-          });
-        });
-      }
-    });
-  } else {
-    BX24.selectUsersAsync().then((user) => {
-      if (Array.isArray(user)) return;
-      data.props.list = [
-        {
+  BX24.selectUsersAsync(data.props.multiple).then((users) => {
+    if (Array.isArray(users)) {
+      users.forEach((user) => {
+        data.props.list.push({
           id: user.id,
           name: user.name,
           photo: fakeIcon,
           position: user.position,
           url: user.url,
+        });
+      });
+    } else {
+      data.props.list = [
+        {
+          id: users.id,
+          name: users.name,
+          photo: fakeIcon,
+          position: users.position,
+          url: users.url,
         },
       ];
-    });
-  }
+    }
+  });
 }
 </script>

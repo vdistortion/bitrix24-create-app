@@ -1,10 +1,16 @@
 const handler = [window.location.origin, window.location.pathname].join('');
 
-export default (isAdmin: boolean) => ({
+export default () => ({
   initParams() {
-    const options = {
-      info: ['app.info'],
-      user: ['user.current'],
+    return {
+      appInfo: ['app.info'],
+      scope: ['scope'],
+      profile: ['profile'],
+    };
+  },
+
+  usersList() {
+    return {
       users: [
         'user.get',
         {
@@ -13,25 +19,7 @@ export default (isAdmin: boolean) => ({
           },
         },
       ],
-      department: {
-        method: 'user.get',
-        params: {
-          FILTER: {
-            USER_TYPE: 'employee',
-            UF_DEPARTMENT: '$result[user][UF_DEPARTMENT]',
-          },
-        },
-      },
     };
-
-    if (isAdmin) {
-      return {
-        ...this.placementList(),
-        ...options,
-      };
-    }
-
-    return options;
   },
 
   placementList() {

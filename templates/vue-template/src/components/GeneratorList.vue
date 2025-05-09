@@ -3,10 +3,12 @@
     <tbody v-for="(item, key) in entities" :key="key">
       <tr v-if="!entities[key - 1] || item.scope !== entities[key - 1].scope">
         <td colspan="3">
-          <small>Scope: {{ item.scope }}</small>
+          <small v-if="store.scopeList.includes(item.scope)">Scope: {{ item.scope }}</small>
+          <small v-else class="error">Scope: {{ item.scope }} не подключен</small>
         </td>
       </tr>
-      <tr>
+      <tr v-if="!store.scopeList.includes(item.scope)"></tr>
+      <tr v-else>
         <td>
           <app-link class="generator-list__link" :href="item.link">
             {{ item.buttonName }}
@@ -37,9 +39,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { BxButton, BxInput } from 'vue-bitrix24';
+import { useRootStore } from '@/stores/RootStore';
 import { useBitrix24 } from '@/api/bitrix';
 import AppLink from '@/components/AppLink.vue';
 import AppIcon from '@/components/AppIcon.vue';
+import env from '@/env';
 
 type EntityNameType = 'task' | 'deal' | 'company' | 'contact' | 'lead';
 type EntityType = {
@@ -55,19 +59,19 @@ type EntityType = {
   help?: string;
 };
 
+const store = useRootStore();
 const { batch } = useBitrix24();
-const placeholder = 'bitrix24-create-app';
+const placeholder = env.get('APP_NAME');
 const defaultCount = 10;
 const disabledButton = ref(false);
-const userId = ref(1);
-const entities = ref<EntityType[]>([
+const entities: EntityType[] = [
   {
     id: 'task',
     method: 'tasks.task.add',
     userId: 'RESPONSIBLE_ID',
     title: 'TITLE',
     scope: 'task',
-    link: `/company/personal/user/${userId.value}/tasks/`,
+    link: `/company/personal/user/${store.currentId}/tasks/`,
     count: String(defaultCount),
     buttonName: 'Задачи',
     name: 'Задача',
@@ -117,7 +121,7 @@ const entities = ref<EntityType[]>([
     name: 'Лид',
     help: 'Если лиды не включены, они создадутся в сделках',
   },
-]);
+];
 
 function add(entity: EntityType) {
   disabledButton.value = true;
@@ -131,7 +135,7 @@ function add(entity: EntityType) {
       params: {
         fields: {
           [entity.title]: title(i + 1),
-          [entity.userId]: userId.value,
+          [entity.userId]: store.currentId,
         },
       },
     });
@@ -139,12 +143,8 @@ function add(entity: EntityType) {
 
   batch
     .addEntities(params)
-    .then((entities: any) => {
-      console.log(entities);
-    })
-    .catch((errors: any) => {
-      console.log(errors);
-    })
+    .then(console.info)
+    .catch(console.warn)
     .finally(() => {
       disabledButton.value = false;
     });
@@ -155,6 +155,10 @@ function add(entity: EntityType) {
 .generator-list {
   small {
     color: gray;
+
+    &.error {
+      color: var(--ui-field-color-danger);
+    }
   }
 
   &__link {
