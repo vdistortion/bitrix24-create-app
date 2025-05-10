@@ -13,7 +13,7 @@
   <img src="docs/public/vue.svg" alt="vuejs" width="35" height="45"/>
 </a>
 
-Command line for create a project with your own templates
+Command-line tool to create a project using your own templates
 
 ### Templates
 

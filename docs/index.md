@@ -3,8 +3,9 @@
 layout: home
 
 hero:
-  name: "bitrix24-create-app"
-  text: "CLI for create a project with your own templates"
+  name: 'bitrix24-create-app'
+  text: 'CLI for Bitrix24'
+  tagline: 'Command-line tool to create a project using your own templates'
   actions:
     - theme: brand
       text: ng-template

@@ -1,8 +1,8 @@
 {
   "name": "bitrix24-create-app",
-  "description": "Command line for create a project with your own templates",
+  "description": "Command-line tool to create a project using your own templates",
   "version": "2.4.0",
-  "author": "Валентин <valentin.distortion@gmail.com>",
+  "author": "Valentin <valentin.distortion@gmail.com>",
   "license": "GPL",
   "private": false,
   "type": "module",
@@ -21,8 +21,6 @@
   "keywords": [
     "angular",
     "vue",
-    "promises",
-    "components",
     "typescript",
     "bitrix24",
     "bx24"

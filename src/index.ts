@@ -11,11 +11,13 @@ const __dirname = dirname(__filename);
 
 const GITIGNORE_FILE: string = 'template.gitignore';
 const SKIP_FILES: string[] = ['node_modules', 'dist', GITIGNORE_FILE];
-const NG_POST_MESSAGE = 'Explore the Docs https://angular.dev/';
-const VUE_POST_MESSAGE =
+const NG_POST_MESSAGE: string = 'Explore the Docs https://angular.dev/';
+const VUE_POST_MESSAGE: string =
   'Vue’s official documentation provides you with all information you need to get started https://vuejs.org/';
-const NG_REPO_EXAMPLE = 'bitrix24-stickerpack-app';
-const VUE_REPO_EXAMPLE = 'bitrix24-pricing-app';
+const NG_REPO_EXAMPLE: string = 'bitrix24-stickerpack-app';
+const VUE_REPO_EXAMPLE: string = 'bitrix24-pricing-app';
+const REPO_NAME: string = 'bitrix24-create-app';
+const USER: string = 'vdistortion';
 
 async function main() {
   const response = await prompts({
@@ -62,7 +64,7 @@ async function main() {
         projectName,
         {
           recursive: true,
-          filter(source: string): boolean | Promise<boolean> {
+          filter(source): boolean | Promise<boolean> {
             const isSkip = SKIP_FILES.some((name) =>
               source.startsWith(join(folderPath, selectedFolder, name)),
             );
@@ -91,6 +93,9 @@ async function main() {
           console.info(
             selectedFolder.includes('ng') ? NG_POST_MESSAGE : VUE_POST_MESSAGE,
           );
+          console.info(
+            `🎉 Thank you for using ${REPO_NAME}! \nIf you like it, a GitHub star would be greatly appreciated: https://github.com/${USER}/${REPO_NAME} 🌟`,
+          );
         },
       );
     } else {
@@ -114,14 +119,14 @@ async function main() {
     });
 
     exec(
-      `git clone git@github.com:vdistortion/${repo}.git`,
+      `git clone git@github.com:${USER}/${repo}.git`,
       (err, stdout, stderr) => {
         if (err) {
           console.error('Cloning error:', stderr);
           return;
         }
         console.info(
-          `The ${`https://github.com/vdistortion/${repo}`} repository has been successfully cloned.`,
+          `The ${`https://github.com/${USER}/${repo}`} repository has been successfully cloned.`,
           stdout,
         );
       },
