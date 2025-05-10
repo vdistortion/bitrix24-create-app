@@ -1,31 +1,13 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
-import type { LangType } from 'bitrix24-library';
 import { useBitrix24 } from '@/api/bitrix';
 
-type PlacementType<T extends object> = {
-  description: string;
-  handler: string;
-  langAll: Record<
-    LangType,
-    {
-      DESCRIPTION: string;
-      GROUP_NAME: string;
-      TITLE: string;
-    }
-  >;
-  options: T;
-  placement: string;
-  title: string;
-  userId: number;
-};
-
 type PlacementResponseType = {
-  placementList: IPlacements;
+  placementList: Record<string, IPlacement>;
 };
 
 type UsersResponseType = {
-  users: IUserNew[];
+  users: Record<string, IUserNew>;
 };
 
 type InitResponseType = {
@@ -49,8 +31,8 @@ export const useRootStore = defineStore('RootStore', () => {
   const appInfoCode = ref('');
   const scopeList = ref<string[]>([]);
   const userId = ref('');
-  const userList = ref<IUserNew[]>([]);
-  const placementList = ref<IPlacements>({});
+  const userList = ref<Record<string, IUserNew>>({});
+  const placementList = ref<Record<string, IPlacement>>({});
 
   const loading = computed(() => loader.value);
   const appId = computed(() => appInfoId.value);

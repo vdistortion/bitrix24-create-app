@@ -14,23 +14,8 @@ interface IUserNew {
   href: string;
 }
 
-interface IUsers {
-  [key: string]: IUserNew;
-}
-
-interface IPlacementRaw {
-  description: string;
-  handler: string;
-  placement: string;
-  title: string;
-}
-
 interface IPlacement {
   placement: string;
   name: string;
   bind: boolean;
-}
-
-interface IPlacements {
-  [key: string]: IPlacement;
 }

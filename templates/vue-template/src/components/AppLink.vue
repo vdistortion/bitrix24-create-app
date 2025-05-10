@@ -1,5 +1,10 @@
 <template>
-  <a :href="props.href" target="_blank" @click.prevent="onClick" @auxclick.prevent="onMiddleClick">
+  <a
+    :href="href"
+    target="_blank"
+    @click.prevent="openLink(href)"
+    @auxclick.prevent="openLink(href, true)"
+  >
     <slot></slot>
   </a>
 </template>
@@ -9,15 +14,7 @@ import { useBitrix24 } from '@/api/bitrix';
 
 const { openLink } = useBitrix24();
 
-const props = defineProps<{
+const { href } = defineProps<{
   href: string;
 }>();
-
-function onClick() {
-  openLink(props.href);
-}
-
-function onMiddleClick() {
-  openLink(props.href, true);
-}
 </script>

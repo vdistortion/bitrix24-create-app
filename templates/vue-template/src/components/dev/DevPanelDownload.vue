@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import env from '@/env';
+import { env } from '@/utils/helpers';
 
-const filename = [env.get('APP_NAME'), 'zip'].join('.');
+const filename = `${env('APP_NAME')}.zip`;
 </script>

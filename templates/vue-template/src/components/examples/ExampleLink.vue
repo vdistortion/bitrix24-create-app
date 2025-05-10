@@ -28,7 +28,7 @@ import AppLink from '../AppLink.vue';
 
 const data = reactive({
   slots: {
-    default: 'image',
+    default: 'image' as 'image' | 'text',
   },
   props: {
     href: '/marketplace/',
@@ -43,7 +43,6 @@ const slot = computed(() => {
     image: '<img src="logo.png" alt="logo">',
     text: '<span>Текст</span>',
   };
-  // @ts-ignore
   return tags[data.slots.default];
 });
 

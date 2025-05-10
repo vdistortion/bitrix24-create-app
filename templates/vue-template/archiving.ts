@@ -4,7 +4,7 @@ import json from './package.json';
 
 const archive = archiver('zip', { zlib: { level: 9 } });
 const output = createWriteStream(`${json.name}.zip`);
-const path = (name) => ['dist', name].join('/');
+const path = (name: string) => ['dist', name].join('/');
 const list = [
   {
     file: false,

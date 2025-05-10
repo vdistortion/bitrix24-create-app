@@ -43,7 +43,7 @@ import { useRootStore } from '@/stores/RootStore';
 import { useBitrix24 } from '@/api/bitrix';
 import AppLink from '@/components/AppLink.vue';
 import AppIcon from '@/components/AppIcon.vue';
-import env from '@/env';
+import { env } from '@/utils/helpers';
 
 type EntityNameType = 'task' | 'deal' | 'company' | 'contact' | 'lead';
 type EntityType = {
@@ -61,7 +61,7 @@ type EntityType = {
 
 const store = useRootStore();
 const { batch } = useBitrix24();
-const placeholder = env.get('APP_NAME');
+const placeholder = env('APP_NAME');
 const defaultCount = 10;
 const disabledButton = ref(false);
 const entities: EntityType[] = [
@@ -141,13 +141,9 @@ function add(entity: EntityType) {
     });
   }
 
-  batch
-    .addEntities(params)
-    .then(console.info)
-    .catch(console.warn)
-    .finally(() => {
-      disabledButton.value = false;
-    });
+  batch.addEntities(params).finally(() => {
+    disabledButton.value = false;
+  });
 }
 </script>
 

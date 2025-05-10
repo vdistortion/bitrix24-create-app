@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="dev-panel">
+  <div class="dev-panel">
     <dev-panel-reload class="dev-panel__button-icon">
       <app-icon icon="mdiReload"></app-icon>
     </dev-panel-reload>
@@ -15,17 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import env from '@/env';
 import DevPanelReload from './DevPanelReload.vue';
 import DevPanelPages from './DevPanelPages.vue';
 import DevPanelDownload from './DevPanelDownload.vue';
 import AppIcon from '../AppIcon.vue';
-import { useBitrix24 } from '@/api/bitrix';
-
-const { BX24 } = useBitrix24();
-
-const isVisible = computed(() => env.get('TEST_DOMAINS').includes(BX24.getDomain()));
 </script>
 
 <style lang="scss">

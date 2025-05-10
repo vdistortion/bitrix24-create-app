@@ -1,5 +1,3 @@
-const handler = [window.location.origin, window.location.pathname].join('');
-
 export default () => ({
   initParams() {
     return {
@@ -34,7 +32,7 @@ export default () => ({
         method: 'placement.bind',
         params: {
           PLACEMENT: placement,
-          HANDLER: handler,
+          HANDLER: [window.location.origin, window.location.pathname].join(''),
           LANG_ALL: {
             ru: {
               TITLE: name,

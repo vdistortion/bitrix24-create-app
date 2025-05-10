@@ -2,14 +2,14 @@
   <div class="user-toggle">
     <button
       class="user-toggle__button"
-      :class="{ active: data.type === 'users' }"
+      :class="{ active: type === 'users' }"
       @click.stop="onClick('users')"
     >
       Сотрудники
     </button>
     <button
       class="user-toggle__button"
-      :class="{ active: data.type === 'disabled' }"
+      :class="{ active: type === 'disabled' }"
       @click.stop="onClick('disabled')"
     >
       Уволенные
@@ -18,21 +18,19 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { ref } from 'vue';
 
-const props = defineProps<{
+const { defaultType } = defineProps<{
   defaultType: string;
 }>();
 
 const emit = defineEmits(['click']);
 
-const data = reactive({
-  type: props.defaultType, // users, disabled
-});
+const type = ref(defaultType);
 
-function onClick(type: string) {
-  data.type = type;
-  emit('click', type);
+function onClick(newType: string) {
+  type.value = newType;
+  emit('click', newType);
 }
 </script>
 

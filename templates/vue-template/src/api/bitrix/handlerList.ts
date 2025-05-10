@@ -1,5 +1,4 @@
-import env from '@/env';
-import tools from '@/utils/helpers';
+import { env, formatDate } from '@/utils/helpers';
 
 interface IUser {
   ID: string;
@@ -14,22 +13,12 @@ interface IUser {
 }
 
 export default {
-  user: parseId,
   users: parseUsers,
-  department: parseIds,
   placementList: parsePlacementList,
 };
 
-function parseIds(users: IUser[]) {
-  return users.map(parseId);
-}
-
-function parseId(user: IUser) {
-  return user.ID;
-}
-
-function parseUsers(users: IUser[]): IUsers {
-  return users.reduce((acc: IUsers, user: IUser) => {
+function parseUsers(users: IUser[]): Record<string, IUserNew> {
+  return users.reduce((acc: Record<string, IUserNew>, user) => {
     const { ID } = user;
     acc[ID] = parseUser(user);
     return acc;
@@ -56,30 +45,35 @@ function parseUser(user: IUser): IUserNew {
     fullName: fullName.trim() ? fullName : EMAIL,
     active: ACTIVE,
     position: WORK_POSITION ?? '',
-    birthday: PERSONAL_BIRTHDAY ? tools.formatDate(PERSONAL_BIRTHDAY) : false,
+    birthday: PERSONAL_BIRTHDAY ? formatDate(PERSONAL_BIRTHDAY) : false,
     photo: PERSONAL_PHOTO ?? '',
     department: UF_DEPARTMENT,
     href: `/company/personal/user/${ID}/`,
   };
 }
 
-function parsePlacementList(placementList: IPlacementRaw[]): IPlacements {
-  function getItem(placement: string, name = env.get('APP_NAME'), bind = false) {
+function parsePlacementList(
+  placementList: {
+    description: string;
+    handler: string;
+    placement: string;
+    title: string;
+  }[],
+): Record<string, IPlacement> {
+  function getItem(placement: string, name = env('APP_NAME'), bind = false): IPlacement {
     return { placement, name, bind };
   }
-  const defaultPlacement: IPlacements = env
-    .get('PLACEMENT')
-    .reduce((acc: IPlacements, placement: string) => {
+  const defaultPlacement = env('PLACEMENT').reduce(
+    (acc: Record<string, IPlacement>, placement: string) => {
       acc[placement] = getItem(placement);
-      return acc;
-    }, {});
-  const realPlacement: IPlacements = placementList.reduce(
-    (acc: IPlacements, item: IPlacementRaw) => {
-      acc[item.placement] = getItem(item.placement, item.title, true);
       return acc;
     },
     {},
   );
+  const realPlacement = placementList.reduce((acc: Record<string, IPlacement>, item) => {
+    acc[item.placement] = getItem(item.placement, item.title, true);
+    return acc;
+  }, {});
 
   return {
     ...defaultPlacement,

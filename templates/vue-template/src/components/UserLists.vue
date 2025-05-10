@@ -1,10 +1,10 @@
 <template>
   <div class="user-lists">
-    <user-toggle @click="data.type = $event" :default-type="data.type"></user-toggle>
+    <user-toggle @click="type = $event" :default-type="type"></user-toggle>
     <div class="user-lists__wrapper">
-      <users-list v-if="data.type === 'users'" key="users" :users="store.usersEnabled"></users-list>
+      <users-list v-if="type === 'users'" key="users" :users="store.usersEnabled"></users-list>
       <users-list
-        v-else-if="data.type === 'disabled'"
+        v-else-if="type === 'disabled'"
         key="disabled"
         :users="store.usersDisabled"
       ></users-list>
@@ -13,16 +13,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { ref } from 'vue';
 import { useRootStore } from '@/stores/RootStore';
 import UserToggle from './UserToggle.vue';
 import UsersList from './UserList.vue';
 
 const store = useRootStore();
 
-const data = reactive({
-  type: 'users',
-});
+const type = ref('users');
 </script>
 
 <style lang="scss">

@@ -1,9 +1,9 @@
 <template>
   <div class="user-list">
-    <div v-for="user in props.users" :key="user.id" class="user-list__card">
+    <div v-for="user in users" :key="user.id" class="user-list__card">
       <a
         class="user"
-        :href="`https://${domain}${user.href}`"
+        :href="`https://${BX24.getDomain()}${user.href}`"
         target="_blank"
         :title="getTitle(user)"
         :data-birthday="user.birthday"
@@ -17,7 +17,7 @@
           size="xs"
           icon="chat"
           :round="true"
-          @click="openMessenger(user.id)"
+          @click="BX24.im.openMessenger(user.id)"
         >
           {{ user.fullName ?? 'Открыть чат' }}
         </bx-button>
@@ -32,18 +32,12 @@ import { useBitrix24 } from '@/api/bitrix';
 
 const { BX24, openLink } = useBitrix24();
 
-const props = defineProps<{
-  users: IUsers;
+const { users } = defineProps<{
+  users: Record<string, IUserNew>;
 }>();
 
-const domain = BX24.getDomain();
-
-function getTitle(user: any) {
+function getTitle(user: IUserNew) {
   return [user.fullName, user.position].filter((s) => s).join('\n');
-}
-
-function openMessenger(id: string) {
-  BX24.im.openMessenger(id);
 }
 </script>
 
@@ -69,7 +63,7 @@ $size: 170px;
     margin-bottom: 20px;
   }
 
-  a.user {
+  .user {
     display: block;
     margin: 0 auto;
     width: $size;
@@ -83,7 +77,7 @@ $size: 170px;
     background-position: center;
 
     &:hover {
-      border-color: currentColor;
+      border-color: var(--ui-field-color-link);
     }
 
     img {

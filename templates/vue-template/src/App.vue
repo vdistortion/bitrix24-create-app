@@ -7,13 +7,19 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, defineAsyncComponent, onMounted, ref } from 'vue';
 import { BxAlert } from 'vue-bitrix24';
-import { useRootStore } from '@/stores/RootStore';
-import DevPanel from './components/dev/DevPanel.vue';
-import env from './env';
+import { useRootStore } from './stores/RootStore';
+import { useBitrix24 } from './api/bitrix';
+import { env } from './utils/helpers';
 
 const store = useRootStore();
+const { BX24 } = useBitrix24();
+const DevPanel = computed(() =>
+  env('TEST_DOMAINS').includes(BX24.getDomain())
+    ? defineAsyncComponent(() => import('./components/dev/DevPanel.vue'))
+    : '',
+);
 
 const scopeWarning = ref('');
 
@@ -21,7 +27,7 @@ onMounted(() => {
   store.init().then(() => {
     const list: string[] = [];
 
-    env.get('SCOPE').forEach((scope: string) => {
+    env('SCOPE').forEach((scope: string) => {
       if (!store.scopeList.includes(scope)) list.push(scope);
     });
 

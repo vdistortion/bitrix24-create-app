@@ -1,25 +1,33 @@
 #!/bin/bash
 
-# Ищем в каталоге
-cd ${PWD}
+EXCLUDED_DIRS=("node_modules" "dist" ".git" ".idea")
+EXCLUDED_FILES=("package-lock.json" "stats.html")
 
-# Список каталогов, в которых искать не нужно
-for var in node_modules dist .git .idea; do
-  exclude=$exclude"--exclude-dir="$var" "
+EXCLUDE_ARGS=()
+for dir in "${EXCLUDED_DIRS[@]}"; do
+  EXCLUDE_ARGS+=(--exclude-dir="$dir")
+done
+for file in "${EXCLUDED_FILES[@]}"; do
+  EXCLUDE_ARGS+=(--exclude="$file")
 done
 
-# Список файлов, в которых искать не нужно
-for var in package-lock.json stats.html; do
-  exclude=$exclude"--exclude="$var" "
-done
+MODE="$1"
+SEARCH_TERM="$2"
 
-# Параметры вывода
-if   [[ "list" == *"$1"* ]]; then # Список файлов
-  grep $exclude --color -Hrwl $2
-elif [[ "word" == *"$1"* ]]; then # Только полные слова
-  grep $exclude --color -Hrwn $2
-elif [[ "full" == *"$1"* ]]; then # Подробно
-  grep $exclude --color -Hrn $2
-fi
+case "$MODE" in
+  list)
+    grep "${EXCLUDE_ARGS[@]}" --color -Hrwl "$SEARCH_TERM"
+    ;;
+  word)
+    grep "${EXCLUDE_ARGS[@]}" --color -Hrwn "$SEARCH_TERM"
+    ;;
+  full)
+    grep "${EXCLUDE_ARGS[@]}" --color -Hrn "$SEARCH_TERM"
+    ;;
+  *)
+    # Если MODE не задан — просто ищем (предполагаем, что $1 — это запрос)
+    grep "${EXCLUDE_ARGS[@]}" --color -Hrn "$MODE"
+    ;;
+esac
 
 exit 0

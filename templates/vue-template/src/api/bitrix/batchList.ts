@@ -1,4 +1,4 @@
-import type { IBitrix24Library } from 'bitrix24-library';
+import type { IBitrix24Library, RequestType } from 'bitrix24-library';
 import getRequestList from './requestList';
 import handlerList from './handlerList';
 
@@ -7,8 +7,8 @@ export default class BitrixBatch {
   private readonly requestList: any;
 
   constructor(BX24: IBitrix24Library) {
-    const instanceBatch = BX24.createBatch(handlerList);
-    this.batch = instanceBatch.batch.bind(instanceBatch);
+    const instance = BX24.createBatch(handlerList);
+    this.batch = instance.batch.bind(instance);
     this.requestList = getRequestList();
   }
 
@@ -32,7 +32,7 @@ export default class BitrixBatch {
     return this.batch(this.requestList.placementUnbind(placement));
   }
 
-  addEntities(params: any) {
+  addEntities(params: RequestType<{ fields: Record<string, string> }>[]) {
     return this.batch(params);
   }
 }

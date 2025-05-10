@@ -6,6 +6,7 @@
         <bx-input
           v-model="v$.form.email.$model"
           :color="v$.form.email.$error ? 'danger' : ''"
+          size="xs"
           placeholder="Почта"
         ></bx-input>
       </form-error-wrapper>
@@ -13,6 +14,7 @@
         <bx-input
           v-model="v$.form.password.$model"
           :color="v$.form.password.$error ? 'danger' : ''"
+          size="xs"
           placeholder="Пароль"
           type="password"
         ></bx-input>
@@ -21,12 +23,13 @@
         <bx-input
           v-model="v$.form.passwordConfirm.$model"
           :color="v$.form.passwordConfirm.$error ? 'danger' : ''"
+          size="xs"
           placeholder="Подтвердите пароль"
         ></bx-input>
       </form-error-wrapper>
       <div class="form-validation__buttons">
-        <bx-button type="reset" color="light-border">Сбросить</bx-button>
-        <bx-button type="submit" :disabled="v$.$error">Отправить</bx-button>
+        <bx-button type="reset" size="xs" color="light-border">Сбросить</bx-button>
+        <bx-button type="submit" size="xs" :disabled="v$.$error">Отправить</bx-button>
       </div>
     </fieldset>
   </form>
