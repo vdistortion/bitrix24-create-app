@@ -19,7 +19,7 @@ $size: 170px;
     margin-bottom: 20px;
   }
 
-  a.user {
+  .user {
     display: block;
     margin: 0 auto;
     width: $size;
@@ -31,12 +31,8 @@ $size: 170px;
     background-repeat: no-repeat;
     background-position: center;
 
-    &.department {
-      border-color: coral;
-    }
-
-    &.current {
-      border-color: currentColor;
+    &:hover {
+      border-color: #185ccf;
     }
 
     img {

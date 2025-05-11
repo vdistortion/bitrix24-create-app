@@ -8,5 +8,5 @@ import { environment } from '../../../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevPanelDownloadComponent {
-  filename: string = `${environment.APP_NAME}.zip`;
+  filename = `${environment.APP_NAME}.zip`;
 }

@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'dev-panel-pages',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './dev-panel-pages.component.html',
+  styleUrl: './dev-panel-pages.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevPanelPagesComponent {

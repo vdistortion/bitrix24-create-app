@@ -1,0 +1,30 @@
+<div class="settings-page">
+  <fieldset>
+    <legend>Настройки портала</legend>
+    <div class="settings-page__buttons">
+      <app-link [href]="`/devops/edit/application/${store.appId}/`">
+        <button>Настройки приложения</button>
+      </app-link>
+      <app-link href="/devops/section/standard/">
+        <button>Создать приложение</button>
+      </app-link>
+      <app-link href="/devops/list/">
+        <button>Все приложения</button>
+      </app-link>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Генерация данных</legend>
+    <app-generator-list></app-generator-list>
+  </fieldset>
+
+  <fieldset>
+    <legend>Встраивание</legend>
+    @if (store.scopeList.includes('placement') && store.isAdmin) {
+      <app-placement-list></app-placement-list>
+    } @else {
+      <span>Нет прав</span>
+    }
+  </fieldset>
+</div>

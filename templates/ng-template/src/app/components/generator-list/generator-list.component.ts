@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { mdiHelpCircleOutline } from '@mdi/js';
 import { BitrixService } from '../../services/bitrix.service';
 import { FormsModule } from '@angular/forms';
-import { LinkComponent } from '../../components/link/link.component';
+import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../../ui/icon/icon.component';
+import { environment } from '../../../environments/environment';
+import { RootStoreService } from '../../services/root-store.service';
 
-type EntityNameType = 'task' | 'deal' | 'company' | 'contact' | 'lead';
 type EntityType = {
-  id: EntityNameType;
+  id: 'task' | 'deal' | 'company' | 'contact' | 'lead';
   method: string;
   userId: string;
   title: string;
@@ -20,18 +21,20 @@ type EntityType = {
 };
 
 @Component({
-  selector: 'app-generator-page',
+  selector: 'app-generator-list',
   imports: [FormsModule, LinkComponent, IconComponent],
-  templateUrl: './generator-page.component.html',
-  styleUrl: './generator-page.component.scss',
+  templateUrl: './generator-list.component.html',
+  styleUrl: './generator-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GeneratorPageComponent {
+export class GeneratorListComponent {
+  private cdr = inject(ChangeDetectorRef);
+  private bitrixService = inject(BitrixService);
+  protected store = inject(RootStoreService);
   mdiHelpCircleOutline = mdiHelpCircleOutline;
-  placeholder = 'bitrix24-create-app';
+  placeholder = environment.APP_NAME;
   disabledButton = false;
   defaultCount = 10;
-  userId = 1;
   entities: EntityType[] = [
     {
       id: 'task',
@@ -39,7 +42,7 @@ export class GeneratorPageComponent {
       userId: 'RESPONSIBLE_ID',
       title: 'TITLE',
       scope: 'task',
-      link: `/company/personal/user/${this.userId}/tasks/`,
+      link: `/company/personal/user/${this.store.currentId}/tasks/`,
       count: this.defaultCount,
       buttonName: 'Задачи',
       name: 'Задача',
@@ -91,40 +94,26 @@ export class GeneratorPageComponent {
     },
   ];
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private bitrixService: BitrixService,
-  ) {}
-
   add(entity: EntityType) {
     this.disabledButton = true;
     const count = Number(entity.count);
     const params = [];
-    const title = (number: number) => `${entity.name} #${number} (${this.placeholder})`;
 
     for (let i = 0; i < count; i++) {
       params.push({
         method: entity.method,
         params: {
           fields: {
-            [entity.title]: title(i + 1),
-            [entity.userId]: this.userId,
+            [entity.title]: `${entity.name} #${i + 1} (${this.placeholder})`,
+            [entity.userId]: this.store.currentId,
           },
         },
       });
     }
 
-    this.bitrixService.batch
-      .addEntities(params)
-      .then((entities: any) => {
-        console.log(entities);
-      })
-      .catch((entities: any) => {
-        console.log(entities);
-      })
-      .finally(() => {
-        this.disabledButton = false;
-        this.cdr.markForCheck();
-      });
+    this.bitrixService.batch.addEntities(params).finally(() => {
+      this.disabledButton = false;
+      this.cdr.markForCheck();
+    });
   }
 }

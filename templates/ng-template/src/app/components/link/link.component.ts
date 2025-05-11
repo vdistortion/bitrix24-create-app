@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 
 @Component({
@@ -9,8 +9,7 @@ import { BitrixService } from '../../services/bitrix.service';
 })
 export class LinkComponent {
   @Input({ required: true }) public href!: string;
-
-  constructor(private bitrixService: BitrixService) {}
+  private bitrixService = inject(BitrixService);
 
   onClick(e: MouseEvent) {
     e.preventDefault();

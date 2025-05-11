@@ -9,7 +9,6 @@ import { RouterOutlet } from '@angular/router';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
 import { BitrixService } from './services/bitrix.service';
 import { RootStoreService } from './services/root-store.service';
-import { PlacementStoreService } from './services/placement-store.service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -23,39 +22,34 @@ import { environment } from '../environments/environment';
     @if (isApp) {
       <router-outlet></router-outlet>
     }
+    @if (scopeWarning) {
+      <mark>🔥 {{ scopeWarning }}</mark>
+    }
   `,
 })
 export class AppComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+  private store = inject(RootStoreService);
   private bitrixService = inject(BitrixService);
   private BX24 = this.bitrixService.get();
   protected isDev = false;
   protected isApp = false;
-
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private rootStoreService: RootStoreService,
-    private placementStoreService: PlacementStoreService,
-  ) {}
+  scopeWarning = '';
 
   async ngOnInit() {
-    await this.rootStoreService.init().then((list: Record<string, IPlacement>) => {
-      this.placementStoreService.setList(list);
+    this.store.init().then(() => {
+      const list: string[] = [];
+
+      environment.SCOPE.forEach((scope: string) => {
+        if (!this.store.scopeList.includes(scope)) list.push(scope);
+      });
+
+      if (list.length === 1) this.scopeWarning = `Не подключен scope ${list.join(', ')}`;
+      if (list.length > 1) this.scopeWarning = `Не подключены scope: ${list.join(', ')}`;
     });
 
-    await this.rootStoreService.appInfo().then(({ scope }: { scope: string[] }) => {
-      this.verifyScopeLog(environment.SCOPE, scope);
-    });
-
-    this.cdr.markForCheck();
     this.isDev = environment.TEST_DOMAINS.includes(this.BX24.getDomain());
     this.isApp = true;
-  }
-
-  verifyScopeLog(scopeList: string[], requiredList: string[]) {
-    [...scopeList, ...requiredList].forEach((scope: string) => {
-      const message = `🔥 scope "${scope}" `;
-      if (!scopeList.includes(scope)) console.info(message + 'excess');
-      if (!requiredList.includes(scope)) console.info(message + 'not found');
-    });
+    this.cdr.markForCheck();
   }
 }

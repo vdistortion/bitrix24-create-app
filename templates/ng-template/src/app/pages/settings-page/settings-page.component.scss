@@ -1,0 +1,5 @@
+.settings-page {
+  &__buttons > * + * {
+    margin-left: 10px;
+  }
+}

@@ -1,7 +1,20 @@
 <table class="placement-list">
   @for (item of list; track $index) {
     <tbody>
-      @if (item.bind) {
+      @if (item.placement === 'CRM_DEAL_DETAIL_TAB') {
+        <tr>
+          <td colspan="3">
+            @if (store.scopeList.includes('crm')) {
+              <small>Scope: crm</small>
+            } @else {
+              <small class="error">Scope: crm не подключен</small>
+            }
+          </td>
+        </tr>
+      }
+      @if (item.placement !== 'REST_APP_URI' && !store.scopeList.includes('crm')) {
+        <tr></tr>
+      } @else if (item.bind) {
         <tr>
           <td>
             <small>{{ item.placement }}</small>
@@ -24,7 +37,7 @@
             }
           </td>
           <td>
-            <button data-color="danger" (click)="unbind(item.placement)">Удалить</button>
+            <button (click)="unbind(item.placement)">Удалить</button>
           </td>
         </tr>
       } @else {
@@ -33,12 +46,14 @@
             <small>{{ item.placement }}</small>
           </td>
           <td>
-            <input [(ngModel)]="item.name" [placeholder]="item.placement" data-inline />
+            <input
+              [(ngModel)]="item.name"
+              [placeholder]="item.placement"
+              [disabled]="item.placement === 'REST_APP_URI'"
+            />
           </td>
           <td>
-            <button [disabled]="!item.name" data-color="primary" (click)="bind(item)">
-              Добавить
-            </button>
+            <button [disabled]="!item.name" (click)="bind(item)">Добавить</button>
           </td>
         </tr>
       }

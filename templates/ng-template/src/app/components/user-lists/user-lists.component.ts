@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UserToggleComponent, type UserType } from '../user-toggle/user-toggle.component';
 import { UserListComponent } from '../user-list/user-list.component';
 import { RootStoreService } from '../../services/root-store.service';
@@ -11,23 +11,8 @@ import { RootStoreService } from '../../services/root-store.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListsComponent {
+  protected store = inject(RootStoreService);
   public type: UserType = 'users';
-
-  constructor(private rootStore: RootStoreService) {}
-
-  get usersEnabled(): Record<string, IUserNew> {
-    const list = Object.entries(this.rootStore.users as Record<string, IUserNew>).filter(
-      ([_key, user]) => user.active,
-    );
-    return Object.fromEntries(list);
-  }
-
-  get usersDisabled(): Record<string, IUserNew> {
-    const list = Object.entries(this.rootStore.users as Record<string, IUserNew>).filter(
-      ([_key, user]) => !user.active,
-    );
-    return Object.fromEntries(list);
-  }
 
   setType(type: UserType) {
     this.type = type;

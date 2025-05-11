@@ -1,0 +1,8 @@
+a {
+  opacity: 0.4;
+
+  &.active,
+  &:hover {
+    opacity: 1;
+  }
+}

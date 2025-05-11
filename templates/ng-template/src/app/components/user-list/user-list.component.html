@@ -3,7 +3,6 @@
     <div class="user-list__card">
       <a
         class="user"
-        [class]="classList(user.id)"
         [href]="portal + user.href"
         target="_blank"
         [title]="getTitle(user)"
@@ -16,14 +15,8 @@
         }
       </a>
       <div class="user-list__buttons">
-        <button
-          data-color="light-border"
-          data-size="xs"
-          data-icon="chat"
-          data-round="true"
-          (click)="openMessenger(user.id)"
-        >
-          Открыть чат
+        <button (click)="openMessenger(user.id)">
+          {{ user.fullName ? user.fullName : 'Открыть чат' }}
         </button>
       </div>
     </div>

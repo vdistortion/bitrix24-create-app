@@ -1,0 +1,9 @@
+.placement-list {
+  small {
+    color: gray;
+
+    &.error {
+      color: red;
+    }
+  }
+}

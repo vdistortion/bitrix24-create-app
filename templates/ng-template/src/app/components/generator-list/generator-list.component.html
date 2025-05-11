@@ -1,0 +1,39 @@
+<table class="generator-list">
+  @for (item of entities; track $index; let key = $index) {
+    <tbody>
+      @if (!entities[key - 1] || item.scope !== entities[key - 1].scope) {
+        <tr>
+          <td colspan="3">
+            @if (store.scopeList.includes(item.scope)) {
+              <small>Scope: {{ item.scope }}</small>
+            } @else {
+              <small class="error">Scope: {{ item.scope }} не подключен</small>
+            }
+          </td>
+        </tr>
+      }
+      @if (!store.scopeList.includes(item.scope)) {
+        <tr></tr>
+      } @else {
+        <tr>
+          <td>
+            <app-link class="generator-list__link" [href]="item.link">
+              {{ item.buttonName }}
+            </app-link>
+            @if (item.help) {
+              <span class="generator-list__icon" [title]="item.help">
+                <app-icon [path]="mdiHelpCircleOutline" [size]="12"></app-icon>
+              </span>
+            }
+          </td>
+          <td>
+            <input [(ngModel)]="item.count" />
+          </td>
+          <td>
+            <button [disabled]="disabledButton" (click)="add(item)">Создать</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  }
+</table>

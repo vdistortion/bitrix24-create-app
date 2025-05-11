@@ -1,4 +1,4 @@
-@if (loader) {
+@if (store.loader$ | async) {
   <app-loader></app-loader>
 } @else {
   <app-user-lists></app-user-lists>

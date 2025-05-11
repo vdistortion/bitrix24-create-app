@@ -2,9 +2,9 @@
   <app-user-toggle (click)="setType($event)"></app-user-toggle>
   <div class="user-lists__wrapper">
     @if (type === 'users') {
-      <app-user-list [users]="usersEnabled"></app-user-list>
+      <app-user-list [users]="store.usersEnabled"></app-user-list>
     } @else if (type === 'disabled') {
-      <app-user-list [users]="usersDisabled"></app-user-list>
+      <app-user-list [users]="store.usersDisabled"></app-user-list>
     }
   </div>
 </div>

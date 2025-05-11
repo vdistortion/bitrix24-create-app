@@ -1,3 +1,8 @@
-<a [routerLink]="path" [title]="title">
+<a
+  [routerLink]="path"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  [title]="title"
+>
   <ng-content></ng-content>
 </a>

@@ -1,3 +1,12 @@
+export function env(key: string) {
+  const value = import.meta.env[key];
+  try {
+    return JSON.parse(value);
+  } catch (e) {
+    return value;
+  }
+}
+
 export function parseDate(date = Date.now()) {
   const newDate = new Date(date);
   const year = newDate.getFullYear();
