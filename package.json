@@ -1,7 +1,7 @@
 {
   "name": "bitrix24-create-app",
   "description": "Command-line tool to create a project using your own templates",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "author": "Valentin <valentin.distortion@gmail.com>",
   "license": "GPL",
   "private": false,
