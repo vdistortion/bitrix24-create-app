@@ -23,11 +23,7 @@
           <input [(ngModel)]="item.count" data-inline />
         </td>
         <td>
-          <button
-            data-color="primary"
-            [disabled]="disabledButton"
-            (click)="add(item)"
-          >
+          <button data-color="primary" [disabled]="disabledButton" (click)="add(item)">
             Создать
           </button>
         </td>

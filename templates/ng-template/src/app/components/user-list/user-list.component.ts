@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 import { RootStoreService } from '../../services/root-store.service';
 
@@ -16,7 +10,7 @@ import { RootStoreService } from '../../services/root-store.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent implements OnInit {
-  @Input({ required: true }) public users!: IUsers;
+  @Input({ required: true }) public users!: Record<string, IUserNew>;
   private bitrixService = inject(BitrixService);
   private BX24 = this.bitrixService.get();
   private department: any;
@@ -31,7 +25,7 @@ export class UserListComponent implements OnInit {
     this.portal = this.rootStoreService.portal;
   }
 
-  getUsers(): IUser[] {
+  getUsers() {
     return Object.values(this.users);
   }
 

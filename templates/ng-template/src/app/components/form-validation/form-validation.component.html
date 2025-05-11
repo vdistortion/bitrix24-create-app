@@ -12,11 +12,7 @@
       }
     </div>
     <div class="form-error-wrapper">
-      <input
-        formControlName="email"
-        type="text"
-        placeholder="Электронная почта"
-      />
+      <input formControlName="email" type="text" placeholder="Электронная почта" />
       @if (form.get('email')?.invalid && form.get('email')?.touched) {
         <div class="form-error-wrapper__error">
           @if (form.get('email')?.errors?.['required']) {
@@ -38,9 +34,7 @@
           @if (form.get('password')?.errors?.['minlength']) {
             <small>
               Не менее
-              {{
-                form.get('password')?.errors?.['minlength']['requiredLength']
-              }}
+              {{ form.get('password')?.errors?.['minlength']['requiredLength'] }}
               символов!
             </small>
           }

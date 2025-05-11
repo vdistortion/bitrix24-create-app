@@ -24,9 +24,7 @@
             }
           </td>
           <td>
-            <button data-color="danger" (click)="unbind(item.placement)">
-              Удалить
-            </button>
+            <button data-color="danger" (click)="unbind(item.placement)">Удалить</button>
           </td>
         </tr>
       } @else {
@@ -35,18 +33,10 @@
             <small>{{ item.placement }}</small>
           </td>
           <td>
-            <input
-              [(ngModel)]="item.name"
-              [placeholder]="item.placement"
-              data-inline
-            />
+            <input [(ngModel)]="item.name" [placeholder]="item.placement" data-inline />
           </td>
           <td>
-            <button
-              [disabled]="!item.name"
-              data-color="primary"
-              (click)="bind(item)"
-            >
+            <button [disabled]="!item.name" data-color="primary" (click)="bind(item)">
               Добавить
             </button>
           </td>

@@ -38,15 +38,13 @@ export class AppComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    await this.rootStoreService.init().then((list: IPlacements) => {
+    await this.rootStoreService.init().then((list: Record<string, IPlacement>) => {
       this.placementStoreService.setList(list);
     });
 
-    await this.rootStoreService
-      .appInfo()
-      .then(({ scope }: { scope: string[] }) => {
-        this.verifyScopeLog(environment.SCOPE, scope);
-      });
+    await this.rootStoreService.appInfo().then(({ scope }: { scope: string[] }) => {
+      this.verifyScopeLog(environment.SCOPE, scope);
+    });
 
     this.cdr.markForCheck();
     this.isDev = environment.TEST_DOMAINS.includes(this.BX24.getDomain());

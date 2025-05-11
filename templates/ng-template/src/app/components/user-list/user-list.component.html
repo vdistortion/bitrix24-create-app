@@ -5,7 +5,7 @@
         class="user"
         [class]="classList(user.id)"
         [href]="portal + user.href"
-        [target]="user.target"
+        target="_blank"
         [title]="getTitle(user)"
         [attr.data-birthday]="user.birthday"
         (click)="openLink($event, user.href)"

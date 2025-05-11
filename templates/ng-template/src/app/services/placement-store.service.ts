@@ -5,7 +5,7 @@ import { BitrixService } from './bitrix.service';
   providedIn: 'root',
 })
 export class PlacementStoreService {
-  private placementList: IPlacements = {};
+  private placementList: Record<string, IPlacement> = {};
 
   constructor(private bitrixService: BitrixService) {}
 
@@ -18,19 +18,19 @@ export class PlacementStoreService {
     return this.placementList;
   }
 
-  setList(list: IPlacements) {
+  setList(list: Record<string, IPlacement>) {
     this.placementList = list;
   }
 
   bind(item: { placement: string; name: string }) {
     return this.bitrixService.batch
       .bind(item.placement, item.name)
-      .then((list: IPlacements) => this.setList(list));
+      .then((list: Record<string, IPlacement>) => this.setList(list));
   }
 
   unbind(placement: string) {
     return this.bitrixService.batch
       .unbind(placement)
-      .then((list: IPlacements) => this.setList(list));
+      .then((list: Record<string, IPlacement>) => this.setList(list));
   }
 }

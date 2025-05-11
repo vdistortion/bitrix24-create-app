@@ -3,11 +3,7 @@
     <app-icon [path]="icons.mdiReload"></app-icon>
   </dev-panel-reload>
   @for (page of pages; track page.icon) {
-    <dev-panel-pages
-      class="dev-panel__button-icon"
-      [path]="page.path"
-      [title]="page.title"
-    >
+    <dev-panel-pages class="dev-panel__button-icon" [path]="page.path" [title]="page.title">
       <app-icon [path]="page.icon"></app-icon>
     </dev-panel-pages>
   }

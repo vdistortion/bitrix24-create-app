@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UserToggleComponent } from '../user-toggle/user-toggle.component';
+import { UserToggleComponent, type UserType } from '../user-toggle/user-toggle.component';
 import { UserListComponent } from '../user-list/user-list.component';
 import { RootStoreService } from '../../services/root-store.service';
 
@@ -11,25 +11,25 @@ import { RootStoreService } from '../../services/root-store.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListsComponent {
-  public type: TUserType = 'users';
+  public type: UserType = 'users';
 
   constructor(private rootStore: RootStoreService) {}
 
-  get usersEnabled(): IUsers {
-    const list = Object.entries(this.rootStore.users as IUsers).filter(
-      ([_key, user]: [string, IUser]) => user.active,
+  get usersEnabled(): Record<string, IUserNew> {
+    const list = Object.entries(this.rootStore.users as Record<string, IUserNew>).filter(
+      ([_key, user]) => user.active,
     );
     return Object.fromEntries(list);
   }
 
-  get usersDisabled(): IUsers {
-    const list = Object.entries(this.rootStore.users as IUsers).filter(
-      ([_key, user]: [string, IUser]) => !user.active,
+  get usersDisabled(): Record<string, IUserNew> {
+    const list = Object.entries(this.rootStore.users as Record<string, IUserNew>).filter(
+      ([_key, user]) => !user.active,
     );
     return Object.fromEntries(list);
   }
 
-  setType(type: TUserType) {
+  setType(type: UserType) {
     this.type = type;
   }
 }

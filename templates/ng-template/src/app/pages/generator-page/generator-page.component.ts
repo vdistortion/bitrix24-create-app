@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { mdiHelpCircleOutline } from '@mdi/js';
 import { BitrixService } from '../../services/bitrix.service';
 import { FormsModule } from '@angular/forms';
@@ -104,8 +100,7 @@ export class GeneratorPageComponent {
     this.disabledButton = true;
     const count = Number(entity.count);
     const params = [];
-    const title = (number: number) =>
-      `${entity.name} #${number} (${this.placeholder})`;
+    const title = (number: number) => `${entity.name} #${number} (${this.placeholder})`;
 
     for (let i = 0; i < count; i++) {
       params.push({

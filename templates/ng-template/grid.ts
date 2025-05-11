@@ -19,8 +19,7 @@ grid('./src', {
     },
     w768: {
       width: '768px' /* Small Devices, Tablets */,
-      fields:
-        '20px' /* set fields only if you want to change container.fields */,
+      fields: '20px' /* set fields only if you want to change container.fields */,
     },
     w992: {
       width: '992px' /* Medium Devices, Desktops */,
