@@ -1,5 +1,5 @@
-import { environment } from '../../environments/environment';
-import { formatDate } from '../../utils/helpers';
+import { environment } from '../../../environments/environment';
+import { formatDate } from '../../../utils/helpers';
 
 interface IUser {
   ID: string;

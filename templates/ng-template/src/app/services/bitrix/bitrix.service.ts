@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import type { IBitrix24Library } from 'bitrix24-library';
-import BitrixBatch from '../../api/bitrix';
+import BitrixBatch from './batchList';
 
 @Injectable({
   providedIn: 'root',

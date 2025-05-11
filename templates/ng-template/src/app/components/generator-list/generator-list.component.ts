@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { mdiHelpCircleOutline } from '@mdi/js';
-import { BitrixService } from '../../services/bitrix.service';
+import { BitrixService } from '../../services/bitrix/bitrix.service';
 import { FormsModule } from '@angular/forms';
 import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../../ui/icon/icon.component';

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BitrixService } from './bitrix.service';
+import { BitrixService } from './bitrix/bitrix.service';
 
 type PlacementResponseType = {
   placementList: Record<string, IPlacement>;

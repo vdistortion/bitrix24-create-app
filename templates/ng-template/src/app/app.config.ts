@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { Bitrix24 } from 'bitrix24-library';
-import { BitrixService } from './services/bitrix.service';
+import { BitrixService } from './services/bitrix/bitrix.service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {

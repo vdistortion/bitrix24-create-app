@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { BitrixService } from '../../services/bitrix.service';
+import { BitrixService } from '../../services/bitrix/bitrix.service';
 
 @Component({
   selector: 'app-link',

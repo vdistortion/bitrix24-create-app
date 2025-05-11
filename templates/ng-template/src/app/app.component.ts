@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
-import { BitrixService } from './services/bitrix.service';
+import { BitrixService } from './services/bitrix/bitrix.service';
 import { StoreService } from './services/store.service';
 import { environment } from '../environments/environment';
 

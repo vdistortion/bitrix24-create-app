@@ -35,12 +35,13 @@ PLACEMENT: []    # список мест для встраивания прил�
 TEST_DOMAINS: [] # список доменов, которые считаются тестовыми
 ```
 
-#### /src/api/
+#### /src/app/services/bitrix/
 
 ```sh
-/src/api/bitrix/index.ts       # класс для работы с API Битрикс24
-/src/api/bitrix/requestList.ts # batch-запросы
-/src/api/bitrix/handlerList.ts # обработка ответов
+bitrix.service.ts # подключение BX24
+batchList.ts      # класс для работы с API Битрикс24
+requestList.ts    # batch-запросы
+handlerList.ts    # обработка ответов
 ```
 
 #### /src/app/dev/
