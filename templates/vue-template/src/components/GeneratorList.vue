@@ -40,10 +40,10 @@
 import { ref } from 'vue';
 import { BxButton, BxInput } from 'vue-bitrix24';
 import { useRootStore } from '@/stores/RootStore';
-import { useBitrix24 } from '@/api/bitrix';
-import AppLink from '@/components/AppLink.vue';
-import AppIcon from '@/components/AppIcon.vue';
+import { useBitrix24 } from '@/composable/bitrix';
 import { env } from '@/utils/helpers';
+import AppLink from './AppLink.vue';
+import AppIcon from './AppIcon.vue';
 
 type EntityNameType = 'task' | 'deal' | 'company' | 'contact' | 'lead';
 type EntityType = {

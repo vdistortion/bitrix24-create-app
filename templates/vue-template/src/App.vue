@@ -10,7 +10,7 @@
 import { computed, defineAsyncComponent, onMounted, ref } from 'vue';
 import { BxAlert } from 'vue-bitrix24';
 import { useRootStore } from './stores/RootStore';
-import { useBitrix24 } from './api/bitrix';
+import { useBitrix24 } from './composable/bitrix';
 import { env } from './utils/helpers';
 
 const store = useRootStore();

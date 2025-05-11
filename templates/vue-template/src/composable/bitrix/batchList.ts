@@ -1,6 +1,6 @@
 import type { IBitrix24Library, RequestType } from 'bitrix24-library';
-import getRequestList from './requestList';
-import handlerList from './handlerList';
+import getRequestList from './requestList.ts';
+import handlerList from './handlerList.ts';
 
 export default class BitrixBatch {
   private readonly batch: any;

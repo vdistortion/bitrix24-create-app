@@ -33,9 +33,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue';
-import ExampleTable from '@/components/examples/ExampleTable.vue';
-import BitrixSelect from '@/components/BitrixSelect.vue';
 import api, { type IUserPlaceholder } from '@/api';
+import ExampleTable from './ExampleTable.vue';
+import BitrixSelect from '../BitrixSelect.vue';
 
 const data = reactive({
   props: {

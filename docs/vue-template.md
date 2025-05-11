@@ -6,22 +6,17 @@ Vue 3.5, Pinia, TypeScript, SCSS, vue-bitrix24, bitrix24-library
 
 ```sh
 cp .env .env.development
-```
-
-```sh
 npm run dev
-# или
-npm run watch
 ```
 
 ## Команды
 
 ```sh
-npm run dev    # development на локалке
-npm run watch  # development на сервере
-npm run build  # production + сборка архива с приложением первого типа
-npm run format # prettier
-npm run grid   # пересборка сетки
+npm run dev       # development на локалке
+npm run watch     # development на сервере
+npm run build     # production + сборка архива с приложением первого типа
+npm run format    # prettier
+npm run grid      # пересборка сетки
 
 # Поиск файлов
 npm run grep list # список файлов
@@ -52,7 +47,6 @@ VITE_TEST_DOMAINS=[]
 ```sh
 /src/api/index.ts      # запросы к серверу
 /src/api/HttpClient.ts # подключение axios
-/src/api/bitrix/       # composable для работы с API Битрикс24
 ```
 
 ### /src/components/dev/
@@ -66,6 +60,10 @@ VITE_TEST_DOMAINS=[]
 - Страница со списком компонентов плагина `vue-bitrix24`
 - Отображается на порталах из списка `VITE_TEST_DOMAINS` (`.env`)
 
+### /src/composable/bitrix/
+
+Подключение BX24 и useBitrix24 для работы с API Битрикс24 (https://vdistortion.github.io/bitrix24-library/)
+
 ### /src/views/ExamplePage.vue
 
 Список доступных компонентов vue-bitrix24 (https://vdistortion.github.io/ui-bitrix24/vue/)
@@ -77,7 +75,7 @@ VITE_TEST_DOMAINS=[]
   - Список установленных приложений можно посмотреть тут `/devops/list/`
 - "Путь вашего обработчика":
   - `http://127.0.0.1:4200/index.html` для локальной разработки (`npm run dev`)
-  - `/dist/index.html` для стандартной разработки (`npm run watch`)
+  - `/dist/index.html` для production или `npm run watch`
 
 ## Ссылки
 

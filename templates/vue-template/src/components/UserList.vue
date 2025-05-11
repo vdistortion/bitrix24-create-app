@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { BxButton } from 'vue-bitrix24';
-import { useBitrix24 } from '@/api/bitrix';
+import { useBitrix24 } from '@/composable/bitrix';
 
 const { BX24, openLink } = useBitrix24();
 

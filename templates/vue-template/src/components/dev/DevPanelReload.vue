@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBitrix24 } from '@/api/bitrix';
+import { useBitrix24 } from '@/composable/bitrix';
 
 const { BX24 } = useBitrix24();
 

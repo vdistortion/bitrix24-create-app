@@ -1,4 +1,4 @@
-import { env, formatDate } from '@/utils/helpers';
+import { env, formatDate } from '@/utils/helpers.ts';
 
 interface IUser {
   ID: string;

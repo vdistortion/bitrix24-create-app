@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
-import { useBitrix24 } from '@/api/bitrix';
+import { useBitrix24 } from '@/composable/bitrix';
 
 type PlacementResponseType = {
   placementList: Record<string, IPlacement>;

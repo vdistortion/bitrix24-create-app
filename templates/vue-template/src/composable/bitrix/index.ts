@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import type { IBitrix24Library } from 'bitrix24-library';
-import BitrixBatch from './batchList';
+import BitrixBatch from './batchList.ts';
 
 export function useBitrix24() {
   const BX24 = inject<IBitrix24Library>('$BX24')!;

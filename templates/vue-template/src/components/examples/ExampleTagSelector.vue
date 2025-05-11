@@ -109,8 +109,8 @@
 import { reactive, computed } from 'vue';
 import type { IUser as IUserReadonly } from 'bitrix24-library';
 import { BxTagSelector } from 'vue-bitrix24';
+import { useBitrix24 } from '@/composable/bitrix';
 import ExampleTable from './ExampleTable.vue';
-import { useBitrix24 } from '@/api/bitrix';
 
 const { BX24, openLink } = useBitrix24();
 

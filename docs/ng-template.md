@@ -2,19 +2,19 @@
 
 Angular 19, RxJS, TypeScript, SCSS, bitrix24-library
 
-### Запуск
+## Запуск
 
 ```sh
 cp src/environments/environment.ts src/environments/environment.development.ts
 npm start
 ```
 
-### Команды
+## Команды
 
 ```sh
 npm start         # development на локалке
 npm run watch     # development на сервере
-npm run build     # production и сборка архива с приложением первого типа
+npm run build     # production + сборка архива с приложением первого типа
 npm run format    # prettier
 npm run grid      # пересборка сетки
 
@@ -24,18 +24,18 @@ npm run grep word # только полные слова
 npm run grep full # подробно
 ```
 
-### Структура
+## Структура
 
-#### /src/environments/environment.ts
+### /src/environments/environment.ts
 
 ```sh
-SCOPE: []        # список скоупов, необходимых для работы приложения
-APP_NAME: ""     # название приложения
-PLACEMENT: []    # список мест для встраивания приложения
-TEST_DOMAINS: [] # список доменов, которые считаются тестовыми
+SCOPE: []         # список скоупов, необходимых для работы приложения
+APP_NAME: ""      # название приложения
+PLACEMENT: []     # список мест для встраивания приложения
+TEST_DOMAINS: []  # список доменов, которые считаются тестовыми
 ```
 
-#### /src/app/services/bitrix/
+### /src/app/services/bitrix/
 
 ```sh
 bitrix.service.ts # подключение BX24
@@ -44,7 +44,7 @@ requestList.ts    # batch-запросы
 handlerList.ts    # обработка ответов
 ```
 
-#### /src/app/dev/
+### /src/app/dev/
 
 Панель управления для разработки, содержит:
 
@@ -54,16 +54,16 @@ handlerList.ts    # обработка ответов
 - Страница для администраторов портала со списком встраиваний (placement)
 - Отображается на порталах из списка `TEST_DOMAINS` (`/src/environments/environment.ts`)
 
-### Подключение к Битрикс24
+## Подключение к Битрикс24
 
-- Создайте локальное приложение на существующем портале по ссылке `/devops/section/standard/`
-  - Или создайте новый портал https://www.bitrix24.ru/create.php (для регистрации лучше использовать временную почту, например https://temp-mail.org)
+- Создайте новый портал https://www.bitrix24.ru/create.php (для регистрации лучше использовать временную почту, например https://temp-mail.org)
+  - Или создайте локальное приложение на существующем портале по ссылке `/devops/section/standard/`
+  - Список установленных приложений можно посмотреть тут `/devops/list/`
 - "Путь вашего обработчика":
-  - `http://127.0.0.1:4200/index.html` для локальной разработки (`npm start`)
-  - `/dist/bitrix24-create-app/browser/index.html` для стандартной разработки (`npm run watch`)
-- Список установленных приложений можно посмотреть тут `/devops/list/`
+  - `http://127.0.0.1:4200/index.html` для локальной разработки (`npm run dev`)
+  - `/dist/bitrix24-create-app/browser/index.html` для production или `npm run watch`
 
-### Ссылки
+## Ссылки
 
 - Angular (https://angular.dev/)
 - RxJS (https://rxjs.dev/)

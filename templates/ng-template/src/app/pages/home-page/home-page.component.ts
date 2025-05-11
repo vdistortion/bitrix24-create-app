@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { LoaderComponent } from '../../ui/loader/loader.component';
-import { StoreService } from '../../services/store.service';
-import { UserListsComponent } from '../../components/user-lists/user-lists.component';
 import { AsyncPipe } from '@angular/common';
+import { LoaderComponent } from '../../ui/loader/loader.component';
+import { UserListsComponent } from '../../components/user-lists/user-lists.component';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-home-page',
-  imports: [LoaderComponent, UserListsComponent, AsyncPipe],
+  imports: [AsyncPipe, LoaderComponent, UserListsComponent],
   templateUrl: './home-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

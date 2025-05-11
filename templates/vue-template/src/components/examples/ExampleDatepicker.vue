@@ -28,8 +28,8 @@
 
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
-import ExampleTable from '@/components/examples/ExampleTable.vue';
-import BitrixDatepicker, { type PropAfter } from '@/components/BitrixDatepicker.vue';
+import ExampleTable from './ExampleTable.vue';
+import BitrixDatepicker, { type PropAfter } from '../BitrixDatepicker.vue';
 
 const data = reactive({
   props: {
