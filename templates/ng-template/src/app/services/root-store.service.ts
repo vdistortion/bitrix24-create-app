@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BitrixService } from './bitrix.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RootStoreService {
-  public portal: string;
+  private bitrixService = inject(BitrixService);
+  private BX24 = this.bitrixService.get();
+  public portal: string = `https://${this.BX24.getDomain()}`;
   public loader: boolean = false;
   public currentId: string = '';
   public department = [];
@@ -13,16 +15,8 @@ export class RootStoreService {
   public appInfoId: number = 0;
   public appInfoCode: string = '';
 
-  constructor(private bitrixService: BitrixService) {}
-
   init() {
-    if (!this.bitrixService.BX24.placement) {
-      return Promise.reject(
-        new Error('Unable to initialize Bitrix24 JS library!'),
-      );
-    }
     this.loader = true;
-    this.portal = `https://${this.bitrixService.BX24.getDomain()}`;
 
     return this.bitrixService.batch
       .load()
@@ -40,12 +34,7 @@ export class RootStoreService {
   }
 
   appInfo() {
-    if (!this.bitrixService.BX24.createBatch) {
-      return Promise.reject(
-        new Error('Unable to initialize Bitrix24 JS library!'),
-      );
-    }
-    const RestCall = this.bitrixService.BX24.createBatch();
+    const RestCall = this.BX24.createBatch();
 
     return RestCall.batch({
       appInfo: ['app.info'],
@@ -53,7 +42,7 @@ export class RootStoreService {
       scope: ['scope'],
     }).then((response: any) => ({
       ...response,
-      placementInfo: this.bitrixService.BX24.placement.info(),
+      placementInfo: this.BX24.placement.info(),
     }));
   }
 }

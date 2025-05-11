@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { BitrixService } from '../../services/bitrix.service';
 
 @Component({
@@ -8,10 +13,11 @@ import { BitrixService } from '../../services/bitrix.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevPanelReloadComponent implements OnInit {
-  constructor(private bitrixService: BitrixService) {}
+  private bitrixService = inject(BitrixService);
+  private BX24 = this.bitrixService.get();
 
   ngOnInit() {
-    this.bitrixService.BX24.bind(window, 'keydown', (e) => {
+    this.BX24.bind(window, 'keydown', (e) => {
       if (e instanceof KeyboardEvent && e.ctrlKey && e.code === 'KeyR') {
         this.reload(e);
       }

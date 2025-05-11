@@ -8,7 +8,7 @@ import { BitrixService } from '../../services/bitrix.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
-  @Input({ required: true }) public href: string;
+  @Input({ required: true }) public href!: string;
 
   constructor(private bitrixService: BitrixService) {}
 

@@ -8,6 +8,6 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevPanelPagesComponent {
-  @Input({ required: true }) public path: string;
-  @Input({ required: true }) public title: string;
+  @Input({ required: true }) public path!: string;
+  @Input({ required: true }) public title!: string;
 }

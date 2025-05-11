@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Ищем в текущем каталоге
-cd ${PWD}
-
 # Список каталогов, в которых искать не нужно
 for var in node_modules dist .git .idea .angular .vscode; do
   exclude=$exclude"--exclude-dir="$var" "

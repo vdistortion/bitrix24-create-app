@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   mdiDownload,
   mdiFormatListBulletedType,
@@ -26,6 +26,8 @@ import { BitrixService } from '../../services/bitrix.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevPanelComponent {
+  private bitrixService = inject(BitrixService);
+  private BX24 = this.bitrixService.get();
   protected buttons = [
     {
       admin: true,
@@ -57,10 +59,8 @@ export class DevPanelComponent {
     mdiDownload,
   };
 
-  constructor(private bitrixService: BitrixService) {}
-
   protected get pages() {
-    const isAdmin = this.bitrixService.BX24.isAdmin();
+    const isAdmin = this.BX24.isAdmin();
     if (isAdmin) return this.buttons;
     return this.buttons.filter((btn) => !btn.admin);
   }

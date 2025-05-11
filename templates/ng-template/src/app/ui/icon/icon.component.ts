@@ -8,6 +8,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {
-  @Input({ required: true }) public path: string;
+  @Input({ required: true }) public path!: string;
   @Input() public size: number = 24;
 }

@@ -6,12 +6,16 @@ import BitrixBatch from '../../api/bitrix';
   providedIn: 'root',
 })
 export class BitrixService {
-  public BX24: IBitrix24Library;
+  private BX24!: IBitrix24Library;
   public batch: any;
 
   init(BX24: IBitrix24Library) {
     this.BX24 = BX24;
     this.batch = new BitrixBatch(BX24);
+  }
+
+  get(): IBitrix24Library {
+    return this.BX24;
   }
 
   openLink(url: string, inNewTab = false) {

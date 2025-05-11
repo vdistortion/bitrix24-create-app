@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   OnInit,
 } from '@angular/core';
@@ -15,15 +16,14 @@ import { RootStoreService } from '../../services/root-store.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent implements OnInit {
-  @Input({ required: true }) public users: IUsers;
+  @Input({ required: true }) public users!: IUsers;
+  private bitrixService = inject(BitrixService);
+  private BX24 = this.bitrixService.get();
   private department: any;
   private currentId: any;
   protected portal: any;
 
-  constructor(
-    private bitrixService: BitrixService,
-    private rootStoreService: RootStoreService,
-  ) {}
+  constructor(private rootStoreService: RootStoreService) {}
 
   ngOnInit() {
     this.department = this.rootStoreService.department;
@@ -52,6 +52,6 @@ export class UserListComponent implements OnInit {
   }
 
   openMessenger(id: string) {
-    this.bitrixService.BX24.im.openMessenger(id);
+    this.BX24.im.openMessenger(id);
   }
 }

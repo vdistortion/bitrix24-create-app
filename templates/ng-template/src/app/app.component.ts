@@ -3,9 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  inject,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Bitrix24, type IBitrix24Library } from 'bitrix24-library';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
 import { BitrixService } from './services/bitrix.service';
 import { RootStoreService } from './services/root-store.service';
@@ -26,20 +26,18 @@ import { environment } from '../environments/environment';
   `,
 })
 export class AppComponent implements OnInit {
-  protected isDev: boolean = false;
-  protected isApp: boolean = false;
+  private bitrixService = inject(BitrixService);
+  private BX24 = this.bitrixService.get();
+  protected isDev = false;
+  protected isApp = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private bitrixService: BitrixService,
     private rootStoreService: RootStoreService,
     private placementStoreService: PlacementStoreService,
   ) {}
 
   async ngOnInit() {
-    const BX24: IBitrix24Library = await Bitrix24();
-    this.bitrixService.init(BX24);
-
     await this.rootStoreService.init().then((list: IPlacements) => {
       this.placementStoreService.setList(list);
     });
@@ -51,7 +49,7 @@ export class AppComponent implements OnInit {
       });
 
     this.cdr.markForCheck();
-    this.isDev = environment.TEST_DOMAINS.includes(BX24.getDomain());
+    this.isDev = environment.TEST_DOMAINS.includes(this.BX24.getDomain());
     this.isApp = true;
   }
 
