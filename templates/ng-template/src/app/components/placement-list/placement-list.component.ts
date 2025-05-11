@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LinkComponent } from '../link/link.component';
-import { RootStoreService } from '../../services/root-store.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-placement-list',
@@ -12,7 +12,7 @@ import { RootStoreService } from '../../services/root-store.service';
 })
 export class PlacementListComponent {
   private cdr = inject(ChangeDetectorRef);
-  protected store = inject(RootStoreService);
+  protected store = inject(StoreService);
 
   get list(): IPlacement[] {
     return Object.values(this.store.placementList);

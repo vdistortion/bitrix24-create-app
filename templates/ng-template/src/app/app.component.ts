@@ -8,7 +8,7 @@ import {
 import { RouterOutlet } from '@angular/router';
 import { DevPanelComponent } from './dev/dev-panel/dev-panel.component';
 import { BitrixService } from './services/bitrix.service';
-import { RootStoreService } from './services/root-store.service';
+import { StoreService } from './services/store.service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -29,7 +29,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
-  private store = inject(RootStoreService);
+  private store = inject(StoreService);
   private bitrixService = inject(BitrixService);
   private BX24 = this.bitrixService.get();
   protected isDev = false;

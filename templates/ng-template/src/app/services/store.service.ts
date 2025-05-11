@@ -24,7 +24,7 @@ type InitResponseType = {
 @Injectable({
   providedIn: 'root',
 })
-export class RootStoreService {
+export class StoreService {
   private bitrixService = inject(BitrixService);
   private BX24 = this.bitrixService.get();
   isAdmin = this.BX24.isAdmin();

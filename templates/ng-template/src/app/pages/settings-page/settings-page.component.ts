@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { GeneratorListComponent } from '../../components/generator-list/generator-list.component';
 import { PlacementListComponent } from '../../components/placement-list/placement-list.component';
 import { LinkComponent } from '../../components/link/link.component';
-import { RootStoreService } from '../../services/root-store.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-settings-page',
@@ -12,5 +12,5 @@ import { RootStoreService } from '../../services/root-store.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsPageComponent {
-  protected store = inject(RootStoreService);
+  protected store = inject(StoreService);
 }

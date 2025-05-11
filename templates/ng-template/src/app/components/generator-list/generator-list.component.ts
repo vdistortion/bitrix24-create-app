@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../../ui/icon/icon.component';
 import { environment } from '../../../environments/environment';
-import { RootStoreService } from '../../services/root-store.service';
+import { StoreService } from '../../services/store.service';
 
 type EntityType = {
   id: 'task' | 'deal' | 'company' | 'contact' | 'lead';
@@ -30,7 +30,7 @@ type EntityType = {
 export class GeneratorListComponent {
   private cdr = inject(ChangeDetectorRef);
   private bitrixService = inject(BitrixService);
-  protected store = inject(RootStoreService);
+  protected store = inject(StoreService);
   mdiHelpCircleOutline = mdiHelpCircleOutline;
   placeholder = environment.APP_NAME;
   disabledButton = false;
